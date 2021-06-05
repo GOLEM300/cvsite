@@ -1,0 +1,65 @@
+version: '2'
+services:
+    nginx:
+        build:
+            context: ./
+            dockerfile: docker/nginx.docker
+        volumes:
+            - ./:/var/www
+            - ./docker/nginx/ssl:/etc/nginx/ssl
+        ports:
+            - "8080:443"
+        depends_on:
+            - php-fpm
+    php-fpm:
+        build:
+            context: ./
+            dockerfile: docker/php-fpm.docker
+        volumes:
+            - ./:/var/www
+        depends_on:
+            - mysql
+        environment:
+            - "DB_PORT=3306"
+            - "DB_HOST=mysql"
+    php-cli:
+        build:
+            context: ./
+            dockerfile: docker/php-cli.docker
+        volumes:
+            - ./:/var/www
+        depends_on:
+            - mysql
+        environment:
+            - "DB_PORT=3306"
+            - "DB_HOST=mysql"
+        tty: true
+    mysql:
+        image: mysql:5.7
+        environment:
+            - "MYSQL_ROOT_PASSWORD=admin"
+            - "MYSQL_DATABASE=cvsite"
+            - "MYSQL_USER=admin"
+            - "MYSQL_PASSWORD=admin"
+        ports:
+            - "33061:3306"
+    phpmyadmin:
+        image: phpmyadmin
+        restart: always
+        depends_on:
+            - mysql
+        ports:
+            - 8181:80
+        environment:
+            - PMA_ARBITRARY=1
+            - PMA_USER=admin
+            - PMA_PASSWORD=admin
+            - PMA_HOST=mysql
+            - PMA_PORT=3306
+    node:
+      image: node:16.2.0-alpine
+      volumes:
+        - ./:/var/www
+      working_dir: /var/www
+      tty: true
+
