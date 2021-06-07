@@ -94,6 +94,14 @@ class Cv extends Model
         return $prevWorks;
     }
 
+    /** return cvs collection
+     *  
+     */
+    public function getCvs($id) : object
+    {
+        return self::where('user_id', $id)->get();
+    }
+
     /**
      * 
      */

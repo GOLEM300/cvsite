@@ -14,19 +14,48 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('site/search');
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('site/search', [App\Http\Controllers\HomeController::class, 'index'])->name('site.search');
 
-Route::get('/cv/create', [App\Http\Controllers\CvController::class, 'create'])->name('cv.create');
-Route::put('cv/edit/{cv}',[App\Http\Controllers\CvController::class, 'edit'])->name('cv.edit');
-Route::post('/cv', [App\Http\Controllers\CvController::class, 'store']);
-Route::delete('cv/remove/{cv}',[App\Http\Controllers\CvController::class, 'remove'])->name('cv.remove');
+Route::group(
+    [
+        'prefix' => 'cv',
+        'as' => 'cv.',
+        'namespace' => 'Cv',
+        'middleware' => ['auth'],
+    ],
+    function () {
+        Route::get('/create', 'CvController@create')->name('cv.create');
+        Route::put('/edit/{cv}', 'CvController@edit')->name('cv.edit');
+        Route::post('/', 'CvController@store');
+        Route::delete('/remove/{cv}', 'CvController@remove')->name('cv.remove');
+    }
+);
 
-Route::get('/show/{cv}',[App\Http\Controllers\SiteController::class, 'show'])->name('site.show');
-Route::get('/search',[App\Http\Controllers\SiteController::class, 'search'])->name('site.search');
+Route::group(
+    [
+        'prefix' => 'site',
+        'as' => 'site.',
+        'namespace' => 'Site',
+    ],
+    function () {
+        Route::get('/show/{cv}', 'SiteController@show')->name('site.show');
+        Route::get('/search', 'SiteController@search')->name('site.search');
+    }
+);
 
-Route::get('/list/{user}',[App\Http\Controllers\ProfileController::class, 'list'])->name('profile.list');
+Route::group(
+    [
+        'prefix' => 'profile',
+        'as' => 'profile.',
+        'namespace' => 'Profile',
+        'middleware' => ['auth'],
+    ],
+    function() {
+        Route::get('/list/{user_id}', 'ProfileController@list')->name('profile.list');
+    }
+);

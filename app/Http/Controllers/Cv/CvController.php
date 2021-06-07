@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Cv;
 
+use App\Http\Controllers\Controller;
 use App\Models\Cv;
 use Illuminate\Http\Request;
-use Symfony\Component\Console\Input\Input;
 use App\UseCases\Cvs\CvService;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Cv\CreateRequest;
-use Gate;
+use App\Models\Specialization;
 
 class CvController extends Controller
 {
@@ -20,11 +19,10 @@ class CvController extends Controller
         $this->service = $service;
     }
 
-    public function create()
+    public function create(Specialization $specialization)
     {
-        $specialization_name = DB::table('specializations')->pluck('specialization','id');
         return view('cv.create', [
-            'specialization_name' => $specialization_name,
+            'specialization_name' => $specialization->list(),
         ]);
     }
 
@@ -38,13 +36,11 @@ class CvController extends Controller
         } catch (\DomainException $e) {
             return back()->with('error', $e->getMessage());
         }
-
         return redirect()->route('site.show', $cv);
     }
 
     public function remove(Cv $cv)
     {
-        // $this->checkAccess($cv);
         try {
             $this->service->remove($cv->id);
         } catch (\DomainException $e) {
@@ -52,11 +48,4 @@ class CvController extends Controller
         }
         return redirect()->route('profile.list',$cv->user_id);
     }
-
-    // private function checkAccess(Cv $cv): void
-    // {
-    //     if (!Gate::allows('user_id', $cv)) {
-    //         abort(403);
-    //     }
-    // }
 }

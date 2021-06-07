@@ -34,24 +34,40 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <header class="header">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
+                <nav class="navbar navigation">
+                    <a class="navbar-brand" href="{{ route('site.site.search') }}"><img src="{{ asset('images/logo.svg') }}" alt="Logo">
+                    </a>
+                    <div class="header__login header__login-mobile">
+                    </div>
+                    @if (Auth::check())
+                    <ul class="navigation-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ route('cv.cv.create') }}">Резюме</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('profile.profile.list', $user_id) }}">Мои резюме</a>
+                        </li>
                     </ul>
-
-                    <!-- Right Side Of Navbar -->
+                    <div class="navigation-menu__mobile">
+                        <ul class="navigation-menu__mobile-nav">
+                            <div class="navigation-menu__mobile-nav-top">
+                                <li class="navigation-menu__mobile-nav-item active">
+                                    <a class="nav-link" href="{{ route('cv.cv.create') }}">Резюме</a>
+                                </li>
+                                <li class="navigation-menu__mobile-nav-item">
+                                    <a class="nav-link" href="{{ route('profile.profile.list', $user_id) }}">Мои резюме</a>
+                                </li>
+                            </div>
+                        </ul>
+                    </div>
+                    <div class="navigation-toggler">
+                        <div class="bar1"></div>
+                        <div class="bar2"></div>
+                        <div class="bar3"></div>
+                    </div>
+                    @endif
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
@@ -86,9 +102,9 @@
                         </li>
                         @endguest
                     </ul>
-                </div>
+                </nav>
             </div>
-        </nav>
+        </header>
 
         @yield('content')
 
