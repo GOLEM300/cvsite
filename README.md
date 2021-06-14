@@ -9,6 +9,7 @@ If you have Windows 10 before you need to install WSL 2:
 https://docs.microsoft.com/en-us/windows/wsl/install-win10
 Here you will find documentation for Docker Desktop:
 https://docs.docker.com/docker-for-windows/install/
+
 2. Laravel Sail
 
 Project using Laravel Sail for work with Docker.
