@@ -17,6 +17,24 @@ I don't think that you have to need to install it cuz i have installed it
 before and it should work already but anyway here you can find documentation:
 https://laravel.com/docs/8.x/sail
 
+**How to run?**
+
+In terminal pass the follow command:
+
+apt install make - let you to use a short syntacksis from make file;
+
+make up - build docker container;
+
+make migrate - run migration;
+
+make seed-specialization - list for drop down on cv create page;
+
+**Routes**
+
+http://localhost - project;
+
+http://localhost:8181 - phpmyadmin, password - password, user - admin;
+
 
 
 
