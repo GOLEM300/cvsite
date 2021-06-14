@@ -14,10 +14,4 @@ class Specialization extends Model
 
     public $timestamps = false;
 
-    public function list() : object
-    {
-        $specialization_name = DB::table('specializations')->pluck('specialization','id');
-        return $specialization_name;
-    }
-
 }

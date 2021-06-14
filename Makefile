@@ -1,47 +1,47 @@
-docker-up: memory
-	docker-compose up -d
+up: memory
+	./vendor/bin/sail up -d
 
-docker-down:
-	docker-compose down
+down:
+	./vendor/bin/sail down
 
-docker-build: memory
-	docker-compose up --build -d
+build: memory
+	./vendor/bin/sail up --build -d
 
 test:
-	docker-compose exec php-cli vendor/bin/phpunit
+	./vendor/bin/sail exec php-cli vendor/bin/phpunit
 
 migrate:
-	docker-compose exec php-cli php artisan migrate:fresh
+	./vendor/bin/sail artisan migrate:fresh
 
 seed-specialization:
-	docker-compose exec php-cli php artisan db:seed --class=SpecializationTableSeeder
+	./vendor/bin/sail artisan db:seed --class=SpecializationTableSeeder
 
 assets-install:
-	docker-compose exec node npm install
+	./vendor/bin/sail npm install
 
 assets-rebuild:
-	docker-compose exec node npm rebuild node-sass --force
+	./vendor/bin/sail npm rebuild node-sass --force
 
 assets-dev:
-	docker-compose exec node npm run dev
+	./vendor/bin/sail npm run dev
 
 assets-watch:
-	docker-compose exec node npm run watch
+	./vendor/bin/sail npm run watch
 
 queue:
-	docker-compose exec php-cli php artisan queue:work
+	./vendor/bin/sail artisan queue:work
 
 horizon:
-	docker-compose exec php-cli php artisan horizon
+	./vendor/bin/sail artisan horizon
 
 horizon-pause:
-	docker-compose exec php-cli php artisan horizon:pause
+	./vendor/bin/sail artisan horizon:pause
 
 horizon-continue:
-	docker-compose exec php-cli php artisan horizon:continue
+	./vendor/bin/sail artisan horizon:continue
 
 horizon-terminate:
-	docker-compose exec php-cli php artisan horizon:terminate
+	./vendor/bin/sail artisan horizon:terminate
 
 memory:
 	sudo sysctl -w vm.max_map_count=262144

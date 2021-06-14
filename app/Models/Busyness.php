@@ -12,4 +12,9 @@ class Busyness extends Model
     public $timestamps = false;
 
     protected $table = 'busyness';
+
+    public function cv()
+    {
+        return $this->belongsTo(Cv::class);
+    }
 }

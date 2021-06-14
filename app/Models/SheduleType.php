@@ -12,4 +12,9 @@ class SheduleType extends Model
     public $timestamps = false;
 
     protected $table = 'shedule_types';
+
+    public function cv()
+    {
+        return $this->belongsTo(Cv::class);
+    }
 }

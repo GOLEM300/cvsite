@@ -10,8 +10,6 @@ class ComposerServiceProvider extends ServiceProvider
 
     public function boot()
     {
-
-        // Using Closure based composers
         view()->composer('layouts.app', function ($view) {
             $user_id = Auth::user()->id ?? '';
             $view->user_id = $user_id;

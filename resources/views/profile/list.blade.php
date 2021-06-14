@@ -43,7 +43,7 @@
                                         <h2 class="mini-title mb8">{{$cv->specialization}}</h2>
                                         <div class="d-flex align-items-center flex-wrap mb8 ">
                                             <span class="mr16 paragraph">{{$cv->salary}} ₽</span>
-                                            <span class="mr16 paragraph">{{$cv->prevYears($cv->id)}}</span>
+                                            <span class="mr16 paragraph">{{$cv->prevYears($prevWorksExp)}}</span>
                                             <span class="mr16 paragraph">{{$cv->locate_city}}</span>
                                         </div>
                                         <div class="d-flex flex-wrap">
@@ -55,7 +55,7 @@
                                     </div>
                                     <div class="col-xl-12 d-flex justify-content-between align-items-center flex-wrap">
                                         <div class="d-flex flex-wrap mobile-mb12">
-                                            <a class="mr16" href="/show/{{$cv->id}}">Открыть</a>
+                                            <a class="mr16" href="{{ route('site.site.show', $cv->id)}}">Открыть</a>
                                         </div>
                                         <span class="mini-paragraph cadet-blue">{{$cv->published_at()}}</span>
                                     </div>

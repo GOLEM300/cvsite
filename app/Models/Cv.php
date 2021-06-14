@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
+use App\Repositories\PrevWorksInterface;
 use Illuminate\Support\Carbon;
 
 class Cv extends Model
@@ -12,8 +13,6 @@ class Cv extends Model
     use HasFactory;
 
     protected $guarded = [];
-
-    const UPDATED_AT = null;
 
     public static $months = [
         '01' => 'Январь',
@@ -30,11 +29,6 @@ class Cv extends Model
         '12' => 'Декабрь'
     ];
 
-    /**
-     * Таблица, связанная с моделью.
-     *
-     * @var string
-     */
     protected $table = 'cv';
 
     public function user()
@@ -47,16 +41,25 @@ class Cv extends Model
         return $this->hasOne(Photo::class, 'cv_id', 'id');
     }
 
-    /**
-     * 
+    public function busyness()
+    {
+        return $this->hasMany(Busyness::class);
+    }
+
+    public function sheduleType()
+    {
+        return $this->hasMany(SheduleType::class);
+    }
+
+    /** get full expirience with years from previous jobs
+     *
      */
-    public function prevYears($id) : string
+    public function prevYears(PrevWorksInterface $prevWorksExp) : string
     {
         $total = 0;
-
         if ($this->expirience == 'yes') {
-            $prevExps = PreviosExpirience::where('cv_id', $id)->get();
-            foreach ($prevExps as $prevExp) {
+            $prevWorksExp = $prevWorksExp->getPrevWorksExp($this->id);
+            foreach ($prevWorksExp as $prevExp) {
                 $total += $prevExp->totalYears();
             };
             if ((int)$total < 21) {
@@ -69,49 +72,45 @@ class Cv extends Model
         }
     }
 
-    /**
-     * 
+    /** get full expirience with months and years from previous jobs
+     *
      */
-    public function fullExpirience($id) : string
+    public function fullExpirience(PrevWorksInterface $prevWorksExp) : string
     {
         $total = [];
 
         if ($this->expirience == 'yes') {
-            $prevExps = PreviosExpirience::where('cv_id', $id)->get();
-            foreach ($prevExps as $prevExp) {
-                array_push($total,$prevExp->dateDiff());
+            $prevWorksExp = $prevWorksExp->getPrevWorksExp($this->id);
+            foreach ($prevWorksExp as $prevExp) {
+                array_push($total, $prevExp->dateDiff());
             };
         }
         return date_sum($total);
     }
 
-    /**
-     * 
+    /** get user last job from cv
+     *
      */
-    public function prevWorks($id) : object
+    public function getLastWork(PrevWorksInterface $prevWorksExp) : string
     {
-        $prevWorks = PreviosExpirience::where('cv_id', $id)->get();
-        return $prevWorks;
+        $prevWorksExp = $prevWorksExp->getLastWork($this->id);
+        if (!empty($prevWorksExp)) {
+            return $prevWorksExp->vacancy.' в '.$prevWorksExp->organisation.' , '.$prevWorksExp->period();
+        } else {
+            return "Нет";
+        }
     }
 
-    /** return cvs collection
-     *  
-     */
-    public function getCvs($id) : object
-    {
-        return self::where('user_id', $id)->get();
-    }
-
-    /**
-     * 
+    /** get full user name
+     *
      */
     public function fullName() : string
     {
         return $this->patronymic.' '.$this->name.' '.$this->lastname;
     }
 
-    /**
-     * 
+    /** calculate user age with Carbon
+     *
      */
     public function age() : string
     {
@@ -123,38 +122,22 @@ class Cv extends Model
         }
     }
 
-    /**
+    /** get data from array and transform it into string
      * 
      */
-    public function busyness($id) : string
+    public function transform(array $data) : string
     {
         $total = [];
 
-        $lists = Busyness::where('cv_id', $id)->pluck('name');
-        foreach ($lists as $key => $value) 
-        {
-            $total[$key] = $value;
+        foreach ($data as $key => $value) {
+            $total[$key] = $data[$key]['name'];
         }
-        return implode(', ',$total);
+
+        return implode(', ', $total);
     }
 
-    /**
-     * 
-     */
-    public function sheduleType($id) : string
-    {
-        $total = [];
-        
-        $lists = SheduleType::where('cv_id', $id)->pluck('name');
-        foreach ($lists as $key => $value) 
-        {
-            $total[$key] = $value;
-        }
-        return implode(', ',$total);
-    }
-
-    /**
-     * 
+    /** date and time there cv was published
+     *
      */
     public function published_at() : string
     {
@@ -164,5 +147,18 @@ class Cv extends Model
         $time = $this->created_at->format('H:m');
 
         return "Опубликовано ".$day.' '.$monthName.' '.$year. ' в '.$time;
+    }
+
+    /** date and time there cv was updated
+     *
+     */
+    public function updated_at() : string
+    {
+        $monthName = self::$months[$this->updated_at->format('m')];
+        $day = $this->updated_at->format('d');
+        $year = $this->updated_at->format('Y');
+        $time = $this->updated_at->format('H:m');
+
+        return "Обновлено  ".$day.' '.$monthName.' '.$year. ' в '.$time;
     }
 }

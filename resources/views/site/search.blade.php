@@ -45,6 +45,7 @@
                             </div>
                         </div>
                     </div>
+                    @foreach ($cvs ?? [] as $cv)
                     <div class="vakancy-page-block company-list-search__block resume-list__block p-rel mb16">
                         <div class="company-list-search__block-left">
                             <div class="resume-list__block-img mb8">
@@ -52,143 +53,23 @@
                             </div>
                         </div>
                         <div class="company-list-search__block-right">
-                            <div class="mini-paragraph cadet-blue mobile-mb12">Обновлено 1 апреля 2020 в 15:00</div>
-                            <h3 class="mini-title mobile-off">PHP разработчик</h3>
+                            <div class="mini-paragraph cadet-blue mobile-mb12">{{$cv->updated_at()}}</div>
+                            <h3 class="mini-title mobile-off">{{$cv->specialization}}</h3>
                             <div class="d-flex align-items-center flex-wrap mb8 ">
-                                <span class="mr16 paragraph">120 000 ₽</span>
-                                <span class="mr16 paragraph">Опыт работы 3 года</span>
-                                <span class="mr16 paragraph">43 года</span>
-                                <span class="mr16 paragraph">Кемерово</span>
+                                <span class="mr16 paragraph">{{$cv->salary}} ₽</span>
+                                <span class="mr16 paragraph">{{$cv->prevYears($prevWorksExp)}}</span>
+                                <span class="mr16 paragraph">{{$cv->age()}}</span>
+                                <span class="mr16 paragraph">{{$cv->locate_city}}</span>
                             </div>
                             <p class="paragraph tbold mobile-off">Последнее место работы</p>
                         </div>
                         <div class="company-list-search__block-middle">
-                            <h3 class="mini-title desktop-off">PHP разработчик</h3>
-                            <p class="paragraph mb16 mobile-mb32">Младший PHP разработчик в ООО «ТЕПЛОВОЕ
-                                ОБОРУДОВАНИЕ»,
-                                Октябрь 2010 — по настоящее время </p>
+                            <h3 class="mini-title desktop-off"></h3>
+                            <p class="paragraph mb16 mobile-mb32">{{$cv->getLastWork($prevWorksExp)}}
+                                </p>
                         </div>
                     </div>
-                    <div class="vakancy-page-block company-list-search__block resume-list__block p-rel mb16">
-                        <div class="company-list-search__block-left">
-                            <div class="resume-list__block-img mb8">
-                                <img src="images/profile-foto.jpg" alt="profile">
-                            </div>
-                        </div>
-                        <div class="company-list-search__block-right">
-                            <div class="mini-paragraph cadet-blue mobile-mb12">Обновлено 1 апреля 2020 в 15:00</div>
-                            <h3 class="mini-title mobile-off">PHP разработчик</h3>
-                            <div class="d-flex align-items-center flex-wrap mb8 ">
-                                <span class="mr16 paragraph">120 000 ₽</span>
-                                <span class="mr16 paragraph">Опыт работы 3 года</span>
-                                <span class="mr16 paragraph">43 года</span>
-                                <span class="mr16 paragraph">Кемерово</span>
-                            </div>
-                            <p class="paragraph tbold mobile-off">Последнее место работы</p>
-                        </div>
-                        <div class="company-list-search__block-middle">
-                            <h3 class="mini-title desktop-off">PHP разработчик</h3>
-                            <p class="paragraph mb16 mobile-mb32">Младший PHP разработчик в ООО «ТЕПЛОВОЕ
-                                ОБОРУДОВАНИЕ»,
-                                Октябрь 2010 — по настоящее время </p>
-                        </div>
-                    </div>
-                    <div class="vakancy-page-block company-list-search__block resume-list__block p-rel mb16">
-                        <div class="company-list-search__block-left">
-                            <div class="resume-list__block-img mb8">
-                                <img src="images/profile-foto.jpg" alt="profile">
-                            </div>
-                        </div>
-                        <div class="company-list-search__block-right">
-                            <div class="mini-paragraph cadet-blue mobile-mb12">Обновлено 1 апреля 2020 в 15:00</div>
-                            <h3 class="mini-title mobile-off">PHP разработчик</h3>
-                            <div class="d-flex align-items-center flex-wrap mb8 ">
-                                <span class="mr16 paragraph">120 000 ₽</span>
-                                <span class="mr16 paragraph">Опыт работы 3 года</span>
-                                <span class="mr16 paragraph">43 года</span>
-                                <span class="mr16 paragraph">Кемерово</span>
-                            </div>
-                            <p class="paragraph tbold mobile-off">Последнее место работы</p>
-                        </div>
-                        <div class="company-list-search__block-middle">
-                            <h3 class="mini-title desktop-off">PHP разработчик</h3>
-                            <p class="paragraph mb16 mobile-mb32">Младший PHP разработчик в ООО «ТЕПЛОВОЕ
-                                ОБОРУДОВАНИЕ»,
-                                Октябрь 2010 — по настоящее время </p>
-                        </div>
-                    </div>
-                    <div class="vakancy-page-block company-list-search__block resume-list__block p-rel mb16">
-                        <div class="company-list-search__block-left">
-                            <div class="resume-list__block-img mb8">
-                                <img src="images/profile-foto.jpg" alt="profile">
-                            </div>
-                        </div>
-                        <div class="company-list-search__block-right">
-                            <div class="mini-paragraph cadet-blue mobile-mb12">Обновлено 1 апреля 2020 в 15:00</div>
-                            <h3 class="mini-title mobile-off">PHP разработчик</h3>
-                            <div class="d-flex align-items-center flex-wrap mb8 ">
-                                <span class="mr16 paragraph">120 000 ₽</span>
-                                <span class="mr16 paragraph">Опыт работы 3 года</span>
-                                <span class="mr16 paragraph">43 года</span>
-                                <span class="mr16 paragraph">Кемерово</span>
-                            </div>
-                            <p class="paragraph tbold mobile-off">Последнее место работы</p>
-                        </div>
-                        <div class="company-list-search__block-middle">
-                            <h3 class="mini-title desktop-off">PHP разработчик</h3>
-                            <p class="paragraph mb16 mobile-mb32">Младший PHP разработчик в ООО «ТЕПЛОВОЕ
-                                ОБОРУДОВАНИЕ»,
-                                Октябрь 2010 — по настоящее время </p>
-                        </div>
-                    </div>
-                    <div class="vakancy-page-block company-list-search__block resume-list__block p-rel mb16">
-                        <div class="company-list-search__block-left">
-                            <div class="resume-list__block-img mb8">
-                                <img src="images/profile-foto.jpg" alt="profile">
-                            </div>
-                        </div>
-                        <div class="company-list-search__block-right">
-                            <div class="mini-paragraph cadet-blue mobile-mb12">Обновлено 1 апреля 2020 в 15:00</div>
-                            <h3 class="mini-title mobile-off">PHP разработчик</h3>
-                            <div class="d-flex align-items-center flex-wrap mb8 ">
-                                <span class="mr16 paragraph">120 000 ₽</span>
-                                <span class="mr16 paragraph">Опыт работы 3 года</span>
-                                <span class="mr16 paragraph">43 года</span>
-                                <span class="mr16 paragraph">Кемерово</span>
-                            </div>
-                            <p class="paragraph tbold mobile-off">Последнее место работы</p>
-                        </div>
-                        <div class="company-list-search__block-middle">
-                            <h3 class="mini-title desktop-off">PHP разработчик</h3>
-                            <p class="paragraph mb16 mobile-mb32">Младший PHP разработчик в ООО «ТЕПЛОВОЕ
-                                ОБОРУДОВАНИЕ»,
-                                Октябрь 2010 — по настоящее время </p>
-                        </div>
-                    </div>
-                    <div class="vakancy-page-block company-list-search__block resume-list__block p-rel mb16">
-                        <div class="company-list-search__block-left">
-                            <div class="resume-list__block-img mb8">
-                                <img src="images/profile-foto.jpg" alt="profile">
-                            </div>
-                        </div>
-                        <div class="company-list-search__block-right">
-                            <div class="mini-paragraph cadet-blue mobile-mb12">Обновлено 1 апреля 2020 в 15:00</div>
-                            <h3 class="mini-title mobile-off">PHP разработчик</h3>
-                            <div class="d-flex align-items-center flex-wrap mb8 ">
-                                <span class="mr16 paragraph">120 000 ₽</span>
-                                <span class="mr16 paragraph">Опыт работы 3 года</span>
-                                <span class="mr16 paragraph">43 года</span>
-                                <span class="mr16 paragraph">Кемерово</span>
-                            </div>
-                            <p class="paragraph tbold mobile-off">Последнее место работы</p>
-                        </div>
-                        <div class="company-list-search__block-middle">
-                            <h3 class="mini-title desktop-off">PHP разработчик</h3>
-                            <p class="paragraph mb16 mobile-mb32">Младший PHP разработчик в ООО «ТЕПЛОВОЕ
-                                ОБОРУДОВАНИЕ»,
-                                Октябрь 2010 — по настоящее время </p>
-                        </div>
-                    </div>
+                    @endforeach
                     <ul class="dor-pagination mb128">
                         <li class="page-link-prev"><a href="#"><img class="mr8"
                                                                     src="images/mini-left-arrow.svg" alt="arrow"> Назад</a>

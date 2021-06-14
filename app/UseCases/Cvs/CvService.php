@@ -12,16 +12,29 @@ use Illuminate\Support\Facades\DB;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Carbon;
 use Intervention\Image\Image as ImageImage;
+use App\Repositories\CvQueriesInterface;
 
 class CvService
 {
-    /**
+    private $cvQueries;
+
+    /** cv class for get data from db
+     *  
+     */
+    public function __construct(CvQueriesInterface $cvQueries)
+    {
+        $this->cvQueries = $cvQueries;
+    }
+    
+    /** create and store cv from request
      * 
      */
     public function create($user_id, CreateRequest $request) : Cv
     {
         return DB::transaction(function () use ($request, $user_id) {
             $image = $this->savePhoto($request);
+
+            dd(gettype($user_id));
 
             $request['birth_date'] = Carbon::createFromFormat('d.m.Y', $request['birth_date'])->format('Y-m-d');
     
@@ -32,7 +45,7 @@ class CvService
             $request['user_id'] = $user_id;
 
             $cv = Cv::make([
-                'photo' => $image->basename,
+                'photo' => 'hjk',//$image->basename,
                 'name' => $request['name'],
                 'patronymic' => $request['patronymic'],
                 'lastname' => $request['lastname'],
@@ -66,25 +79,9 @@ class CvService
     /**
      * 
      */
-    public function remove($id) : void
-    {
-        $cv = $this->getCv($id);
-        $cv->delete();
-    }
-
-    /**
-     * 
-     */
-    private function getCv($id) : Cv
-    {
-        return Cv::findOrFail($id);
-    }
-
-    /**
-     * 
-     */
     private function savePhoto(CreateRequest $request) : ImageImage
     {
+        // dd($request);
         $imagePath = $request['photo']->store('uploads', 'public');
         $image = Image::make(public_path("storage/{$imagePath}"))->fit(1200, 1200);
         $image->save();
@@ -124,5 +121,53 @@ class CvService
             $work_experiences->cv_id = $cv->id;
             $work_experiences->save();
         }
+    }
+
+    /** remove current cv
+     * 
+     */
+    public function remove($cv_id) : void
+    {
+        $this->cvQueries->remove($cv_id);
+    }
+
+    /** get one user cv
+     * 
+     */
+    public function getUserCv($cv_id) : object
+    {
+        return $this->cvQueries->getUserCv($cv_id);
+    }
+
+    /** get cv collection for log in user
+     * 
+     */
+    public function getUserCvs($user_id) : object
+    {
+        return $this->cvQueries->getUserCvs($user_id);
+    }
+
+    /** get all cv
+     * 
+     */
+    public function getAllCv() : object
+    {
+        return $this->cvQueries->getAllCv();
+    }
+
+    /** get busyness relation from current cv
+     * 
+     */
+    public function getBusyness($cv) : array
+    {
+        return $cv->getRelation('busyness')->toArray();
+    }
+
+    /** get sheduleType relation from current cv
+     * 
+     */
+    public function getSheduleType($cv) : array
+    {
+        return $cv->getRelation('sheduleType')->toArray();
     }
 }

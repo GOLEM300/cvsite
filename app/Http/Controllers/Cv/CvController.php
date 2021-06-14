@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\UseCases\Cvs\CvService;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Cv\CreateRequest;
-use App\Models\Specialization;
+use App\Repositories\SpecializationsInterface;
 
 class CvController extends Controller
 {
@@ -19,7 +19,7 @@ class CvController extends Controller
         $this->service = $service;
     }
 
-    public function create(Specialization $specialization)
+    public function create(SpecializationsInterface $specialization)
     {
         return view('cv.create', [
             'specialization_name' => $specialization->list(),
@@ -36,7 +36,7 @@ class CvController extends Controller
         } catch (\DomainException $e) {
             return back()->with('error', $e->getMessage());
         }
-        return redirect()->route('site.show', $cv);
+        return redirect()->route('site.site.show', $cv);
     }
 
     public function remove(Cv $cv)
@@ -46,6 +46,11 @@ class CvController extends Controller
         } catch (\DomainException $e) {
             return back()->with('error', $e->getMessage());
         }
-        return redirect()->route('profile.list',$cv->user_id);
+        return redirect()->route('profile.profile.list', Auth::user()->id);
+    }
+
+    public function edit()
+    {
+        //
     }
 }

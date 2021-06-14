@@ -21,6 +21,7 @@ window.Vue = require('vue').default;
 
 Vue.component('previous-work', require('./components/PreviosWork.vue').default);
 Vue.component('image-upload', require('./components/ImageUpload.vue').default);
+Vue.component('filter', require('./components/Filter.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
