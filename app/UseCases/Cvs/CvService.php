@@ -32,9 +32,7 @@ class CvService
     public function create($user_id, CreateRequest $request) : Cv
     {
         return DB::transaction(function () use ($request, $user_id) {
-            $image = $this->savePhoto($request);
-
-            dd(gettype($user_id));
+            //$image = $this->savePhoto($request);
 
             $request['birth_date'] = Carbon::createFromFormat('d.m.Y', $request['birth_date'])->format('Y-m-d');
     
