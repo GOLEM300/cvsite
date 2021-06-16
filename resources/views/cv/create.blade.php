@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <div class="mt8 mb40"><a href="#"><img src="{{ asset('images/blue-left-arrow.svg') }}" alt="arrow">
+                <div class="mt8 mb40"><a href="{{ route('profile.profile.list', $user_id) }}"><img src="{{ asset('images/blue-left-arrow.svg') }}" alt="arrow">
                         Вернуться без
                         сохранения</a>
                 </div>
@@ -17,8 +17,9 @@
             </div>
         </div>
         <div class="col-12">
-            <form action="/cv" enctype="multipart/form-data" method="post">
+            <form action="{{ route('cv.') }}" enctype="multipart/form-data" method="post">
                 @csrf
+                @method('POST')
                 <div class="row mb32">
                     <div class="col-lg-2 col-md-3 dflex-acenter">
                         <div class="paragraph">Фото</div>

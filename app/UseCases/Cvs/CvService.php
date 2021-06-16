@@ -2,28 +2,34 @@
 
 namespace App\UseCases\Cvs;
 
-use App\Models\Busyness;
 use App\Models\Cv;
-use App\Models\SheduleType;
 use App\Http\Requests\Cv\CreateRequest;
-use App\Models\PreviosExpirience;
-use Illuminate\Database\Eloquent\Model;
+use App\Http\Requests\Cv\EditRequest;
+use App\Repositories\BusynessInterface;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Carbon;
 use Intervention\Image\Image as ImageImage;
 use App\Repositories\CvQueriesInterface;
+use App\Repositories\PrevWorksInterface;
+use App\Repositories\SheduleTypeInterface;
 
 class CvService
 {
     private $cvQueries;
+    private $prevWorks;
+    private $busynessQueries;
+    private $sheduleTypeQueries;
 
-    /** cv class for get data from db
+    /**
      *  
      */
-    public function __construct(CvQueriesInterface $cvQueries)
+    public function __construct(CvQueriesInterface $cvQueries, PrevWorksInterface $prevWorks, BusynessInterface $busynessQueries, SheduleTypeInterface $sheduleTypeQueries)
     {
         $this->cvQueries = $cvQueries;
+        $this->prevWorks = $prevWorks;
+        $this->busynessQueries = $busynessQueries;
+        $this->sheduleTypeQueries = $sheduleTypeQueries; 
     }
     
     /** create and store cv from request
@@ -63,11 +69,11 @@ class CvService
 
             $cv->saveOrFail();
 
-            $this->saveAttribute($request, 'App\Models\SheduleType', $cv->id, 'shedule_types');
-            $this->saveAttribute($request, 'App\Models\Busyness', $cv->id, 'busyness');
+            $this->saveBusyness($request['busyness'],$cv->id);
+            $this->saveSheduleType($request['shedule_types'],$cv->id);
 
             if ($request['radio-expirience'] == 'yes') {
-                $this->savePrevExp($request, 'App\Models\PreviosExpirience', $cv);
+                $this->savePrevWorks($request['workExperiences'],$cv->id);
             }
 
             return $cv;
@@ -86,38 +92,34 @@ class CvService
         return $image;
     }
 
-    /**
+    /** update current cv
      * 
      */
-    private function saveAttribute(CreateRequest $request, string $modelName, int $id, $argument) : void
+    public function update(EditRequest $request,int $cv_id) : void
     {
-        $loop = $request[$argument];
-        foreach ($loop as $value) {
-            $field = new $modelName();
-            $field->name = $value;
-            $field->cv_id = $id;
-            $field->save();
-        }
-    }
+        $old_cv = $this->getUserCv($cv_id);
+        $old_cv->update($request->only([
+            'name',
+            'patronymic',
+            'lastname',
+            'birth_date',
+            'sex',
+            'locate_city',
+            'email',
+            'phone',
+            'specialization',
+            'salary',
+            'expirience',
+            'about',
+            'user_id',
+            'updated_at'
+        ]));
+        
+        $this->updateBusyness($request['busyness'],$cv_id);
+        $this->updateSheduleType($request['shedule_types'],$cv_id);
 
-    /**
-     * 
-     */
-    private function savePrevExp(CreateRequest $request, string $modelName, Cv $cv) : void
-    {
-        $work_experiencess = $request['workExperiences'];
-        foreach ($work_experiencess as $value) {
-            $work_experiences = new $modelName();
-            $work_experiences->workStartMonth = $value['workStartMonth'];
-            $work_experiences->workStartYear = $value['workStartYear'];
-            $work_experiences->workEndMonth = $value['workEndMonth'];
-            $work_experiences->workEndYear = $value['workEndYear'];
-            $work_experiences->stillWork = $value['stillWork'] ?? 'off';
-            $work_experiences->vacancy = $value['vacancy'];
-            $work_experiences->organisation = $value['organisation'];
-            $work_experiences->duty = $value['duty'];
-            $work_experiences->cv_id = $cv->id;
-            $work_experiences->save();
+        if ($request['radio-expirience'] == 'yes') {
+            $this->updatePrevWorks($request['workExperiences'], $cv_id);
         }
     }
 
@@ -167,5 +169,53 @@ class CvService
     public function getSheduleType($cv) : array
     {
         return $cv->getRelation('sheduleType')->toArray();
+    }
+
+    /** save busyness relation from current cv
+     * 
+     */
+    private function saveBusyness(array $array,int $cv_id) : void
+    {
+        $this->busynessQueries->save($array,$cv_id);
+    }
+
+    /** save sheduleType relation from current cv
+     * 
+     */
+    private function saveSheduleType(array $array,int $cv_id) : void
+    {
+        $this->sheduleTypeQueries->save($array,$cv_id);
+    }
+
+    /** update busyness relation from current cv
+     * 
+     */
+    private function updateBusyness(array $array,int $cv_id) : void
+    {
+        $this->busynessQueries->update($array,$cv_id);
+    }
+
+    /** update sheduleType relation from current cv
+     * 
+     */
+    private function updateSheduleType(array $array,int $cv_id) : void
+    {
+        $this->sheduleTypeQueries->update($array,$cv_id);
+    }
+
+    /**
+     * 
+     */
+    private function savePrevWorks(array $array, int $cv_id) : void
+    {
+        $this->prevWorks->save($array,$cv_id);
+    }
+
+    /**
+     * 
+     */
+    private function updatePrevWorks(array $array, int $cv_id) : void
+    {
+        $this->prevWorks->update($array,$cv_id);
     }
 }

@@ -14,6 +14,10 @@ class ComposerServiceProvider extends ServiceProvider
             $user_id = Auth::user()->id ?? '';
             $view->user_id = $user_id;
         });
+        view()->composer('cv.create', function ($view) {
+            $user_id = Auth::user()->id;
+            $view->user_id = $user_id;
+        });
     }
 
     public function register()

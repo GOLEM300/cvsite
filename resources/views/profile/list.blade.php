@@ -29,7 +29,7 @@
                                                 method="POST">
                                                 <button class="dropdown-item" type="submit">Редактировать</button>
                                                 @csrf
-                                                @method('PUT')
+                                                @method('GET')
                                             </form>
                                             <form action="{{ route('cv.cv.remove', $cv) }}"
                                                 method="POST">

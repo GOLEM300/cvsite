@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <div class="mt8 mb40"><a href="#"><img src="{{ asset('images/blue-left-arrow.svg') }}" alt="arrow">
+                <div class="mt8 mb40"><a href="{{ route('profile.profile.list', $cv->user_id) }}"><img src="{{ asset('images/blue-left-arrow.svg') }}" alt="arrow">
                         Вернуться без
                         сохранения</a>
                 </div>
@@ -17,8 +17,9 @@
             </div>
         </div>
         <div class="col-12">
-            <form action="/cv" enctype="multipart/form-data" method="post">
+            <form action="{{ route('cv.cv.update', $cv->id) }}" enctype="multipart/form-data" method="post">
                 @csrf
+                @method('PUT')
                 <div class="row mb32">
                     <div class="col-lg-2 col-md-3 dflex-acenter">
                         <div class="paragraph">Фото</div>
@@ -30,7 +31,7 @@
                         <div class="paragraph">Фамилия</div>
                     </div>
                     <div class="col-lg-3 col-md-4 col-11">
-                        <input id="lastname" value="{{ old('lastname') }}" type="text" name="lastname"
+                        <input id="lastname" value="{{ $cv->lastname }}" type="text" name="lastname"
                             class="dor-input w100 form-control @error('lastname') is-invalid @enderror">
                         @error('lastname')
                         <span class="invalid-feedback" role="alert">
@@ -44,7 +45,7 @@
                         <div class="paragraph">Имя</div>
                     </div>
                     <div class="col-lg-3 col-md-4 col-11">
-                        <input id="name" value="{{ old('name') }}" type="text" name="name"
+                        <input id="name" value="{{ $cv->name }}" type="text" name="name"
                             class="dor-input w100 form-control @error('name') is-invalid @enderror">
                         @error('name')
                         <span class="invalid-feedback" role="alert">
@@ -58,7 +59,7 @@
                         <div class="paragraph">Отчество</div>
                     </div>
                     <div class="col-lg-3 col-md-4 col-11">
-                        <input id="patronymic" value="{{ old('patronymic') }}" type="text" name="patronymic"
+                        <input id="patronymic" value="{{ $cv->patronymic }}" type="text" name="patronymic"
                             class="dor-input w100 form-control @error('patronymic') is-invalid @enderror">
                         @error('patronymic')
                         <span class="invalid-feedback" role="alert">
@@ -73,7 +74,7 @@
                     </div>
                     <div class="col-lg-3 col-md-4 col-11">
                         <div class="datepicker-wrap input-group date">
-                            <input id="birth_date" value="{{ old('birth_date') }}" type="text" name="birth_date"
+                            <input id="birth_date" value="{{ $cv->birth_date }}" type="text" name="birth_date"
                                 class="dor-input dpicker datepicker-input form-control @error('birth_date') is-invalid @enderror">
                             <img src="{{ asset('images/mdi_calendar_today.svg') }}" alt="">
                             @error('birth_date')
@@ -106,7 +107,7 @@
                         <div class="paragraph">Город проживания</div>
                     </div>
                     <div class="col-lg-3 col-md-4 col-11">
-                        <input id="locate_city" value="{{ old('locate_city') }}" type="text" name="locate_city"
+                        <input id="locate_city" value="{{ $cv->locate_city }}" type="text" name="locate_city"
                             class="dor-input w100 form-control @error('locate_city') is-invalid @enderror">
                         @error('locate_city')
                         <span class="invalid-feedback" role="alert">
@@ -127,7 +128,7 @@
                     </div>
                     <div class="col-lg-3 col-md-4 col-11">
                         <div class="p-rel">
-                            <input id="email" value="{{ old('email') }}" type="text" name="email"
+                            <input id="email" value="{{ $cv->email }}" type="text" name="email"
                                 class="dor-input w100 form-control @error('email') is-invalid @enderror">
                             @error('email')
                             <span class="invalid-feedback" role="alert">
@@ -143,7 +144,7 @@
                     </div>
                     <div class="col-lg-3 col-md-4 col-11">
                         <div style="width: 140px;" class="p-rel mobile-w100">
-                            <input id="phone" value="{{ old('phone') }}" type="text" name="phone"
+                            <input id="phone" value="{{ $cv->phone }}" type="text" name="phone"
                                 class="dor-input w100 form-control @error('phone') is-invalid @enderror"
                                 placeholder="+7 ___ ___-__-__">
                             @error('phone')
@@ -179,7 +180,7 @@
                     </div>
                     <div class="col-lg-3 col-md-4 col-11">
                         <div class="p-rel">
-                            <input id="salary" value="{{ old('salary') }}" type="text" name="salary" placeholder="От"
+                            <input id="salary" value="{{ $cv->salary }}" type="text" name="salary" placeholder="От"
                                 type="text" class="dor-input w100 form-control @error('salary') is-invalid @enderror">
                             <img class="rub-icon" src="{{ asset('images/rub-icon.svg') }}" alt="rub-icon">
                             @error('salary')
@@ -307,14 +308,14 @@
                         <div class="paragraph">О себе</div>
                     </div>
                     <div class="col-lg-5 col-md-7 col-12">
-                        <textarea id="about" value="{{ old('about') }}" name="about" class="dor-input w100 h176 mb8"></textarea>
+                        <textarea id="about" value="{{ $cv->about }}" name="about" class="dor-input w100 h176 mb8"></textarea>
                     </div>
                 </div>
                 <div class="row mb128 mobile-mb64">
                     <div class="col-lg-2 col-md-3">
                     </div>
                     <div class="col-lg-10 col-md-9">
-                        <button type="submit" class="orange-btn link-orange-btn">Сохранить</button>
+                        <button type="submit" class="orange-btn link-orange-btn">Обновить</button>
                     </div>
                 </div>
             </form>

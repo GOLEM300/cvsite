@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\UseCases\Cvs\CvService;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Cv\CreateRequest;
+use App\Http\Requests\Cv\EditRequest;
 use App\Repositories\SpecializationsInterface;
 
 class CvController extends Controller
@@ -49,8 +50,23 @@ class CvController extends Controller
         return redirect()->route('profile.profile.list', Auth::user()->id);
     }
 
-    public function edit()
+    public function edit(SpecializationsInterface $specialization, Cv $cv)
     {
-        //
+        $specialization_name = $specialization->list();
+        return view('cv.edit', compact('specialization_name', 'cv'));
+    }
+
+    public function update(EditRequest $request)
+    {
+        $cv_id = key($request->query());
+        try {
+            $this->service->update(
+                $request,
+                $cv_id
+            );
+        } catch (\DomainException $e) {
+            return back()->with('error', $e->getMessage());
+        }
+        return redirect()->route('profile.profile.list', Auth::user()->id);
     }
 }

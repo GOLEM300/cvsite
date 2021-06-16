@@ -30,7 +30,8 @@ Route::group(
     ],
     function () {
         Route::get('/create', 'CvController@create')->name('cv.create');
-        Route::put('/edit/{cv}', 'CvController@edit')->name('cv.edit');
+        Route::get('/edit/{cv}', 'CvController@edit')->name('cv.edit');
+        Route::put('/', 'CvController@update')->name('cv.update');
         Route::post('/', 'CvController@store');
         Route::delete('/remove/{cv}', 'CvController@remove')->name('cv.remove');
     }
