@@ -29,6 +29,11 @@ class PreviosExpirience extends Model
         '12' => 'Декабрь'
     ];
 
+    public function cv()
+    {
+        return $this->belongsTo(Cv::class);
+    }
+
     /** get full years from one previous job and return it
      * 
      */

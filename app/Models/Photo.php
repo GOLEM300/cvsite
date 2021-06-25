@@ -11,4 +11,5 @@ class Photo extends Model
     public $timestamp = false;
 
     protected $fillable = ['file'];
+
 }

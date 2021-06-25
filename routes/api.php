@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +13,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::group(
+    [
+        'as' => 'api.',
+        'namespace' => 'Api',
+    ],
+    function () {
+        Route::get('/', 'HomeController@index');
+        Route::get('/search', 'Site\SiteController@search');
+        Route::get('/show/{cv_id}', 'Site\SiteController@show');
+        Route::post('/register', 'Auth\RegisterController@register');
+
+        Route::get('/list/{user_id}', 'Profile\ProfileController@list');
+
+        Route::post('/create', 'Cv\CvController@create');
+        Route::put('/update/{cv_id}', 'Cv\CvController@update');
+        Route::delete('/remove/{cv_id}', 'Cv\CvController@remove');
+
+        Route::middleware('auth:api')->group(function () {
+        });
+    }
+);

@@ -24,6 +24,7 @@ class SiteController extends Controller
         $user_cv = $this->service->getUserCv($cv->id);
         $busyness = $this->service->getBusyness($user_cv);
         $sheduleType = $this->service->getSheduleType($user_cv);
+        //$prevWorksExp = $this->service->getPreviousExpirience($user_cv);
         return view('site.show',compact('user_cv','prevWorksExp','busyness','sheduleType'));
     }
 

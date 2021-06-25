@@ -38,33 +38,26 @@ class CvService
     public function create($user_id, CreateRequest $request) : Cv
     {
         return DB::transaction(function () use ($request, $user_id) {
-            //$image = $this->savePhoto($request);
+            
+            $image = $request['photo'] !== null ? $this->savePhoto($request['photo']) : '';
 
-            $request['birth_date'] = Carbon::createFromFormat('d.m.Y', $request['birth_date'])->format('Y-m-d');
-    
-            $request['sex'] = request('radio-sex') ?? 'male';
-    
-            $request['expirience'] = request('radio-expirience') ?? 'no';
-    
-            $request['user_id'] = $user_id;
-
+            $birthDate = $this->birthDateTransform($request['birth_date']);
+        
             $cv = Cv::make([
-                'photo' => 'hjk',//$image->basename,
+                'photo' => $image->basename ?? '',
                 'name' => $request['name'],
                 'patronymic' => $request['patronymic'],
                 'lastname' => $request['lastname'],
-                'birth_date' => $request['birth_date'],
-                'sex' => $request['sex'],
+                'birth_date' => $birthDate,
+                'sex' => $request['radio-sex'] ?? 'male',
                 'locate_city' => $request['locate_city'],
                 'email' => $request['email'],
                 'phone' => $request['phone'],
                 'specialization' => $request['specialization'],
                 'salary' => $request['salary'],
-                'busyness' => 1,
-                'shedule_type' => 1,
-                'expirience' => $request['radio-expirience'],
+                'expirience' => $request['radio-expirience'] ?? 'no',
                 'about' => $request['about'],
-                'user_id' => $request['user_id']
+                'user_id' => $user_id
                 ]);
 
             $cv->saveOrFail();
@@ -83,13 +76,21 @@ class CvService
     /**
      * 
      */
-    private function savePhoto(CreateRequest $request) : ImageImage
+    private function savePhoto(object $photo) : ImageImage
     {
-        // dd($request);
-        $imagePath = $request['photo']->store('uploads', 'public');
+        $imagePath = $photo->store('uploads', 'public');
         $image = Image::make(public_path("storage/{$imagePath}"))->fit(1200, 1200);
         $image->save();
         return $image;
+    }
+
+    /**
+     * 
+     */
+    private function birthDateTransform(string $requestDate) : string
+    {
+        $birthDate = Carbon::createFromFormat('d.m.Y', $requestDate)->format('Y-m-d');
+        return $birthDate;
     }
 
     /** update current cv
@@ -99,6 +100,7 @@ class CvService
     {
         $old_cv = $this->getUserCv($cv_id);
         $old_cv->update($request->only([
+            'photo',
             'name',
             'patronymic',
             'lastname',
@@ -114,7 +116,7 @@ class CvService
             'user_id',
             'updated_at'
         ]));
-        
+
         $this->updateBusyness($request['busyness'],$cv_id);
         $this->updateSheduleType($request['shedule_types'],$cv_id);
 
@@ -171,6 +173,14 @@ class CvService
         return $cv->getRelation('sheduleType')->toArray();
     }
 
+    /** get previousExpirience relation from current cv
+     * 
+     */
+    public function getPreviousExpirience($cv) : array
+    {
+        return $cv->getRelation('previosExpirience')->toArray();
+    }
+
     /** save busyness relation from current cv
      * 
      */
@@ -201,6 +211,14 @@ class CvService
     private function updateSheduleType(array $array,int $cv_id) : void
     {
         $this->sheduleTypeQueries->update($array,$cv_id);
+    }
+
+    /**
+     * 
+     */
+    public function getPrevWorks(int $cv_id) : object
+    {
+        return $this->prevWorks->getPrevWorksExp($cv_id);
     }
 
     /**

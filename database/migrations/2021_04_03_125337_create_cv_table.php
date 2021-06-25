@@ -26,8 +26,6 @@ class CreateCvTable extends Migration
             $table->unsignedBigInteger('phone');
             $table->string('specialization')->index();
             $table->unsignedBigInteger('salary');
-            $table->unsignedBigInteger('busyness')->nullable();
-            $table->unsignedBigInteger('shedule_type')->nullable();
             $table->string('expirience')->index();
             $table->text('about')->nullable();
             $table->integer('user_id')->unsigned();

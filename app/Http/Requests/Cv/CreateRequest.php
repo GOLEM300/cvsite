@@ -14,7 +14,7 @@ class CreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'photo' => ['required', 'image'],
+            'photo' => ['image'],
             'name' => ['required', 'string', 'max:255'],
             'patronymic' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],

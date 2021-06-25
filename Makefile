@@ -10,8 +10,14 @@ build: memory
 test:
 	./vendor/bin/sail exec php-cli vendor/bin/phpunit
 
-migrate:
+migrate-fresh:
 	./vendor/bin/sail artisan migrate:fresh
+
+migrate:
+	./vendor/bin/sail artisan migrate
+
+passport-install:
+	./vendor/bin/sail artisan passport:install
 
 seed-specialization:
 	./vendor/bin/sail artisan db:seed --class=SpecializationTableSeeder

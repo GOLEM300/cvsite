@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Repositories\PrevWorksInterface;
 use Illuminate\Support\Carbon;
+use Laravel\Passport\HasApiTokens;
 
 class Cv extends Model
 {
     use HasFactory;
+    use HasApiTokens;
 
     protected $guarded = [];
 
@@ -49,6 +51,11 @@ class Cv extends Model
     public function sheduleType()
     {
         return $this->hasMany(SheduleType::class);
+    }
+
+    public function previosExpirience()
+    {
+        return $this->hasMany(PreviosExpirience::class);
     }
 
     /** get full expirience with years from previous jobs

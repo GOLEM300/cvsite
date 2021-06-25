@@ -1,23 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
-use App\Providers\RouteServiceProvider;
 use App\UseCases\Auth\RegisterService;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use Symfony\Component\HttpFoundation\Response;
 
 class RegisterController extends Controller
 {
     private $service;
-
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -26,13 +18,7 @@ class RegisterController extends Controller
      */
     public function __construct(RegisterService $service)
     {
-        $this->middleware('guest');
         $this->service = $service;
-    }
-
-    public function showRegistrationForm()
-    {
-        return view('auth.register');
     }
 
     /**
@@ -44,7 +30,9 @@ class RegisterController extends Controller
     protected function register(RegisterRequest $request)
     {
         $this->service->register($request);
-        return redirect()->route('login')
-        ->with('success', 'Check your email and click on the link to verify.');
+
+        return response()->json([
+            'success' => 'Check your email and click on the link to verify.'
+        ], Response::HTTP_CREATED);
     }
 }

@@ -13,7 +13,8 @@ class CvRepository implements CvQueriesInterface
     {
         $cv = Cv::select()->where('id', $cv_id)->with([
             'busyness:cv_id,name',
-            'sheduleType:cv_id,name'
+            'sheduleType:cv_id,name',
+            'previosExpirience'
         ])->first();
         return $cv;
     }

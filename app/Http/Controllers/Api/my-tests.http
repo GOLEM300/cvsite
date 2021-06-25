@@ -1,0 +1,141 @@
+### register new user
+
+post http://frontend.test/api/register
+Content-type: application/json
+Accept: application/json
+
+{
+    "name" : "apitest",
+    "email" : "api@yandex.ru",
+    "password" : "12345678",
+    "password_confirmation" : "12345678"
+}
+
+### get all cv
+
+get http://frontend.test/api/search
+Content-type: application/json
+
+### show cv
+
+get http://frontend.test/api/show/1
+Content-type: application/json
+Accept: application/json
+
+### get cv list for current user
+
+get http://frontend.test/api/list/1
+Content-type: application/json
+Accept: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiYTYwZGZiZmQ0N2Q2ODZhMWJhYThlZWRhMThhODMzZjI1ZTc5NzgwMmMyZTRhMDk3ODQyOTMwMDJmNWJkMmViZjA3MGE3YjI5YTYwZWE3NzQiLCJpYXQiOjE2MjQ2MjUyNTEuMzIzMzU4LCJuYmYiOjE2MjQ2MjUyNTEuMzIzMzgzLCJleHAiOjE2NTYxNjEyNTEuMjA3MjAyLCJzdWIiOiIiLCJzY29wZXMiOltdfQ.sQsllKI_u9Y27bQbGMrm3gs91zOXWT3a3LxoCb_SrDhhMnofu31tHGkyX5PeovE1tqpjKQW55B7X_WDmTU0SDNkFyZFp40JzGayWceIT6w9_4rxxgGZNQAg_IOgiFaoOXKSgA-YQfQw5DnXqVKfLI3G_Tz7Ejb4lsbeUD957vxsj-6yCB50YBFewJPTdQGPVXlTfmjo2Qv9mSbWkdOlqiX-e1TNludY8oiFCxc7vT3tBTuF_1kGefC5TLQpenXWKaCPCgsv3nBq9Kk1p_umj2glE1P-qPcy8J_f3NJj_4axaE0qXvCsAf3OOP5I0fck8QbaBY7Xo6l2cP23km8O8miZn5rA-Eh27veM4DMVNlI67FzAqnUkuxW9h_vzppUsKXXUic3_otLx_7v8yHhR_7b2GxIQZwmvEBJhCwgILipX24RclY3DPH2ALTorEACdxL--Zue2Dith1-KONG6_A0pCrzUSg6usiAHd8zCwaX14idjn-XccfQh1H_mKnDQhHzY4tbgZevKRcpX9jkE7HMGEYAqPe3u93GP_w9Wk799WmcVnA21hTtwBFPOM7k7VGEZKTDuI2WJ4WLlrUzJVwmdmjiNPQnDzEc24vzs1CtSSRX8FGuTUvR03Xo_1eD3ZTkFK7eAdHgjMuHoUc5LAq3ZoqUtXIGhCIk8TBAvfYyII
+
+### create cv
+
+post http://frontend.test/api/create
+Content-type: application/json
+Accept: application/json
+//Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiYTYwZGZiZmQ0N2Q2ODZhMWJhYThlZWRhMThhODMzZjI1ZTc5NzgwMmMyZTRhMDk3ODQyOTMwMDJmNWJkMmViZjA3MGE3YjI5YTYwZWE3NzQiLCJpYXQiOjE2MjQ2MjUyNTEuMzIzMzU4LCJuYmYiOjE2MjQ2MjUyNTEuMzIzMzgzLCJleHAiOjE2NTYxNjEyNTEuMjA3MjAyLCJzdWIiOiIiLCJzY29wZXMiOltdfQ.sQsllKI_u9Y27bQbGMrm3gs91zOXWT3a3LxoCb_SrDhhMnofu31tHGkyX5PeovE1tqpjKQW55B7X_WDmTU0SDNkFyZFp40JzGayWceIT6w9_4rxxgGZNQAg_IOgiFaoOXKSgA-YQfQw5DnXqVKfLI3G_Tz7Ejb4lsbeUD957vxsj-6yCB50YBFewJPTdQGPVXlTfmjo2Qv9mSbWkdOlqiX-e1TNludY8oiFCxc7vT3tBTuF_1kGefC5TLQpenXWKaCPCgsv3nBq9Kk1p_umj2glE1P-qPcy8J_f3NJj_4axaE0qXvCsAf3OOP5I0fck8QbaBY7Xo6l2cP23km8O8miZn5rA-Eh27veM4DMVNlI67FzAqnUkuxW9h_vzppUsKXXUic3_otLx_7v8yHhR_7b2GxIQZwmvEBJhCwgILipX24RclY3DPH2ALTorEACdxL--Zue2Dith1-KONG6_A0pCrzUSg6usiAHd8zCwaX14idjn-XccfQh1H_mKnDQhHzY4tbgZevKRcpX9jkE7HMGEYAqPe3u93GP_w9Wk799WmcVnA21hTtwBFPOM7k7VGEZKTDuI2WJ4WLlrUzJVwmdmjiNPQnDzEc24vzs1CtSSRX8FGuTUvR03Xo_1eD3ZTkFK7eAdHgjMuHoUc5LAq3ZoqUtXIGhCIk8TBAvfYyII
+
+{
+    "lastname": "test",
+    "name": "api",
+    "patronymic": "last",
+    "birth_date": "13.06.2021",
+    "sex": "male",
+    "locate_city": "aaaaaaaaaaa",
+    "email": "go666@yandex.ru",
+    "phone": 12345678901,
+    "specialization": "Treutelburgh",
+    "salary": 1111111,
+    "radio-expirience": "yes",
+    "about": null,
+    "user_id": 1,
+    "busyness": [
+      "Частичная занятость",
+      "Волонтёрство"
+    ],
+    "shedule_types": [
+      "Сменный график"
+    ],
+    "workExperiences": [
+      {
+        "workStartMonth": "01",
+        "workStartYear": "2006",
+        "workEndMonth": "01",
+        "workEndYear": "2010",
+        "stillWork": "off",
+        "vacancy": "666",
+        "organisation": "wrew",
+        "duty": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeennnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn"
+      }
+    ]
+}
+
+### edit cv
+
+put http://frontend.test/api/update/4
+Content-type: application/json
+Accept: application/json
+
+{
+    "lastname": "golem",
+    "name": "golem",
+    "patronymic": "last",
+    "birth_date": "13.06.2021",
+    "sex": "male",
+    "locate_city": "aaaaaaaaaaa",
+    "email": "go666@yandex.ru",
+    "phone": 12345678901,
+    "specialization": "Treutelburgh",
+    "salary": 1111111,
+    "radio-expirience": "yes",
+    "about": null,
+    "user_id": 1,
+    "busyness": [
+      "Частичная занятость",
+      "Волонтёрство"
+    ],
+    "shedule_types": [
+      "Сменный график"
+    ],
+    "previos_expirience": [
+      {
+        "workStartMonth": "01",
+        "workStartYear": "2006",
+        "workEndMonth": "01",
+        "workEndYear": "2010",
+        "stillWork": "off",
+        "vacancy": "666",
+        "organisation": "wrew",
+        "duty": "xxx",
+      }
+    ]
+}
+
+### remove cv
+
+delete http://frontend.test/api/remove/1
+Content-type: application/json
+Accept: application/json
+Authorization: Bearer 
+
+###
+
+get http://frontend.test/oauth/clients
+Content-type: application/json
+Accept: application/json
+
+### 
+
+post http://frontend.test/oauth/token
+Content-type: application/json
+Accept: application/json
+
+{
+    "grant_type" : "client_credentials",
+    "client_id" : 2,
+    "client_secret" : "4xSGZgpI7JIb5KuGixDA1X3vn7HsiIvqYI1gotK6",
+    "username" : "apitest",
+    "password" : "12345678",
+    "scope" : ""
+}

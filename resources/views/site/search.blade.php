@@ -49,7 +49,7 @@
                     <div class="vakancy-page-block company-list-search__block resume-list__block p-rel mb16">
                         <div class="company-list-search__block-left">
                             <div class="resume-list__block-img mb8">
-                                <img src="images/profile-foto.jpg" alt="profile">
+                                <img src="/storage/uploads/{{$cv->photo}}" alt="profile">
                             </div>
                         </div>
                         <div class="company-list-search__block-right">
