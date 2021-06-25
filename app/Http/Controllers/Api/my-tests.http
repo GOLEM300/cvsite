@@ -73,7 +73,7 @@ Accept: application/json
 
 ### edit cv
 
-put http://frontend.test/api/update/4
+put http://localhost/api/update/4
 Content-type: application/json
 Accept: application/json
 
@@ -114,20 +114,20 @@ Accept: application/json
 
 ### remove cv
 
-delete http://frontend.test/api/remove/1
+delete http://localhost/api/remove/1
 Content-type: application/json
 Accept: application/json
 Authorization: Bearer 
 
 ###
 
-get http://frontend.test/oauth/clients
+get http://localhost/oauth/clients
 Content-type: application/json
 Accept: application/json
 
 ### 
 
-post http://frontend.test/oauth/token
+post http://localhost/oauth/token
 Content-type: application/json
 Accept: application/json
 
