@@ -29,14 +29,16 @@ make migrate - run migration;
 
 make seed-specialization - list for drop down on cv create page;
 
-Your environment  db section should looks like:
+Your .env file  db section should looks like:
 
+```
 DB_CONNECTION=mysql
 DB_HOST=mysql
 DB_PORT=3306
 DB_DATABASE=cvsite
 DB_USERNAME=admin
 DB_PASSWORD=password
+```
 
 **Routes**
 
