@@ -22,7 +22,7 @@ class CvController extends Controller
 
     public function create(CreateRequest $request)
     {
-        $this->service->create(1,$request);
+        $this->service->create($request->user()->id,$request);
         return response()->json([
                 'success' => 'Cv was made and stored.'
             ], Response::HTTP_CREATED);
@@ -38,7 +38,7 @@ class CvController extends Controller
 
     public function update(EditRequest $request)
     {
-        $cv_id = key($request->query());
+        $cv_id = $request['id'];
             $this->service->update(
                 $request,
                 $cv_id

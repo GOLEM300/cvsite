@@ -24,13 +24,12 @@ Route::group(
         Route::get('/show/{cv_id}', 'Site\SiteController@show');
         Route::post('/register', 'Auth\RegisterController@register');
 
-        Route::get('/list/{user_id}', 'Profile\ProfileController@list');
-
-        Route::post('/create', 'Cv\CvController@create');
-        Route::put('/update/{cv_id}', 'Cv\CvController@update');
-        Route::delete('/remove/{cv_id}', 'Cv\CvController@remove');
-
         Route::middleware('auth:api')->group(function () {
+            Route::get('/list/{user_id}', 'Profile\ProfileController@list');
+
+            Route::put('/update', 'Cv\CvController@update');
+            Route::post('/create', 'Cv\CvController@create');
+            Route::delete('/remove/{cv_id}', 'Cv\CvController@remove');
         });
     }
 );

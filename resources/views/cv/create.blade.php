@@ -92,11 +92,11 @@
                     <div class="col-lg-3 col-md-4 col-11">
                         <ul class="card-ul-radio profile-radio-list">
                             <li>
-                                <input type="radio" id="test1" name="radio-sex" value="male" checked>
+                                <input type="radio" id="test1" name="sex" value="male" checked>
                                 <label for="test1">Мужской</label>
                             </li>
                             <li>
-                                <input type="radio" id="test2" name="radio-sex" value="female">
+                                <input type="radio" id="test2" name="sex" value="female">
                                 <label for="test2">Женский</label>
                             </li>
                         </ul>

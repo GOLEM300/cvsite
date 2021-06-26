@@ -13,6 +13,8 @@ class Busyness extends Model
 
     protected $table = 'busyness';
 
+    protected $guarded = ['id'];
+
     public function cv()
     {
         return $this->belongsTo(Cv::class);

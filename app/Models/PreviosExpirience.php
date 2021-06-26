@@ -12,6 +12,8 @@ class PreviosExpirience extends Model
 
     protected $table = 'previous_expirience';
 
+    protected $guarded = ['id'];
+
     public $timestamps = false;
 
     public static $months = [
@@ -35,7 +37,7 @@ class PreviosExpirience extends Model
     }
 
     /** get full years from one previous job and return it
-     * 
+     *
      */
     public function totalYears() : int
     {
@@ -48,7 +50,7 @@ class PreviosExpirience extends Model
     }
 
     /** get interval express to string between start work and end work
-     * 
+     *
      */
     public function period() : string
     {
@@ -62,8 +64,8 @@ class PreviosExpirience extends Model
         }
     }
 
-    /** calculate work period express to string with years and months 
-     * 
+    /** calculate work period express to string with years and months
+     *
      */
     public function dateDiff() : string
     {

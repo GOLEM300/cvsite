@@ -13,10 +13,10 @@ class SheduleTypeRepository implements SheduleTypeInterface
     public function save(array $array, int $cv_id) : void
     {
         foreach ($array as $value) {
-            $field = new SheduleType();
-            $field->name = $value;
-            $field->cv_id = $cv_id;
-            $field->save();
+            SheduleType::create([
+                'name' => $value,
+                'cv_id' => $cv_id
+            ]);
         }
     }
 

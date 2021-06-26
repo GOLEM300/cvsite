@@ -13,10 +13,10 @@ class BusynessRepository implements BusynessInterface
     public function save(array $array, int $cv_id) : void
     {
         foreach ($array as $value) {
-            $field = new Busyness();
-            $field->name = $value;
-            $field->cv_id = $cv_id;
-            $field->save();
+            Busyness::create([
+                'name' => $value,
+                'cv_id' => $cv_id
+            ]);
         }
     }
 

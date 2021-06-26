@@ -19,7 +19,7 @@ class EditRequest extends FormRequest
             'patronymic' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
             'birth_date' => ['required', 'date'],
-            'sex' => '',
+            'radio-sex' => 'in:male,female',
             'locate_city' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
             'phone' => ['required'],
@@ -27,7 +27,7 @@ class EditRequest extends FormRequest
             'salary' => ['required'],
             'busyness' => 'required|array|min:1',
             'shedule_types' => 'required|array|min:1',
-            'expirience' => '',
+            'radio-expirience' => 'in:yes,no',
             'about' => ''
         ];
     }

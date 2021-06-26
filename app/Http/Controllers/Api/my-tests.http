@@ -5,8 +5,8 @@ Content-type: application/json
 Accept: application/json
 
 {
-    "name" : "apitest",
-    "email" : "api@yandex.ru",
+    "name" : "apitest2",
+    "email" : "gg@yandex.ru",
     "password" : "12345678",
     "password_confirmation" : "12345678"
 }
@@ -24,17 +24,17 @@ Accept: application/json
 
 ### get cv list for current user
 
-get http://frontend.test/api/list/1
+get http://frontend.test/api/list/3
 Content-type: application/json
 Accept: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiYTYwZGZiZmQ0N2Q2ODZhMWJhYThlZWRhMThhODMzZjI1ZTc5NzgwMmMyZTRhMDk3ODQyOTMwMDJmNWJkMmViZjA3MGE3YjI5YTYwZWE3NzQiLCJpYXQiOjE2MjQ2MjUyNTEuMzIzMzU4LCJuYmYiOjE2MjQ2MjUyNTEuMzIzMzgzLCJleHAiOjE2NTYxNjEyNTEuMjA3MjAyLCJzdWIiOiIiLCJzY29wZXMiOltdfQ.sQsllKI_u9Y27bQbGMrm3gs91zOXWT3a3LxoCb_SrDhhMnofu31tHGkyX5PeovE1tqpjKQW55B7X_WDmTU0SDNkFyZFp40JzGayWceIT6w9_4rxxgGZNQAg_IOgiFaoOXKSgA-YQfQw5DnXqVKfLI3G_Tz7Ejb4lsbeUD957vxsj-6yCB50YBFewJPTdQGPVXlTfmjo2Qv9mSbWkdOlqiX-e1TNludY8oiFCxc7vT3tBTuF_1kGefC5TLQpenXWKaCPCgsv3nBq9Kk1p_umj2glE1P-qPcy8J_f3NJj_4axaE0qXvCsAf3OOP5I0fck8QbaBY7Xo6l2cP23km8O8miZn5rA-Eh27veM4DMVNlI67FzAqnUkuxW9h_vzppUsKXXUic3_otLx_7v8yHhR_7b2GxIQZwmvEBJhCwgILipX24RclY3DPH2ALTorEACdxL--Zue2Dith1-KONG6_A0pCrzUSg6usiAHd8zCwaX14idjn-XccfQh1H_mKnDQhHzY4tbgZevKRcpX9jkE7HMGEYAqPe3u93GP_w9Wk799WmcVnA21hTtwBFPOM7k7VGEZKTDuI2WJ4WLlrUzJVwmdmjiNPQnDzEc24vzs1CtSSRX8FGuTUvR03Xo_1eD3ZTkFK7eAdHgjMuHoUc5LAq3ZoqUtXIGhCIk8TBAvfYyII
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiOWJhMGRiZWQxNWFiOWY5OWE4MzEzYWIzYzY2OGU3MWEwNDA0ZTkwN2JmM2JkYTg0OTBhM2U4NTFjYmE0MDk4OGIyOGVlYzIyMzk5N2RkMWUiLCJpYXQiOjE2MjQ2NDI4MTQuNjM0MzE1LCJuYmYiOjE2MjQ2NDI4MTQuNjM0MzIyLCJleHAiOjE2NTYxNzg4MTQuMjc1Njc3LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.Ezwjhbicr0yLoH8AvwxU2IU1DK4OgDKmIKdavnspyxp7i1du3vwEyPsw436HxsQPxBqqv9hE9YdK805NuBrRxwyv8Eco3OHhPBjLRO98t55LO4dmCQiKL_-qP2lqoKwDPAGDJTsk2cAfb2qrrTj7SOdLfXxQc3B_7oJaqTs0vG3RN0eJPMhttci-EWLD8QeROlICww9e2qSheGHqNRyWbzKLckOJqk1bTzyR3Um7fs_bHfpcfAS3uYdadPlmEQjWIfTEZqxBqSR93kRwC6d15EZryrVACB0cJ-B4Ag0a-B7v1KjNe7pfSEP4KWUdkDF8b8YdUQBn8Y4-64s79EJNVwL6SaKHF4T4H6IvIc0l56CM1dGKnFZYPnfXAgNpZq3LmTNjxj2C2OWyKc5eVaNsEnXhzE4vzmvzlLEjjvf_zvEtyBIw0hXbIdmsHgng6kMsNlQsmVp4DzKCNiToKT1BddcH7S-6CZihXBGuacqgQixiFY_-FIN78mZZeXf282WNAF_YVUQwIhuKBnmIiJTlRHibNhd27KfMO135MlRvSyhm21ftUeQTtH_honmECPdk3W9Ka94LMWnEdttnYfJLEJQRWSC6RfElRso1Ag8f0CizKd9oAySKjZI3OQPEwFwblPQSzXcIRLMMvyH6o7-93irQ4iQsMkK3WgtEU4kpFVM
 
 ### create cv
 
 post http://frontend.test/api/create
 Content-type: application/json
 Accept: application/json
-//Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiYTYwZGZiZmQ0N2Q2ODZhMWJhYThlZWRhMThhODMzZjI1ZTc5NzgwMmMyZTRhMDk3ODQyOTMwMDJmNWJkMmViZjA3MGE3YjI5YTYwZWE3NzQiLCJpYXQiOjE2MjQ2MjUyNTEuMzIzMzU4LCJuYmYiOjE2MjQ2MjUyNTEuMzIzMzgzLCJleHAiOjE2NTYxNjEyNTEuMjA3MjAyLCJzdWIiOiIiLCJzY29wZXMiOltdfQ.sQsllKI_u9Y27bQbGMrm3gs91zOXWT3a3LxoCb_SrDhhMnofu31tHGkyX5PeovE1tqpjKQW55B7X_WDmTU0SDNkFyZFp40JzGayWceIT6w9_4rxxgGZNQAg_IOgiFaoOXKSgA-YQfQw5DnXqVKfLI3G_Tz7Ejb4lsbeUD957vxsj-6yCB50YBFewJPTdQGPVXlTfmjo2Qv9mSbWkdOlqiX-e1TNludY8oiFCxc7vT3tBTuF_1kGefC5TLQpenXWKaCPCgsv3nBq9Kk1p_umj2glE1P-qPcy8J_f3NJj_4axaE0qXvCsAf3OOP5I0fck8QbaBY7Xo6l2cP23km8O8miZn5rA-Eh27veM4DMVNlI67FzAqnUkuxW9h_vzppUsKXXUic3_otLx_7v8yHhR_7b2GxIQZwmvEBJhCwgILipX24RclY3DPH2ALTorEACdxL--Zue2Dith1-KONG6_A0pCrzUSg6usiAHd8zCwaX14idjn-XccfQh1H_mKnDQhHzY4tbgZevKRcpX9jkE7HMGEYAqPe3u93GP_w9Wk799WmcVnA21hTtwBFPOM7k7VGEZKTDuI2WJ4WLlrUzJVwmdmjiNPQnDzEc24vzs1CtSSRX8FGuTUvR03Xo_1eD3ZTkFK7eAdHgjMuHoUc5LAq3ZoqUtXIGhCIk8TBAvfYyII
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiOWJhMGRiZWQxNWFiOWY5OWE4MzEzYWIzYzY2OGU3MWEwNDA0ZTkwN2JmM2JkYTg0OTBhM2U4NTFjYmE0MDk4OGIyOGVlYzIyMzk5N2RkMWUiLCJpYXQiOjE2MjQ2NDI4MTQuNjM0MzE1LCJuYmYiOjE2MjQ2NDI4MTQuNjM0MzIyLCJleHAiOjE2NTYxNzg4MTQuMjc1Njc3LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.Ezwjhbicr0yLoH8AvwxU2IU1DK4OgDKmIKdavnspyxp7i1du3vwEyPsw436HxsQPxBqqv9hE9YdK805NuBrRxwyv8Eco3OHhPBjLRO98t55LO4dmCQiKL_-qP2lqoKwDPAGDJTsk2cAfb2qrrTj7SOdLfXxQc3B_7oJaqTs0vG3RN0eJPMhttci-EWLD8QeROlICww9e2qSheGHqNRyWbzKLckOJqk1bTzyR3Um7fs_bHfpcfAS3uYdadPlmEQjWIfTEZqxBqSR93kRwC6d15EZryrVACB0cJ-B4Ag0a-B7v1KjNe7pfSEP4KWUdkDF8b8YdUQBn8Y4-64s79EJNVwL6SaKHF4T4H6IvIc0l56CM1dGKnFZYPnfXAgNpZq3LmTNjxj2C2OWyKc5eVaNsEnXhzE4vzmvzlLEjjvf_zvEtyBIw0hXbIdmsHgng6kMsNlQsmVp4DzKCNiToKT1BddcH7S-6CZihXBGuacqgQixiFY_-FIN78mZZeXf282WNAF_YVUQwIhuKBnmIiJTlRHibNhd27KfMO135MlRvSyhm21ftUeQTtH_honmECPdk3W9Ka94LMWnEdttnYfJLEJQRWSC6RfElRso1Ag8f0CizKd9oAySKjZI3OQPEwFwblPQSzXcIRLMMvyH6o7-93irQ4iQsMkK3WgtEU4kpFVM
 
 {
     "lastname": "test",
@@ -47,7 +47,7 @@ Accept: application/json
     "phone": 12345678901,
     "specialization": "Treutelburgh",
     "salary": 1111111,
-    "radio-expirience": "yes",
+    "expirience": "yes",
     "about": null,
     "user_id": 1,
     "busyness": [
@@ -73,11 +73,13 @@ Accept: application/json
 
 ### edit cv
 
-put http://frontend.test/api/update/4
+put http://frontend.test/api/update
 Content-type: application/json
 Accept: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiOWJhMGRiZWQxNWFiOWY5OWE4MzEzYWIzYzY2OGU3MWEwNDA0ZTkwN2JmM2JkYTg0OTBhM2U4NTFjYmE0MDk4OGIyOGVlYzIyMzk5N2RkMWUiLCJpYXQiOjE2MjQ2NDI4MTQuNjM0MzE1LCJuYmYiOjE2MjQ2NDI4MTQuNjM0MzIyLCJleHAiOjE2NTYxNzg4MTQuMjc1Njc3LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.Ezwjhbicr0yLoH8AvwxU2IU1DK4OgDKmIKdavnspyxp7i1du3vwEyPsw436HxsQPxBqqv9hE9YdK805NuBrRxwyv8Eco3OHhPBjLRO98t55LO4dmCQiKL_-qP2lqoKwDPAGDJTsk2cAfb2qrrTj7SOdLfXxQc3B_7oJaqTs0vG3RN0eJPMhttci-EWLD8QeROlICww9e2qSheGHqNRyWbzKLckOJqk1bTzyR3Um7fs_bHfpcfAS3uYdadPlmEQjWIfTEZqxBqSR93kRwC6d15EZryrVACB0cJ-B4Ag0a-B7v1KjNe7pfSEP4KWUdkDF8b8YdUQBn8Y4-64s79EJNVwL6SaKHF4T4H6IvIc0l56CM1dGKnFZYPnfXAgNpZq3LmTNjxj2C2OWyKc5eVaNsEnXhzE4vzmvzlLEjjvf_zvEtyBIw0hXbIdmsHgng6kMsNlQsmVp4DzKCNiToKT1BddcH7S-6CZihXBGuacqgQixiFY_-FIN78mZZeXf282WNAF_YVUQwIhuKBnmIiJTlRHibNhd27KfMO135MlRvSyhm21ftUeQTtH_honmECPdk3W9Ka94LMWnEdttnYfJLEJQRWSC6RfElRso1Ag8f0CizKd9oAySKjZI3OQPEwFwblPQSzXcIRLMMvyH6o7-93irQ4iQsMkK3WgtEU4kpFVM
 
 {
+    "id" : 1,
     "lastname": "golem",
     "name": "golem",
     "patronymic": "last",
@@ -88,7 +90,7 @@ Accept: application/json
     "phone": 12345678901,
     "specialization": "Treutelburgh",
     "salary": 1111111,
-    "radio-expirience": "yes",
+    "expirience": "yes",
     "about": null,
     "user_id": 1,
     "busyness": [
@@ -117,7 +119,7 @@ Accept: application/json
 delete http://frontend.test/api/remove/1
 Content-type: application/json
 Accept: application/json
-Authorization: Bearer 
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiOWJhMGRiZWQxNWFiOWY5OWE4MzEzYWIzYzY2OGU3MWEwNDA0ZTkwN2JmM2JkYTg0OTBhM2U4NTFjYmE0MDk4OGIyOGVlYzIyMzk5N2RkMWUiLCJpYXQiOjE2MjQ2NDI4MTQuNjM0MzE1LCJuYmYiOjE2MjQ2NDI4MTQuNjM0MzIyLCJleHAiOjE2NTYxNzg4MTQuMjc1Njc3LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.Ezwjhbicr0yLoH8AvwxU2IU1DK4OgDKmIKdavnspyxp7i1du3vwEyPsw436HxsQPxBqqv9hE9YdK805NuBrRxwyv8Eco3OHhPBjLRO98t55LO4dmCQiKL_-qP2lqoKwDPAGDJTsk2cAfb2qrrTj7SOdLfXxQc3B_7oJaqTs0vG3RN0eJPMhttci-EWLD8QeROlICww9e2qSheGHqNRyWbzKLckOJqk1bTzyR3Um7fs_bHfpcfAS3uYdadPlmEQjWIfTEZqxBqSR93kRwC6d15EZryrVACB0cJ-B4Ag0a-B7v1KjNe7pfSEP4KWUdkDF8b8YdUQBn8Y4-64s79EJNVwL6SaKHF4T4H6IvIc0l56CM1dGKnFZYPnfXAgNpZq3LmTNjxj2C2OWyKc5eVaNsEnXhzE4vzmvzlLEjjvf_zvEtyBIw0hXbIdmsHgng6kMsNlQsmVp4DzKCNiToKT1BddcH7S-6CZihXBGuacqgQixiFY_-FIN78mZZeXf282WNAF_YVUQwIhuKBnmIiJTlRHibNhd27KfMO135MlRvSyhm21ftUeQTtH_honmECPdk3W9Ka94LMWnEdttnYfJLEJQRWSC6RfElRso1Ag8f0CizKd9oAySKjZI3OQPEwFwblPQSzXcIRLMMvyH6o7-93irQ4iQsMkK3WgtEU4kpFVM
 
 ###
 
@@ -130,12 +132,13 @@ Accept: application/json
 post http://frontend.test/oauth/token
 Content-type: application/json
 Accept: application/json
+Authorization: Bearer 111
 
 {
-    "grant_type" : "client_credentials",
-    "client_id" : 2,
-    "client_secret" : "4xSGZgpI7JIb5KuGixDA1X3vn7HsiIvqYI1gotK6",
-    "username" : "apitest",
+    "grant_type" : "password",
+    "client_id" : 3,
+    "client_secret" : "38usyOePGa7SqOsIhpbgo0tiOIjJcNRGw72bBR9F",
+    "username" : "api@yandex.ru",
     "password" : "12345678",
     "scope" : ""
 }

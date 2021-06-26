@@ -10,7 +10,7 @@
             <input
               type="radio"
               id="test9131"
-              name="radio-expirience"
+              name="expirience"
               value="no"
               checked=""
               v-model="show"
@@ -21,7 +21,7 @@
             <input
               type="radio"
               id="test10242"
-              name="radio-expirience"
+              name="expirience"
               v-model="show"
               value="yes"
             />

@@ -38,7 +38,6 @@ class CvService
     public function create($user_id, CreateRequest $request) : Cv
     {
         return DB::transaction(function () use ($request, $user_id) {
-            
             $image = $request['photo'] !== null ? $this->savePhoto($request['photo']) : '';
 
             $birthDate = $this->birthDateTransform($request['birth_date']);
@@ -49,13 +48,13 @@ class CvService
                 'patronymic' => $request['patronymic'],
                 'lastname' => $request['lastname'],
                 'birth_date' => $birthDate,
-                'sex' => $request['radio-sex'] ?? 'male',
+                'sex' => $request['sex'],
                 'locate_city' => $request['locate_city'],
                 'email' => $request['email'],
                 'phone' => $request['phone'],
                 'specialization' => $request['specialization'],
                 'salary' => $request['salary'],
-                'expirience' => $request['radio-expirience'] ?? 'no',
+                'expirience' => $request['expirience'],
                 'about' => $request['about'],
                 'user_id' => $user_id
                 ]);
@@ -65,7 +64,7 @@ class CvService
             $this->saveBusyness($request['busyness'],$cv->id);
             $this->saveSheduleType($request['shedule_types'],$cv->id);
 
-            if ($request['radio-expirience'] == 'yes') {
+            if ($request['expirience'] == 'yes') {
                 $this->savePrevWorks($request['workExperiences'],$cv->id);
             }
 
@@ -120,8 +119,10 @@ class CvService
         $this->updateBusyness($request['busyness'],$cv_id);
         $this->updateSheduleType($request['shedule_types'],$cv_id);
 
-        if ($request['radio-expirience'] == 'yes') {
+        if (!empty($request['workExperiences'])) {
             $this->updatePrevWorks($request['workExperiences'], $cv_id);
+        } else {
+            $this->removePrevWorks($cv_id);
         }
     }
 
@@ -235,5 +236,13 @@ class CvService
     private function updatePrevWorks(array $array, int $cv_id) : void
     {
         $this->prevWorks->update($array,$cv_id);
+    }
+
+    /**
+     * 
+     */
+    private function removePrevWorks(int $cv_id) : void
+    {
+        $this->prevWorks->remove($cv_id);
     }
 }

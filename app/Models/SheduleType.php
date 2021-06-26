@@ -13,6 +13,8 @@ class SheduleType extends Model
 
     protected $table = 'shedule_types';
 
+    protected $guarded = ['id'];
+
     public function cv()
     {
         return $this->belongsTo(Cv::class);
