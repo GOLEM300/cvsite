@@ -1,6 +1,6 @@
 ### register new user
 
-post http://frontend.test/api/register
+post http://localhost/api/register
 Content-type: application/json
 Accept: application/json
 
@@ -13,25 +13,29 @@ Accept: application/json
 
 ### get all cv
 
-get http://frontend.test/api/search
+get http://localhost/api/search
 Content-type: application/json
 
 ### show cv
 
-get http://frontend.test/api/show/1
+get http://localhost/api/show/1
 Content-type: application/json
 Accept: application/json
 
 ### get cv list for current user
 
+<<<<<<< HEAD
 get http://frontend.test/api/list/3
+=======
+get http://localhost/api/list/1
+>>>>>>> 3acd0681d4f56df18df692fb6143b38e74cbcb42
 Content-type: application/json
 Accept: application/json
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiOWJhMGRiZWQxNWFiOWY5OWE4MzEzYWIzYzY2OGU3MWEwNDA0ZTkwN2JmM2JkYTg0OTBhM2U4NTFjYmE0MDk4OGIyOGVlYzIyMzk5N2RkMWUiLCJpYXQiOjE2MjQ2NDI4MTQuNjM0MzE1LCJuYmYiOjE2MjQ2NDI4MTQuNjM0MzIyLCJleHAiOjE2NTYxNzg4MTQuMjc1Njc3LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.Ezwjhbicr0yLoH8AvwxU2IU1DK4OgDKmIKdavnspyxp7i1du3vwEyPsw436HxsQPxBqqv9hE9YdK805NuBrRxwyv8Eco3OHhPBjLRO98t55LO4dmCQiKL_-qP2lqoKwDPAGDJTsk2cAfb2qrrTj7SOdLfXxQc3B_7oJaqTs0vG3RN0eJPMhttci-EWLD8QeROlICww9e2qSheGHqNRyWbzKLckOJqk1bTzyR3Um7fs_bHfpcfAS3uYdadPlmEQjWIfTEZqxBqSR93kRwC6d15EZryrVACB0cJ-B4Ag0a-B7v1KjNe7pfSEP4KWUdkDF8b8YdUQBn8Y4-64s79EJNVwL6SaKHF4T4H6IvIc0l56CM1dGKnFZYPnfXAgNpZq3LmTNjxj2C2OWyKc5eVaNsEnXhzE4vzmvzlLEjjvf_zvEtyBIw0hXbIdmsHgng6kMsNlQsmVp4DzKCNiToKT1BddcH7S-6CZihXBGuacqgQixiFY_-FIN78mZZeXf282WNAF_YVUQwIhuKBnmIiJTlRHibNhd27KfMO135MlRvSyhm21ftUeQTtH_honmECPdk3W9Ka94LMWnEdttnYfJLEJQRWSC6RfElRso1Ag8f0CizKd9oAySKjZI3OQPEwFwblPQSzXcIRLMMvyH6o7-93irQ4iQsMkK3WgtEU4kpFVM
 
 ### create cv
 
-post http://frontend.test/api/create
+post http://localhost/api/create
 Content-type: application/json
 Accept: application/json
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiOWJhMGRiZWQxNWFiOWY5OWE4MzEzYWIzYzY2OGU3MWEwNDA0ZTkwN2JmM2JkYTg0OTBhM2U4NTFjYmE0MDk4OGIyOGVlYzIyMzk5N2RkMWUiLCJpYXQiOjE2MjQ2NDI4MTQuNjM0MzE1LCJuYmYiOjE2MjQ2NDI4MTQuNjM0MzIyLCJleHAiOjE2NTYxNzg4MTQuMjc1Njc3LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.Ezwjhbicr0yLoH8AvwxU2IU1DK4OgDKmIKdavnspyxp7i1du3vwEyPsw436HxsQPxBqqv9hE9YdK805NuBrRxwyv8Eco3OHhPBjLRO98t55LO4dmCQiKL_-qP2lqoKwDPAGDJTsk2cAfb2qrrTj7SOdLfXxQc3B_7oJaqTs0vG3RN0eJPMhttci-EWLD8QeROlICww9e2qSheGHqNRyWbzKLckOJqk1bTzyR3Um7fs_bHfpcfAS3uYdadPlmEQjWIfTEZqxBqSR93kRwC6d15EZryrVACB0cJ-B4Ag0a-B7v1KjNe7pfSEP4KWUdkDF8b8YdUQBn8Y4-64s79EJNVwL6SaKHF4T4H6IvIc0l56CM1dGKnFZYPnfXAgNpZq3LmTNjxj2C2OWyKc5eVaNsEnXhzE4vzmvzlLEjjvf_zvEtyBIw0hXbIdmsHgng6kMsNlQsmVp4DzKCNiToKT1BddcH7S-6CZihXBGuacqgQixiFY_-FIN78mZZeXf282WNAF_YVUQwIhuKBnmIiJTlRHibNhd27KfMO135MlRvSyhm21ftUeQTtH_honmECPdk3W9Ka94LMWnEdttnYfJLEJQRWSC6RfElRso1Ag8f0CizKd9oAySKjZI3OQPEwFwblPQSzXcIRLMMvyH6o7-93irQ4iQsMkK3WgtEU4kpFVM
@@ -73,7 +77,11 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpI
 
 ### edit cv
 
+<<<<<<< HEAD
 put http://frontend.test/api/update
+=======
+put http://localhost/api/update/4
+>>>>>>> 3acd0681d4f56df18df692fb6143b38e74cbcb42
 Content-type: application/json
 Accept: application/json
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiOWJhMGRiZWQxNWFiOWY5OWE4MzEzYWIzYzY2OGU3MWEwNDA0ZTkwN2JmM2JkYTg0OTBhM2U4NTFjYmE0MDk4OGIyOGVlYzIyMzk5N2RkMWUiLCJpYXQiOjE2MjQ2NDI4MTQuNjM0MzE1LCJuYmYiOjE2MjQ2NDI4MTQuNjM0MzIyLCJleHAiOjE2NTYxNzg4MTQuMjc1Njc3LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.Ezwjhbicr0yLoH8AvwxU2IU1DK4OgDKmIKdavnspyxp7i1du3vwEyPsw436HxsQPxBqqv9hE9YdK805NuBrRxwyv8Eco3OHhPBjLRO98t55LO4dmCQiKL_-qP2lqoKwDPAGDJTsk2cAfb2qrrTj7SOdLfXxQc3B_7oJaqTs0vG3RN0eJPMhttci-EWLD8QeROlICww9e2qSheGHqNRyWbzKLckOJqk1bTzyR3Um7fs_bHfpcfAS3uYdadPlmEQjWIfTEZqxBqSR93kRwC6d15EZryrVACB0cJ-B4Ag0a-B7v1KjNe7pfSEP4KWUdkDF8b8YdUQBn8Y4-64s79EJNVwL6SaKHF4T4H6IvIc0l56CM1dGKnFZYPnfXAgNpZq3LmTNjxj2C2OWyKc5eVaNsEnXhzE4vzmvzlLEjjvf_zvEtyBIw0hXbIdmsHgng6kMsNlQsmVp4DzKCNiToKT1BddcH7S-6CZihXBGuacqgQixiFY_-FIN78mZZeXf282WNAF_YVUQwIhuKBnmIiJTlRHibNhd27KfMO135MlRvSyhm21ftUeQTtH_honmECPdk3W9Ka94LMWnEdttnYfJLEJQRWSC6RfElRso1Ag8f0CizKd9oAySKjZI3OQPEwFwblPQSzXcIRLMMvyH6o7-93irQ4iQsMkK3WgtEU4kpFVM
@@ -116,29 +124,36 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpI
 
 ### remove cv
 
-delete http://frontend.test/api/remove/1
+delete http://localhost/api/remove/1
 Content-type: application/json
 Accept: application/json
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiOWJhMGRiZWQxNWFiOWY5OWE4MzEzYWIzYzY2OGU3MWEwNDA0ZTkwN2JmM2JkYTg0OTBhM2U4NTFjYmE0MDk4OGIyOGVlYzIyMzk5N2RkMWUiLCJpYXQiOjE2MjQ2NDI4MTQuNjM0MzE1LCJuYmYiOjE2MjQ2NDI4MTQuNjM0MzIyLCJleHAiOjE2NTYxNzg4MTQuMjc1Njc3LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.Ezwjhbicr0yLoH8AvwxU2IU1DK4OgDKmIKdavnspyxp7i1du3vwEyPsw436HxsQPxBqqv9hE9YdK805NuBrRxwyv8Eco3OHhPBjLRO98t55LO4dmCQiKL_-qP2lqoKwDPAGDJTsk2cAfb2qrrTj7SOdLfXxQc3B_7oJaqTs0vG3RN0eJPMhttci-EWLD8QeROlICww9e2qSheGHqNRyWbzKLckOJqk1bTzyR3Um7fs_bHfpcfAS3uYdadPlmEQjWIfTEZqxBqSR93kRwC6d15EZryrVACB0cJ-B4Ag0a-B7v1KjNe7pfSEP4KWUdkDF8b8YdUQBn8Y4-64s79EJNVwL6SaKHF4T4H6IvIc0l56CM1dGKnFZYPnfXAgNpZq3LmTNjxj2C2OWyKc5eVaNsEnXhzE4vzmvzlLEjjvf_zvEtyBIw0hXbIdmsHgng6kMsNlQsmVp4DzKCNiToKT1BddcH7S-6CZihXBGuacqgQixiFY_-FIN78mZZeXf282WNAF_YVUQwIhuKBnmIiJTlRHibNhd27KfMO135MlRvSyhm21ftUeQTtH_honmECPdk3W9Ka94LMWnEdttnYfJLEJQRWSC6RfElRso1Ag8f0CizKd9oAySKjZI3OQPEwFwblPQSzXcIRLMMvyH6o7-93irQ4iQsMkK3WgtEU4kpFVM
 
 ###
 
-get http://frontend.test/oauth/clients
+get http://localhost/oauth/clients
 Content-type: application/json
 Accept: application/json
 
 ### 
 
-post http://frontend.test/oauth/token
+post http://localhost/oauth/token
 Content-type: application/json
 Accept: application/json
 Authorization: Bearer 111
 
 {
+<<<<<<< HEAD
     "grant_type" : "password",
     "client_id" : 3,
     "client_secret" : "38usyOePGa7SqOsIhpbgo0tiOIjJcNRGw72bBR9F",
     "username" : "api@yandex.ru",
+=======
+    "grant_type" : "client_credentials",
+    "client_id" : 2,
+    "client_secret" : "",
+    "username" : "apitest",
+>>>>>>> 3acd0681d4f56df18df692fb6143b38e74cbcb42
     "password" : "12345678",
     "scope" : ""
 }
