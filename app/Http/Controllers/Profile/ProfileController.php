@@ -3,9 +3,6 @@
 namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
-use App\Models\Cv;
-use App\Repositories\CvQueriesInterface;
-use App\Repositories\PrevWorksInterface;
 use App\UseCases\Cvs\CvService;
 use Illuminate\Support\Facades\Auth;
 

@@ -164,30 +164,6 @@ class CvService
         return $this->cvQueries->getAllCv();
     }
 
-    /** get busyness relation from current cv
-     * 
-     */
-    public function getBusyness($cv) : array
-    {
-        return $cv->getRelation('busyness')->toArray();
-    }
-
-    /** get sheduleType relation from current cv
-     * 
-     */
-    public function getSheduleType($cv) : array
-    {
-        return $cv->getRelation('sheduleType')->toArray();
-    }
-
-    /** get previousExpirience relation from current cv
-     * 
-     */
-    public function getPreviousExpirience($cv) : array
-    {
-        return $cv->getRelation('previosExpirience')->toArray();
-    }
-
     /** save busyness relation from current cv
      * 
      */
