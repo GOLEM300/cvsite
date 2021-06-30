@@ -12,14 +12,27 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('site/search');
-});
-
 Auth::routes();
 
-Route::get('site/search', [App\Http\Controllers\HomeController::class, 'index'])->name('site.search');
+Route::get('/', 'Site\SiteController@search');
+
+Route::group(
+    [
+        'prefix' => 'admin',
+        'as' => 'admin.',
+        'namespace' => 'Admin',
+        'middleware' => ['auth','can:admin-panel'],
+    ],
+    function () {
+        Route::get('/index', 'HomeController@index')->name('.index');
+        Route::get('/show', 'HomeController@show')->name('.show');
+        Route::get('/create', 'HomeController@create');
+        Route::get('/edit/{user}', 'HomeController@edit')->name('.edit');
+        Route::put('/', 'HomeController@update');
+        Route::post('/', 'HomeController@store');
+        Route::delete('/remove/{user}', 'HomeController@remove');
+    }
+);
 
 Route::group(
     [

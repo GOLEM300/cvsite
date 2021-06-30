@@ -1834,10 +1834,10 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Filter.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Filter.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FilterSearch.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FilterSearch.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -1848,8 +1848,246 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  setup: function setup() {}
+  data: function data() {
+    return {
+      request: {
+        gender: "qqq",
+        min_age: "www",
+        max_age: "",
+        salary: "",
+        locate_city: "",
+        specialization: "",
+        prevExpirience: [],
+        busyness: [],
+        sheduleType: []
+      }
+    };
+  },
+  mounted: function mounted() {
+    this.loadCvs();
+  },
+  watch: {
+    request: {
+      handler: function handler() {
+        this.loadCvs();
+      }
+    }
+  },
+  methods: {
+    loadCvs: function loadCvs() {
+      axios.get("api/search", {
+        params: {
+          gender: this.gender,
+          min_age: this.min_age,
+          max_age: this.max_age,
+          salary: this.salary,
+          locate_city: this.locate_city,
+          specialization: this.specialization
+        }
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -2182,7 +2420,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js"
 
 Vue.component('previous-work', __webpack_require__(/*! ./components/PreviosWork.vue */ "./resources/js/components/PreviosWork.vue").default);
 Vue.component('image-upload', __webpack_require__(/*! ./components/ImageUpload.vue */ "./resources/js/components/ImageUpload.vue").default);
-Vue.component('filter', __webpack_require__(/*! ./components/Filter.vue */ "./resources/js/components/Filter.vue").default);
+Vue.component('filter-search', __webpack_require__(/*! ./components/FilterSearch.vue */ "./resources/js/components/FilterSearch.vue").default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -37622,10 +37860,10 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
-/***/ "./resources/js/components/Filter.vue":
-/*!********************************************!*\
-  !*** ./resources/js/components/Filter.vue ***!
-  \********************************************/
+/***/ "./resources/js/components/FilterSearch.vue":
+/*!**************************************************!*\
+  !*** ./resources/js/components/FilterSearch.vue ***!
+  \**************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -37633,8 +37871,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Filter_vue_vue_type_template_id_1dedfda3___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Filter.vue?vue&type=template&id=1dedfda3& */ "./resources/js/components/Filter.vue?vue&type=template&id=1dedfda3&");
-/* harmony import */ var _Filter_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Filter.vue?vue&type=script&lang=js& */ "./resources/js/components/Filter.vue?vue&type=script&lang=js&");
+/* harmony import */ var _FilterSearch_vue_vue_type_template_id_263f772b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FilterSearch.vue?vue&type=template&id=263f772b& */ "./resources/js/components/FilterSearch.vue?vue&type=template&id=263f772b&");
+/* harmony import */ var _FilterSearch_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FilterSearch.vue?vue&type=script&lang=js& */ "./resources/js/components/FilterSearch.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -37644,9 +37882,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
-  _Filter_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _Filter_vue_vue_type_template_id_1dedfda3___WEBPACK_IMPORTED_MODULE_0__.render,
-  _Filter_vue_vue_type_template_id_1dedfda3___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _FilterSearch_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _FilterSearch_vue_vue_type_template_id_263f772b___WEBPACK_IMPORTED_MODULE_0__.render,
+  _FilterSearch_vue_vue_type_template_id_263f772b___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
   null,
@@ -37656,7 +37894,7 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/Filter.vue"
+component.options.__file = "resources/js/components/FilterSearch.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
@@ -37739,10 +37977,10 @@ component.options.__file = "resources/js/components/PreviosWork.vue"
 
 /***/ }),
 
-/***/ "./resources/js/components/Filter.vue?vue&type=script&lang=js&":
-/*!*********************************************************************!*\
-  !*** ./resources/js/components/Filter.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************/
+/***/ "./resources/js/components/FilterSearch.vue?vue&type=script&lang=js&":
+/*!***************************************************************************!*\
+  !*** ./resources/js/components/FilterSearch.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -37750,8 +37988,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Filter_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Filter.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Filter.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Filter_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FilterSearch_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./FilterSearch.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FilterSearch.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FilterSearch_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
@@ -37787,19 +38025,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/Filter.vue?vue&type=template&id=1dedfda3&":
-/*!***************************************************************************!*\
-  !*** ./resources/js/components/Filter.vue?vue&type=template&id=1dedfda3& ***!
-  \***************************************************************************/
+/***/ "./resources/js/components/FilterSearch.vue?vue&type=template&id=263f772b&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/FilterSearch.vue?vue&type=template&id=263f772b& ***!
+  \*********************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Filter_vue_vue_type_template_id_1dedfda3___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Filter_vue_vue_type_template_id_1dedfda3___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FilterSearch_vue_vue_type_template_id_263f772b___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FilterSearch_vue_vue_type_template_id_263f772b___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Filter_vue_vue_type_template_id_1dedfda3___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Filter.vue?vue&type=template&id=1dedfda3& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Filter.vue?vue&type=template&id=1dedfda3&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FilterSearch_vue_vue_type_template_id_263f772b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./FilterSearch.vue?vue&type=template&id=263f772b& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FilterSearch.vue?vue&type=template&id=263f772b&");
 
 
 /***/ }),
@@ -37838,10 +38076,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Filter.vue?vue&type=template&id=1dedfda3&":
-/*!******************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Filter.vue?vue&type=template&id=1dedfda3& ***!
-  \******************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FilterSearch.vue?vue&type=template&id=263f772b&":
+/*!************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FilterSearch.vue?vue&type=template&id=263f772b& ***!
+  \************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -37854,9 +38092,507 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "\n    col-lg-3\n    desctop-992-pl-16\n    d-flex\n    flex-column\n    vakancy-page-filter-block vakancy-page-filter-block-dnone\n  "
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass:
+              "\n      vakancy-page-filter-block__row\n      mobile-flex-992\n      mb24\n      d-flex\n      justify-content-between\n      align-items-center\n    "
+          },
+          [
+            _c("div", { staticClass: "heading" }, [_vm._v("Фильтр")]),
+            _vm._v(" "),
+            _c("img", {
+              staticClass: "cursor-p",
+              attrs: { src: "images/big-cancel.svg", alt: "cancel" }
+            })
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "signin-modal__switch-btns-wrap resume-list__switch-btns-wrap mb16"
+          },
+          [
+            _c(
+              "a",
+              {
+                staticClass: "signin-modal__switch-btn active",
+                attrs: { href: "#" }
+              },
+              [_vm._v("Все")]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              { staticClass: "signin-modal__switch-btn", attrs: { href: "#" } },
+              [_vm._v("Мужчины")]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              { staticClass: "signin-modal__switch-btn", attrs: { href: "#" } },
+              [_vm._v("Женщины")]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "vakancy-page-filter-block__row mb24" }, [
+          _c("div", { staticClass: "paragraph cadet-blue" }, [_vm._v("Город")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "citizenship-select" }, [
+            _c("select", { staticClass: "nselect-1" }, [
+              _c("option", { attrs: { value: "" } }),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "Кемерово" } }, [
+                _vm._v("Кемерово")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "Новосибирск" } }, [
+                _vm._v("Новосибирск")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "Иркутск" } }, [
+                _vm._v("Иркутск")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "Красноярск" } }, [
+                _vm._v("Красноярск")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "Барнаул" } }, [_vm._v("Барнаул")])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "vakancy-page-filter-block__row mb24" }, [
+          _c("div", { staticClass: "paragraph cadet-blue" }, [
+            _vm._v("Зарплата")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-rel" }, [
+            _c("input", {
+              staticClass: "dor-input w100",
+              attrs: { placeholder: "Любая", type: "text" }
+            }),
+            _vm._v(" "),
+            _c("img", {
+              staticClass: "rub-icon",
+              attrs: { src: "images/rub-icon.svg", alt: "rub-icon" }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "vakancy-page-filter-block__row mb24" }, [
+          _c("div", { staticClass: "paragraph cadet-blue" }, [
+            _vm._v("Специализация")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "citizenship-select" }, [
+            _c(
+              "select",
+              { staticClass: "nselect-1", attrs: { "data-title": "Любая" } },
+              [
+                _c("option", { attrs: { value: "" } }),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "Фронтенд" } }, [
+                  _vm._v("Фронтенд")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "Бекенд" } }, [
+                  _vm._v("Бекенд")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "Дизайн" } }, [
+                  _vm._v("Дизайн")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "Тестировщик" } }, [
+                  _vm._v("Тестировщик")
+                ])
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "vakancy-page-filter-block__row mb24" }, [
+          _c("div", { staticClass: "paragraph cadet-blue" }, [
+            _vm._v("Возраст")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "d-flex" }, [
+            _c("input", {
+              staticClass: "dor-input w100",
+              attrs: { placeholder: "От", type: "text" }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "dor-input w100",
+              attrs: { placeholder: "До", type: "text" }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "vakancy-page-filter-block__row mb24" }, [
+          _c("div", { staticClass: "paragraph cadet-blue" }, [
+            _vm._v("Опыт работы")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "profile-info" }, [
+            _c("div", { staticClass: "form-check d-flex" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: { type: "checkbox", id: "exampleCheck1" }
+              }),
+              _vm._v(" "),
+              _c("label", {
+                staticClass: "form-check-label",
+                attrs: { for: "exampleCheck1" }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "profile-info__check-text",
+                  attrs: { for: "exampleCheck1" }
+                },
+                [_vm._v("Без опыта")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check d-flex" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: { type: "checkbox", id: "exampleCheck2" }
+              }),
+              _vm._v(" "),
+              _c("label", {
+                staticClass: "form-check-label",
+                attrs: { for: "exampleCheck2" }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "profile-info__check-text",
+                  attrs: { for: "exampleCheck2" }
+                },
+                [_vm._v("От 1 года до 3 лет")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check d-flex" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: { type: "checkbox", id: "exampleCheck3" }
+              }),
+              _vm._v(" "),
+              _c("label", {
+                staticClass: "form-check-label",
+                attrs: { for: "exampleCheck3" }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "profile-info__check-text",
+                  attrs: { for: "exampleCheck3" }
+                },
+                [_vm._v("От 3 лет до 6 лет")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check d-flex" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: { type: "checkbox", id: "exampleCheck4" }
+              }),
+              _vm._v(" "),
+              _c("label", {
+                staticClass: "form-check-label",
+                attrs: { for: "exampleCheck4" }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "profile-info__check-text",
+                  attrs: { for: "exampleCheck4" }
+                },
+                [_vm._v("Более 6 лет")]
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "vakancy-page-filter-block__row mb24" }, [
+          _c("div", { staticClass: "paragraph cadet-blue" }, [
+            _vm._v("Тип занятости")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "profile-info" }, [
+            _c("div", { staticClass: "form-check d-flex" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: { type: "checkbox", id: "exampleCheck5" }
+              }),
+              _vm._v(" "),
+              _c("label", {
+                staticClass: "form-check-label",
+                attrs: { for: "exampleCheck5" }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "profile-info__check-text",
+                  attrs: { for: "exampleCheck5" }
+                },
+                [_vm._v("Полная занятость")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check d-flex" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: { type: "checkbox", id: "exampleCheck6" }
+              }),
+              _vm._v(" "),
+              _c("label", {
+                staticClass: "form-check-label",
+                attrs: { for: "exampleCheck6" }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "profile-info__check-text",
+                  attrs: { for: "exampleCheck6" }
+                },
+                [_vm._v("Частичная занятость")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check d-flex" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: { type: "checkbox", id: "exampleCheck7" }
+              }),
+              _vm._v(" "),
+              _c("label", {
+                staticClass: "form-check-label",
+                attrs: { for: "exampleCheck7" }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "profile-info__check-text",
+                  attrs: { for: "exampleCheck7" }
+                },
+                [_vm._v("Проектная работа")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check d-flex" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: { type: "checkbox", id: "exampleCheck8" }
+              }),
+              _vm._v(" "),
+              _c("label", {
+                staticClass: "form-check-label",
+                attrs: { for: "exampleCheck8" }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "profile-info__check-text",
+                  attrs: { for: "exampleCheck8" }
+                },
+                [_vm._v("Стажировка")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check d-flex" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: { type: "checkbox", id: "exampleCheck9" }
+              }),
+              _vm._v(" "),
+              _c("label", {
+                staticClass: "form-check-label",
+                attrs: { for: "exampleCheck9" }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "profile-info__check-text",
+                  attrs: { for: "exampleCheck9" }
+                },
+                [_vm._v("Волонтёрство")]
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "vakancy-page-filter-block__row mb24" }, [
+          _c("div", { staticClass: "paragraph cadet-blue" }, [
+            _vm._v("График работы")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "profile-info" }, [
+            _c("div", { staticClass: "form-check d-flex" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: { type: "checkbox", id: "exampleCheck10" }
+              }),
+              _vm._v(" "),
+              _c("label", {
+                staticClass: "form-check-label",
+                attrs: { for: "exampleCheck10" }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "profile-info__check-text",
+                  attrs: { for: "exampleCheck10" }
+                },
+                [_vm._v("Полный день")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check d-flex" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: { type: "checkbox", id: "exampleCheck11" }
+              }),
+              _vm._v(" "),
+              _c("label", {
+                staticClass: "form-check-label",
+                attrs: { for: "exampleCheck11" }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "profile-info__check-text",
+                  attrs: { for: "exampleCheck11" }
+                },
+                [_vm._v("Сменный график")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check d-flex" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: { type: "checkbox", id: "exampleCheck12" }
+              }),
+              _vm._v(" "),
+              _c("label", {
+                staticClass: "form-check-label",
+                attrs: { for: "exampleCheck12" }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "profile-info__check-text",
+                  attrs: { for: "exampleCheck12" }
+                },
+                [_vm._v("Вахтовый метод")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check d-flex" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: { type: "checkbox", id: "exampleCheck13" }
+              }),
+              _vm._v(" "),
+              _c("label", {
+                staticClass: "form-check-label",
+                attrs: { for: "exampleCheck13" }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "profile-info__check-text",
+                  attrs: { for: "exampleCheck13" }
+                },
+                [_vm._v("Гибкий график")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check d-flex" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: { type: "checkbox", id: "exampleCheck14" }
+              }),
+              _vm._v(" "),
+              _c("label", {
+                staticClass: "form-check-label",
+                attrs: { for: "exampleCheck14" }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "profile-info__check-text",
+                  attrs: { for: "exampleCheck14" }
+                },
+                [_vm._v("Удалённая работа")]
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "\n      vakancy-page-filter-block__row\n      vakancy-page-filter-block__show-vakancy-btns\n      mb24\n      d-flex\n      flex-wrap\n      align-items-center\n      mobile-jus-cont-center\n    "
+          },
+          [
+            _c(
+              "a",
+              {
+                staticClass: "link-orange-btn orange-btn mr24 mobile-mb12",
+                attrs: { href: "#" }
+              },
+              [
+                _vm._v("Показать "),
+                _c("span", [_vm._v("1 230")]),
+                _vm._v(" вакансии")
+              ]
+            ),
+            _vm._v(" "),
+            _c("a", { attrs: { href: "#" } }, [_vm._v("Сбросить все")])
+          ]
+        )
+      ]
+    )
+  }
+]
 render._withStripped = true
 
 

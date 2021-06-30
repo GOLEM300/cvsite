@@ -39,9 +39,9 @@ class CvService
     {
         return DB::transaction(function () use ($request, $user_id) {
             $image = $request['photo'] !== null ? $this->savePhoto($request['photo']) : '';
-
-            $birthDate = $this->birthDateTransform($request['birth_date']);
-        
+            //dd($request->birth_date);
+            $birthDate = $this->birthDateTransform($request['birth_date']);//$request->birth_date->format_date;//
+            //dd($birthDate);
             $cv = Cv::make([
                 'photo' => $image->basename ?? '',
                 'name' => $request['name'],
@@ -71,6 +71,12 @@ class CvService
             return $cv;
         });
     }
+
+    public function getFormatDateAttribute($date)
+    {
+        return $date->format('Y-m-d');
+    }
+
 
     /**
      * 

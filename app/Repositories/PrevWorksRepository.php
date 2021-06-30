@@ -45,19 +45,6 @@ class PrevWorksRepository implements PrevWorksInterface
         return $result;
     }
 
-    /** get only last job for current cv
-     *
-     */
-    public function getLastWork($cv_id) : ?object
-    {
-        $lastWork = PreviosExpirience::where('cv_id', $cv_id)->latest('id')->first();
-        if ($lastWork !== null) {
-            return $lastWork;
-        } else {
-            return null;
-        }
-    }
-
     /**
      *
      */

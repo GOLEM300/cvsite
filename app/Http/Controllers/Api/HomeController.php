@@ -16,7 +16,6 @@ class HomeController extends Controller
      */
     public function __construct(CvQueriesInterface $cvQueries)
     {
-        $this->middleware('auth');
         $this->cvQueries = $cvQueries;
     }
 

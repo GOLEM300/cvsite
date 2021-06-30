@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
-use App\Repositories\PrevWorksInterface;
 use Illuminate\Support\Carbon;
 use Laravel\Passport\HasApiTokens;
 
@@ -15,6 +14,8 @@ class Cv extends Model
     use HasApiTokens;
 
     protected $guarded = [];
+
+    protected $dates = ['birth_date'];
 
     public static $months = [
         '01' => 'Январь',
@@ -61,11 +62,11 @@ class Cv extends Model
     /** get full expirience with years from previous jobs
      *
      */
-    public function prevYears(PrevWorksInterface $prevWorksExp) : string
+    public function prevYears() : string
     {
         $total = 0;
         if ($this->expirience == 'yes') {
-            $prevWorksExp = $prevWorksExp->getPrevWorksExp($this->id);
+            $prevWorksExp = $this->getRelation('previosExpirience');
             foreach ($prevWorksExp as $prevExp) {
                 $total += $prevExp->totalYears();
             };
@@ -82,12 +83,12 @@ class Cv extends Model
     /** get full expirience with months and years from previous jobs
      *
      */
-    public function fullExpirience(PrevWorksInterface $prevWorksExp) : string
+    public function fullExpirience() : string
     {
         $total = [];
 
         if ($this->expirience == 'yes') {
-            $prevWorksExp = $prevWorksExp->getPrevWorksExp($this->id);
+            $prevWorksExp = $this->getRelation('previosExpirience');
             foreach ($prevWorksExp as $prevExp) {
                 array_push($total, $prevExp->dateDiff());
             };
@@ -98,9 +99,9 @@ class Cv extends Model
     /** get user last job from cv
      *
      */
-    public function getLastWork(PrevWorksInterface $prevWorksExp) : string
+    public function getLastWork() : string
     {
-        $prevWorksExp = $prevWorksExp->getLastWork($this->id);
+        $prevWorksExp = $this->getRelation('previosExpirience')->last();
         if (!empty($prevWorksExp)) {
             return $prevWorksExp->vacancy.' в '.$prevWorksExp->organisation.' , '.$prevWorksExp->period();
         } else {
@@ -132,10 +133,11 @@ class Cv extends Model
     /** get data from array and transform it into string
      * 
      */
-    public function transform(array $data) : string
+    public function transform(string $relation) : string
     {
         $total = [];
 
+        $data = $this->getRelation($relation)->toArray();
         foreach ($data as $key => $value) {
             $total[$key] = $data[$key]['name'];
         }

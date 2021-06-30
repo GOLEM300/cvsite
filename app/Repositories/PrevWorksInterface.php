@@ -10,7 +10,5 @@ interface PrevWorksInterface {
 
     public function getPrevWorksExp($cv_id) : object;
 
-    public function getLastWork($cv_id) : ?object;
-
     public function remove(int $cv_id) : void;
 }

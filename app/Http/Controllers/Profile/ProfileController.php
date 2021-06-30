@@ -18,9 +18,9 @@ class ProfileController extends Controller
         $this->service = $service;
     }
 
-    public function list(PrevWorksInterface $prevWorksExp)
+    public function list()
     {
         $cvs = $this->service->getUserCvs(Auth::user()->id);
-        return view('profile.list',compact('cvs','prevWorksExp'));
+        return view('profile.list',compact('cvs'));
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Passport\Passport;
@@ -26,16 +27,10 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        // if (! $this->app->routesAreCached()) {
-        //     Passport::routes();
-        // }
-
         Passport::routes();
 
-        // Passport::hashClientSecrets();
-
-        // Passport::tokensExpireIn(now()->addDays(15));
-        // Passport::refreshTokensExpireIn(now()->addDays(30));
-        // Passport::personalAccessTokensExpireIn(now()->addMonths(6));
+        Gate::define('admin-panel', function (User $user) {
+            return $user->isAdmin();
+        });
     }
 }

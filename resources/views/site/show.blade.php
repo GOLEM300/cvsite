@@ -21,7 +21,7 @@
                 </div>
                 <div class="paragraph-lead mb16">
                     <span class="mr24">{{$user_cv->salary}} ₽</span>
-                    <span>{{$user_cv->prevYears($prevWorksExp)}}</span>
+                    <span>{{$user_cv->prevYears()}}</span>
                 </div>
                 <div class="profile-info company-profile-info resume-view__info-blick">
                     <div class="profile-info__block company-profile-info__block mb8">
@@ -37,12 +37,12 @@
                     </div>
                     <div class="profile-info__block company-profile-info__block mb8">
                         <div class="profile-info__block-left company-profile-info__block-left">Занятость</div>
-                        <div class="profile-info__block-right company-profile-info__block-right">{{$user_cv->transform($busyness)}}</div>
+                        <div class="profile-info__block-right company-profile-info__block-right">{{$user_cv->transform('busyness')}}</div>
                     </div>
                     <div class="profile-info__block company-profile-info__block mb8">
                         <div class="profile-info__block-left company-profile-info__block-left">График работы
                         </div>
-                        <div class="profile-info__block-right company-profile-info__block-right">{{$user_cv->transform($sheduleType)}}</div>
+                        <div class="profile-info__block-right company-profile-info__block-right">{{$user_cv->transform('sheduleType')}}</div>
                     </div>
                     <div class="profile-info__block company-profile-info__block mb8">
                         <div class="profile-info__block-left company-profile-info__block-left">Город проживания
@@ -74,9 +74,9 @@
                             <div class="col-lg-10">
                                 <div class="row mb16">
                                     <div class="col-lg-12">
-                                        <h3 class="heading mb16">Опыт работы {{$user_cv->fullExpirience($prevWorksExp)}}</h3>
+                                        <h3 class="heading mb16">Опыт работы {{$user_cv->fullExpirience()}}</h3>
                                     </div>
-                                    @foreach ($prevWorksExp->getPrevWorksExp($user_cv->id) as $work)
+                                    @foreach ($user_cv->getRelation('previosExpirience') as $work)
                                     <div class="col-md-4 mb16">
                                         <div class="paragraph tbold mb8">{{$work->period()}}</div>
                                         <div class="mini-paragraph">{{$work->dateDiff()}}</div>

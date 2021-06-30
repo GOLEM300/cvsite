@@ -43,7 +43,7 @@
                                         <h2 class="mini-title mb8">{{$cv->specialization}}</h2>
                                         <div class="d-flex align-items-center flex-wrap mb8 ">
                                             <span class="mr16 paragraph">{{$cv->salary}} ₽</span>
-                                            <span class="mr16 paragraph">{{$cv->prevYears($prevWorksExp)}}</span>
+                                            <span class="mr16 paragraph">{{$cv->prevYears()}}</span>
                                             <span class="mr16 paragraph">{{$cv->locate_city}}</span>
                                         </div>
                                         <div class="d-flex flex-wrap">
