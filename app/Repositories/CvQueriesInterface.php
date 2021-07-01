@@ -9,6 +9,8 @@ interface CvQueriesInterface {
     public function getUserCvs($user_id);
 
     public function getAllCv();
+
+    public function getAllCvWithPaginate(object $request);
     
     public function remove($cv_id);
 

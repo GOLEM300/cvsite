@@ -96,18 +96,18 @@ class Cv extends Model
         return date_sum($total);
     }
 
-    /** get user last job from cv
-     *
-     */
-    public function getLastWork() : string
-    {
-        $prevWorksExp = $this->getRelation('previosExpirience')->last();
-        if (!empty($prevWorksExp)) {
-            return $prevWorksExp->vacancy.' в '.$prevWorksExp->organisation.' , '.$prevWorksExp->period();
-        } else {
-            return "Нет";
-        }
-    }
+    // /** get user last job from cv
+    //  *
+    //  */
+    // public function getLastWork() : string
+    // {
+    //     $prevWorksExp = $this->getRelation('previosExpirience')->last();
+    //     if (!empty($prevWorksExp)) {
+    //         return $prevWorksExp->vacancy.' в '.$prevWorksExp->organisation.' , '.$prevWorksExp->period();
+    //     } else {
+    //         return "Нет";
+    //     }
+    // }
 
     /** get full user name
      *

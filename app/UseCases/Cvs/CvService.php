@@ -164,6 +164,14 @@ class CvService
         return $this->cvQueries->getAllCv();
     }
 
+    /**
+     * 
+     */
+    public function getAllCvWithPaginate($request) : object
+    {
+        return $this->cvQueries->getAllCvWithPaginate($request);
+    }
+
     /** save busyness relation from current cv
      * 
      */

@@ -2046,20 +2046,182 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       request: {
-        gender: "qqq",
-        min_age: "www",
+        sex: "male",
+        min_age: "",
         max_age: "",
         salary: "",
         locate_city: "",
         specialization: "",
         prevExpirience: [],
         busyness: [],
-        sheduleType: []
-      }
+        sheduleType: [],
+        newst: true,
+        salary_desq: false,
+        salary_asc: false
+      },
+      cvs: [],
+      months: ["Декабрь", "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь"]
     };
   },
   mounted: function mounted() {
@@ -2074,18 +2236,71 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     loadCvs: function loadCvs() {
-      axios.get("api/search", {
-        params: {
-          gender: this.gender,
-          min_age: this.min_age,
-          max_age: this.max_age,
-          salary: this.salary,
-          locate_city: this.locate_city,
-          specialization: this.specialization
-        }
+      var _this = this;
+
+      fetch("http://frontend.test/api/search?request=".concat(JSON.stringify(this.request))).then(function (response) {
+        response.json().then(function (data) {
+          _this.cvs = data.data;
+          console.log(_this.cvs);
+        });
       })["catch"](function (error) {
         console.log(error);
       });
+    },
+    getAge: function getAge(birth_date) {
+      var age = parseInt(new Date().getFullYear()) - parseInt(birth_date.slice(0, 4));
+
+      if (age < 21) {
+        return age + " лет";
+      } else {
+        return age + " года";
+      }
+    },
+    getLastWork: function getLastWork(previos_expirience) {
+      if (!previos_expirience.length) {
+        return "Нет";
+      }
+
+      var lastWork = previos_expirience[previos_expirience.length - 1];
+      return lastWork.vacancy + " в " + lastWork.organisation + " , " + this.getWorkPeriod(lastWork);
+    },
+    getWorkPeriod: function getWorkPeriod(lastWork) {
+      var startMonth = Number(lastWork.workStartMonth);
+      var startYear = lastWork.workStartYear;
+      var endMonth = Number(lastWork.workEndMonth);
+      var endYear = lastWork.workEndYear;
+
+      if (lastWork.stillWork == "off") {
+        return this.months[startMonth] + " " + startYear + " - " + this.months[endMonth] + " " + endYear;
+      } else {
+        return startMonth + " " + startYear + " - " + "По настоящее время";
+      }
+    },
+    getPrevYears: function getPrevYears(previos_expirience) {
+      if (!previos_expirience.length) {
+        return "Error";
+      }
+
+      var total = 0;
+
+      for (var i = 0; i < previos_expirience.length; i++) {
+        total += parseInt(previos_expirience[i].workEndYear) - parseInt(previos_expirience[i].workStartYear);
+      }
+
+      if (total < 21) {
+        return "Опыт работы " + total + " лет";
+      } else {
+        return "Опыт работы " + total + " года";
+      }
+    },
+    updated_at: function updated_at(_updated_at) {
+      var dataArray = _updated_at.split("-", 3);
+
+      var monthName = this.months[Number(dataArray[1])];
+      var day = dataArray[2].split("T")[0];
+      var year = dataArray[0];
+      var time = dataArray[2].split("T")[1].slice(0, 5);
+      return "Обновлено  " + day + " " + monthName + " " + year + " в " + time;
     }
   }
 });
@@ -38092,7 +38307,116 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container" }, [
+    _c("h1", { staticClass: "main-title mt24 mb16" }, [
+      _vm._v("PHP разработчики в Кемерово")
+    ]),
+    _vm._v(" "),
+    _c("button", { staticClass: "vacancy-filter-btn" }, [_vm._v("Фильтр")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c(
+        "div",
+        { staticClass: "col-lg-9 desctop-992-pr-16" },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _vm._l(_vm.cvs, function(cv) {
+            return _c(
+              "div",
+              {
+                staticClass:
+                  "\n          vakancy-page-block\n          company-list-search__block\n          resume-list__block\n          p-rel\n          mb16\n        "
+              },
+              [
+                _c("div", { staticClass: "company-list-search__block-left" }, [
+                  _c("div", { staticClass: "resume-list__block-img mb8" }, [
+                    _c("img", {
+                      attrs: {
+                        src: "/storage/uploads/{{ cv.photo }}",
+                        alt: "profile"
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "company-list-search__block-right" }, [
+                  _c(
+                    "div",
+                    { staticClass: "mini-paragraph cadet-blue mobile-mb12" },
+                    [
+                      _vm._v(
+                        "\n            " +
+                          _vm._s(_vm.updated_at(cv.updated_at)) +
+                          "\n          "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("h3", { staticClass: "mini-title mobile-off" }, [
+                    _vm._v(_vm._s(cv.specialization))
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "d-flex align-items-center flex-wrap mb8" },
+                    [
+                      _c("span", { staticClass: "mr16 paragraph" }, [
+                        _vm._v(_vm._s(cv.salary) + " ₽")
+                      ]),
+                      _vm._v(" "),
+                      cv.expirience == "yes"
+                        ? _c("span", { staticClass: "mr16 paragraph" }, [
+                            _vm._v(
+                              _vm._s(_vm.getPrevYears(cv.previos_expirience))
+                            )
+                          ])
+                        : _c("span", { staticClass: "mr16 paragraph" }, [
+                            _vm._v("Нет опыта работы")
+                          ]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "mr16 paragraph" }, [
+                        _vm._v(_vm._s(_vm.getAge(cv.birth_date)))
+                      ]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "mr16 paragraph" }, [
+                        _vm._v(_vm._s(cv.locate_city))
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "paragraph tbold mobile-off" }, [
+                    _vm._v("Последнее место работы")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "company-list-search__block-middle" },
+                  [
+                    _c("h3", { staticClass: "mini-title desktop-off" }),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "paragraph mb16 mobile-mb32" }, [
+                      _vm._v(
+                        "\n            " +
+                          _vm._s(_vm.getLastWork(cv.previos_expirience)) +
+                          "\n          "
+                      )
+                    ])
+                  ]
+                )
+              ]
+            )
+          }),
+          _vm._v(" "),
+          _vm._m(1)
+        ],
+        2
+      ),
+      _vm._v(" "),
+      _vm._m(2)
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -38101,16 +38425,153 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
+      { staticClass: "d-flex align-items-center flex-wrap mb8" },
+      [
+        _c("span", { staticClass: "paragraph mr16" }, [
+          _vm._v("Найдено 3 резюме")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "vakancy-page-header-dropdowns" }, [
+          _c("div", { staticClass: "vakancy-page-wrap show mr16" }, [
+            _c(
+              "div",
+              {
+                staticClass: "dropdown-menu",
+                attrs: { "aria-labelledby": "dropdownMenuLink" }
+              },
+              [
+                _c(
+                  "a",
+                  { staticClass: "dropdown-item", attrs: { href: "#" } },
+                  [_vm._v("За день")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  { staticClass: "dropdown-item", attrs: { href: "#" } },
+                  [_vm._v("За год")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  { staticClass: "dropdown-item", attrs: { href: "#" } },
+                  [_vm._v("За все время")]
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "vakancy-page-wrap show" }, [
+            _c(
+              "a",
+              {
+                staticClass: "vakancy-page-btn vakancy-btn dropdown-toggle",
+                attrs: {
+                  href: "#",
+                  role: "button",
+                  id: "dropdownMenuLink",
+                  "data-toggle": "dropdown",
+                  "aria-haspopup": "true",
+                  "aria-expanded": "false"
+                }
+              },
+              [
+                _vm._v("\n              По новизне\n              "),
+                _c("i", { staticClass: "fas fa-angle-down arrowDown" })
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "dropdown-menu",
+                attrs: { "aria-labelledby": "dropdownMenuLink" }
+              },
+              [
+                _c(
+                  "a",
+                  { staticClass: "dropdown-item", attrs: { href: "#" } },
+                  [_vm._v("По новизне")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  { staticClass: "dropdown-item", attrs: { href: "#" } },
+                  [_vm._v("По возрастанию зарплаты")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  { staticClass: "dropdown-item", attrs: { href: "#" } },
+                  [_vm._v("По убыванию зарплаты")]
+                )
+              ]
+            )
+          ])
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("ul", { staticClass: "dor-pagination mb128" }, [
+      _c("li", { staticClass: "page-link-prev" }, [
+        _c("a", { attrs: { href: "#" } }, [
+          _c("img", {
+            staticClass: "mr8",
+            attrs: { src: "images/mini-left-arrow.svg", alt: "arrow" }
+          }),
+          _vm._v("\n            Назад")
+        ])
+      ]),
+      _vm._v(" "),
+      _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("1")])]),
+      _vm._v(" "),
+      _c("li", [
+        _c("a", { staticClass: "grey", attrs: { href: "#" } }, [_vm._v("...")])
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "active" }, [
+        _c("a", { attrs: { href: "#" } }, [_vm._v("4")])
+      ]),
+      _vm._v(" "),
+      _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("5")])]),
+      _vm._v(" "),
+      _c("li", [
+        _c("a", { staticClass: "grey", attrs: { href: "#" } }, [_vm._v("...")])
+      ]),
+      _vm._v(" "),
+      _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("10")])]),
+      _vm._v(" "),
+      _c("li", { staticClass: "page-link-next" }, [
+        _c("a", { attrs: { href: "#" } }, [
+          _vm._v("Далее\n            "),
+          _c("img", {
+            staticClass: "ml8",
+            attrs: { src: "images/mini-right-arrow.svg", alt: "arrow" }
+          })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
       {
         staticClass:
-          "\n    col-lg-3\n    desctop-992-pl-16\n    d-flex\n    flex-column\n    vakancy-page-filter-block vakancy-page-filter-block-dnone\n  "
+          "\n        col-lg-3\n        desctop-992-pl-16\n        d-flex\n        flex-column\n        vakancy-page-filter-block vakancy-page-filter-block-dnone\n      "
       },
       [
         _c(
           "div",
           {
             staticClass:
-              "\n      vakancy-page-filter-block__row\n      mobile-flex-992\n      mb24\n      d-flex\n      justify-content-between\n      align-items-center\n    "
+              "\n          vakancy-page-filter-block__row\n          mobile-flex-992\n          mb24\n          d-flex\n          justify-content-between\n          align-items-center\n        "
           },
           [
             _c("div", { staticClass: "heading" }, [_vm._v("Фильтр")]),
@@ -38126,7 +38587,7 @@ var staticRenderFns = [
           "div",
           {
             staticClass:
-              "signin-modal__switch-btns-wrap resume-list__switch-btns-wrap mb16"
+              "\n          signin-modal__switch-btns-wrap\n          resume-list__switch-btns-wrap\n          mb16\n        "
           },
           [
             _c(
@@ -38570,7 +39031,7 @@ var staticRenderFns = [
           "div",
           {
             staticClass:
-              "\n      vakancy-page-filter-block__row\n      vakancy-page-filter-block__show-vakancy-btns\n      mb24\n      d-flex\n      flex-wrap\n      align-items-center\n      mobile-jus-cont-center\n    "
+              "\n          vakancy-page-filter-block__row\n          vakancy-page-filter-block__show-vakancy-btns\n          mb24\n          d-flex\n          flex-wrap\n          align-items-center\n          mobile-jus-cont-center\n        "
           },
           [
             _c(

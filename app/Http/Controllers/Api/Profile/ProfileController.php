@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\Profile;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CvResource;
 use App\UseCases\Cvs\CvService;
-use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {

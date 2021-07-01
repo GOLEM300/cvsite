@@ -32,3 +32,4 @@ Vue.component('filter-search', require('./components/FilterSearch.vue').default)
 const app = new Vue({
     el: '#app',
 });
+

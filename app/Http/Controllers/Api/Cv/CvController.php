@@ -3,10 +3,7 @@
 namespace App\Http\Controllers\Api\Cv;
 
 use App\Http\Controllers\Controller;
-use App\Models\Cv;
-use Illuminate\Http\Request;
 use App\UseCases\Cvs\CvService;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Cv\CreateRequest;
 use App\Http\Requests\Cv\EditRequest;
 use Symfony\Component\HttpFoundation\Response;

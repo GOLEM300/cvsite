@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Site;
 use App\Http\Controllers\Controller;
 use App\Models\Cv;
 use App\UseCases\Cvs\CvService;
-use Illuminate\Http\Request;
 
 class SiteController extends Controller
 {
@@ -31,35 +30,9 @@ class SiteController extends Controller
 
     /** 
      * 
-    */
-    public function search(Request $request)
+     */
+    public function search()
     {   
-        // dd($request->gender);
-        // $query = Cv::orderByDesc('id');
-
-        // if (!empty($value = $request->gender)) {
-        //     $query->where('gender', $value);
-        // }
-
-        // if (!empty($value = $request->locate_city)) {
-        //     $query->where('locate_city', $value);
-        // }
-
-        // if (!empty($value = $request->salary)) {
-        //     $query->where('salary', $value);
-        // }
-
-        // if (!empty($value = $request->specialization)) {
-        //     $query->where('specialization ', $value);
-        // }
-
-        // if (!empty($min_age = $request->min_age) && (!empty($max_age = $request->max_age)) ) {
-        //     $query->whereBetween('age', [$min_age, $max_age]);
-        // }
-
-        // $cvs = $query->paginate(20);
-        $cvs = $this->service->getAllCv();
-
-        return view('site.search', compact('cvs'));
+        return view('site.search');
     }
 }
