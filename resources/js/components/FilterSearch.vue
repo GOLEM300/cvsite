@@ -423,8 +423,7 @@ export default {
         });
     },
     getAge(birth_date) {
-      let age =
-        parseInt(new Date().getFullYear()) - parseInt(birth_date.slice(0, 4));
+      let age = parseInt(new Date().getFullYear()) - parseInt(birth_date.slice(0, 4));
       if (age < 21) {
         return age + " лет";
       } else {

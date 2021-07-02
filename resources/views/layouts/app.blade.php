@@ -49,6 +49,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('profile.profile.list', $user_id) }}">Мои резюме</a>
                         </li>
+                        @can('admin-panel')
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.index') }}">Панель управления</a>
+                        </li>
+                        @endcan
                     </ul>
                     <div class="navigation-menu__mobile">
                         <ul class="navigation-menu__mobile-nav">

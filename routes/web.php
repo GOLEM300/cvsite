@@ -24,10 +24,10 @@ Route::group(
         'middleware' => ['auth','can:admin-panel'],
     ],
     function () {
-        Route::get('/index', 'HomeController@index')->name('.index');
-        Route::get('/show', 'HomeController@show')->name('.show');
+        Route::get('/index', 'HomeController@index')->name('index');
+        Route::get('/show', 'HomeController@show')->name('show');
         Route::get('/create', 'HomeController@create');
-        Route::get('/edit/{user}', 'HomeController@edit')->name('.edit');
+        Route::get('/edit/{user}', 'HomeController@edit')->name('edit');
         Route::put('/', 'HomeController@update');
         Route::post('/', 'HomeController@store');
         Route::delete('/remove/{user}', 'HomeController@remove');
