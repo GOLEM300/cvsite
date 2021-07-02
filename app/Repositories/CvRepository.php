@@ -95,7 +95,7 @@ class CvRepository implements CvQueriesInterface
             [
             'previosExpirience'
             ]
-        )->paginate(20);
+        )->paginate(2);
         return $cvs;
     }
 

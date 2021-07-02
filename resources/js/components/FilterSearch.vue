@@ -24,13 +24,31 @@
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                {{sort_title}}
+                {{ sort_title }}
                 <i class="fas fa-angle-down arrowDown"></i>
               </a>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" role="button" href="#" @click="sort_by('newest','По новизне')">По новизне</a>
-                <a class="dropdown-item" role="button" href="#" @click="sort_by('desc','По возрастанию зарплаты')">По возрастанию зарплаты</a>
-                <a class="dropdown-item" role="button" href="#" @click="sort_by('asc','По убыванию зарплаты')">По убыванию зарплаты</a>
+                <a
+                  class="dropdown-item"
+                  role="button"
+                  href="#"
+                  @click="sort_by('newest', 'По новизне')"
+                  >По новизне</a
+                >
+                <a
+                  class="dropdown-item"
+                  role="button"
+                  href="#"
+                  @click="sort_by('desc', 'По возрастанию зарплаты')"
+                  >По возрастанию зарплаты</a
+                >
+                <a
+                  class="dropdown-item"
+                  role="button"
+                  href="#"
+                  @click="sort_by('asc', 'По убыванию зарплаты')"
+                  >По убыванию зарплаты</a
+                >
               </div>
             </div>
           </div>
@@ -125,9 +143,18 @@
             mb16
           "
         >
-          <a href="#" class="signin-modal__switch-btn active" @click="sex('all')">Все</a>
-          <a href="#" class="signin-modal__switch-btn" @click="sex('male')">Мужчины</a>
-          <a href="#" class="signin-modal__switch-btn" @click="sex('female')">Женщины</a>
+          <a
+            href="#"
+            class="signin-modal__switch-btn active"
+            @click="sex('all')"
+            >Все</a
+          >
+          <a href="#" class="signin-modal__switch-btn" @click="sex('male')"
+            >Мужчины</a
+          >
+          <a href="#" class="signin-modal__switch-btn" @click="sex('female')"
+            >Женщины</a
+          >
         </div>
         <div class="vakancy-page-filter-block__row mb24">
           <div class="paragraph cadet-blue">Город</div>
@@ -495,7 +522,7 @@ export default {
       }
     },
     sort_by(arg, title) {
-      this.request.sorted_by = arg; 
+      this.request.sorted_by = arg;
       this.sort_title = title;
     },
     sex(arg) {
