@@ -39,13 +39,14 @@ class PreviosExpirience extends Model
     /** get full years from one previous job and return it
      *
      */
-    public function totalYears() : int
+    public static function totalYears(array $work) : int
     {
-        if ($this->stillWork == 'off') {
-            $years = $this->workEndYear - $this->workStartYear;
-        } else {
-            $years = date("Y") - $this->workStartYear;
+        $years = 0;
+        if (!array_key_exists('stillWork', $work)) {
+            $years = $work['workEndYear'] - $work['workStartYear'];
+            return $years;
         }
+        $years = date("Y") - $work['workStartYear'];
         return $years;
     }
 

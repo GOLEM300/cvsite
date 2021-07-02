@@ -25,7 +25,8 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(
             CvQueriesInterface::class,
-            CvRepository::class);
+            CvRepository::class
+        );
         $this->app->bind(
             PrevWorksInterface::class,
             PrevWorksRepository::class

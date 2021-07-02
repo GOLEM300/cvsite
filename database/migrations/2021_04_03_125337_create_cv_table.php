@@ -20,6 +20,7 @@ class CreateCvTable extends Migration
             $table->string('name');
             $table->string('patronymic');
             $table->date('birth_date')->nullable();
+            $table->integer('age')->default(0)->index();
             $table->string('sex')->index();
             $table->string('locate_city')->index();
             $table->string('email');
@@ -27,6 +28,7 @@ class CreateCvTable extends Migration
             $table->string('specialization')->index();
             $table->unsignedBigInteger('salary');
             $table->string('expirience')->index();
+            $table->integer('prevYearsExpirience')->index();
             $table->text('about')->nullable();
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

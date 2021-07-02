@@ -62,21 +62,16 @@ class Cv extends Model
     /** get full expirience with years from previous jobs
      *
      */
-    public function prevYears() : string
+    public static function prevYears(string $expirience, ?array $prevWorksExp) : int
     {
         $total = 0;
-        if ($this->expirience == 'yes') {
-            $prevWorksExp = $this->getRelation('previosExpirience');
+        if ($expirience == 'yes' && (!is_null($prevWorksExp))) {
             foreach ($prevWorksExp as $prevExp) {
-                $total += $prevExp->totalYears();
+                $total += PreviosExpirience::totalYears($prevExp);
             };
-            if ((int)$total < 21) {
-                return 'Опыт работы '.$total.' лет';
-            } else {
-                return 'Опыт работы '.$total.' года';
-            }
+            return $total;
         } else {
-            return 'Нет опыта работы';
+            return $total;
         }
     }
 
@@ -96,19 +91,6 @@ class Cv extends Model
         return date_sum($total);
     }
 
-    // /** get user last job from cv
-    //  *
-    //  */
-    // public function getLastWork() : string
-    // {
-    //     $prevWorksExp = $this->getRelation('previosExpirience')->last();
-    //     if (!empty($prevWorksExp)) {
-    //         return $prevWorksExp->vacancy.' в '.$prevWorksExp->organisation.' , '.$prevWorksExp->period();
-    //     } else {
-    //         return "Нет";
-    //     }
-    // }
-
     /** get full user name
      *
      */
@@ -120,14 +102,10 @@ class Cv extends Model
     /** calculate user age with Carbon
      *
      */
-    public function age() : string
+    public static function age(string $birth_date) : int
     {
-        $age = Carbon::parse($this->birth_date)->age;
-        if ($age < 21) {
-            return $age.' лет';
-        } else {
-            return $age.' года';
-        }
+        $age = Carbon::parse($birth_date)->age;
+        return $age;
     }
 
     /** get data from array and transform it into string

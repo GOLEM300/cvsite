@@ -21,7 +21,11 @@
                 </div>
                 <div class="paragraph-lead mb16">
                     <span class="mr24">{{$user_cv->salary}} ₽</span>
-                    <span>{{$user_cv->prevYears()}}</span>
+                    @if ($user_cv->expirience == "yes")
+                    <span>{{$user_cv->prevYearsExpirience}} лет опыта работы</span>
+                    @else 
+                    <span>Нет опыта</span>
+                    @endif
                 </div>
                 <div class="profile-info company-profile-info resume-view__info-blick">
                     <div class="profile-info__block company-profile-info__block mb8">
@@ -33,7 +37,7 @@
                     <div class="profile-info__block company-profile-info__block mb8">
                         <div class="profile-info__block-left company-profile-info__block-left">Возраст
                         </div>
-                        <div class="profile-info__block-right company-profile-info__block-right">{{$user_cv->age()}}</div>
+                        <div class="profile-info__block-right company-profile-info__block-right">{{$user_cv->age}} лет</div>
                     </div>
                     <div class="profile-info__block company-profile-info__block mb8">
                         <div class="profile-info__block-left company-profile-info__block-left">Занятость</div>

@@ -58,10 +58,10 @@
             <div class="d-flex align-items-center flex-wrap mb8">
               <span class="mr16 paragraph">{{ cv.salary }} ₽</span>
               <span class="mr16 paragraph" v-if="cv.expirience == 'yes'">{{
-                getPrevYears(cv.previos_expirience)
-              }}</span>
+                cv.prevYearsExpirience
+              }} лет опыта</span>
               <span class="mr16 paragraph" v-else>Нет опыта работы</span>
-              <span class="mr16 paragraph">{{ getAge(cv.birth_date) }}</span>
+              <span class="mr16 paragraph">{{ cv.age }}</span>
               <span class="mr16 paragraph">{{ cv.locate_city }}</span>
             </div>
             <p class="paragraph tbold mobile-off">Последнее место работы</p>
@@ -366,9 +366,9 @@ export default {
     return {
       request: {
         sex: "",
-        min_age: "",
-        max_age: "",
-        salary: "",
+        min_age: 0,
+        max_age: 0,
+        salary: 0,
         locate_city: "",
         specialization: "",
         prevExpirience: [],
@@ -413,7 +413,7 @@ export default {
         )}`
       )
         .then((response) => {
-          await response.json().then((data) => {
+          response.json().then((data) => {
             this.cvs = data.data;
             console.log(this.cvs);
           });
@@ -421,14 +421,6 @@ export default {
         .catch(function (error) {
           console.log(error);
         });
-    },
-    getAge(birth_date) {
-      let age = parseInt(new Date().getFullYear()) - parseInt(birth_date.slice(0, 4));
-      if (age < 21) {
-        return age + " лет";
-      } else {
-        return age + " года";
-      }
     },
     getLastWork(previos_expirience) {
       if (!previos_expirience.length) {
@@ -460,22 +452,6 @@ export default {
         );
       } else {
         return startMonth + " " + startYear + " - " + "По настоящее время";
-      }
-    },
-    getPrevYears(previos_expirience) {
-      if (!previos_expirience.length) {
-        return "Error";
-      }
-      let total = 0;
-      for (let i = 0; i < previos_expirience.length; i++) {
-        total +=
-          parseInt(previos_expirience[i].workEndYear) -
-          parseInt(previos_expirience[i].workStartYear);
-      }
-      if (total < 21) {
-        return "Опыт работы " + total + " лет";
-      } else {
-        return "Опыт работы " + total + " года";
       }
     },
     updated_at(updated_at) {

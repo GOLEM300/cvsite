@@ -32,44 +32,56 @@ class CvService
         $this->sheduleTypeQueries = $sheduleTypeQueries; 
     }
     
-    /** create and store cv from request
+    /**
      * 
+     * create and store cv from request
      */
     public function create($user_id, CreateRequest $request) : Cv
     {
-        return DB::transaction(function () use ($request, $user_id) {
-            $image = $request['photo'] !== null ? $this->savePhoto($request['photo']) : '';
-            //dd($request->birth_date);
-            $birthDate = $this->birthDateTransform($request['birth_date']);//$request->birth_date->format_date;//
-            //dd($birthDate);
-            $cv = Cv::make([
-                'photo' => $image->basename ?? '',
-                'name' => $request['name'],
-                'patronymic' => $request['patronymic'],
-                'lastname' => $request['lastname'],
-                'birth_date' => $birthDate,
-                'sex' => $request['sex'],
-                'locate_city' => $request['locate_city'],
-                'email' => $request['email'],
-                'phone' => $request['phone'],
-                'specialization' => $request['specialization'],
-                'salary' => $request['salary'],
-                'expirience' => $request['expirience'],
-                'about' => $request['about'],
-                'user_id' => $user_id
-                ]);
+        return DB::transaction(
+            function () use ($request, $user_id) {
 
-            $cv->saveOrFail();
+                $image = $request['photo'] !== null ? $this->savePhoto($request['photo']) : '';
 
-            $this->saveBusyness($request['busyness'],$cv->id);
-            $this->saveSheduleType($request['shedule_types'],$cv->id);
+                $birthDate = $this->birthDateTransform($request['birth_date']);//$request->birth_date->format_date;//
+                //dd($birthDate);
+                $age = Cv::age($birthDate);
 
-            if ($request['expirience'] == 'yes') {
-                $this->savePrevWorks($request['workExperiences'],$cv->id);
+                $prevYearsExpirience = Cv::prevYears($request['expirience'], $request['workExperiences']);
+
+                $cv = Cv::make(
+                    [
+                    'photo' => $image->basename ?? '',
+                    'name' => $request['name'],
+                    'patronymic' => $request['patronymic'],
+                    'lastname' => $request['lastname'],
+                    'birth_date' => $birthDate,
+                    'age' => $age,
+                    'sex' => $request['sex'],
+                    'locate_city' => $request['locate_city'],
+                    'email' => $request['email'],
+                    'phone' => $request['phone'],
+                    'specialization' => $request['specialization'],
+                    'salary' => $request['salary'],
+                    'expirience' => $request['expirience'],
+                    'prevYearsExpirience' => $prevYearsExpirience,
+                    'about' => $request['about'],
+                    'user_id' => $user_id
+                    ]
+                );
+
+                $cv->saveOrFail();
+
+                $this->saveBusyness($request['busyness'], $cv->id);
+                $this->saveSheduleType($request['shedule_types'], $cv->id);
+
+                if ($request['expirience'] == 'yes') {
+                    $this->savePrevWorks($request['workExperiences'], $cv->id);
+                }
+
+                return $cv;
             }
-
-            return $cv;
-        });
+        );
     }
 
     public function getFormatDateAttribute($date)
@@ -98,32 +110,49 @@ class CvService
         return $birthDate;
     }
 
-    /** update current cv
+    /**
      * 
+     * update current cv
      */
     public function update(EditRequest $request,int $cv_id) : void
     {
-        $old_cv = $this->getUserCv($cv_id);
-        $old_cv->update($request->only([
-            'photo',
-            'name',
-            'patronymic',
-            'lastname',
-            'birth_date',
-            'sex',
-            'locate_city',
-            'email',
-            'phone',
-            'specialization',
-            'salary',
-            'expirience',
-            'about',
-            'user_id',
-            'updated_at'
-        ]));
+        $birthDate = $this->birthDateTransform($request['birth_date']);
 
-        $this->updateBusyness($request['busyness'],$cv_id);
-        $this->updateSheduleType($request['shedule_types'],$cv_id);
+        $age = Cv::age($birthDate);
+
+        $prevYearsExpirience = Cv::prevYears($request['expirience'], $request['workExperiences']);
+
+        $old_cv = $this->getUserCv($cv_id);
+
+        $old_cv->update(
+            $request->only(
+                [
+                'photo',
+                'name',
+                'patronymic',
+                'lastname',
+                'birth_date',
+                'sex',
+                'locate_city',
+                'email',
+                'phone',
+                'specialization',
+                'salary',
+                'expirience',
+                'about',
+                'user_id',
+                'updated_at'
+                ]
+            )
+        );
+
+        $old_cv->update([
+            'age'=>$age, 
+            'prevYearsExpirience' => $prevYearsExpirience
+        ]);
+
+        $this->updateBusyness($request['busyness'], $cv_id);
+        $this->updateSheduleType($request['shedule_types'], $cv_id);
 
         if (!empty($request['workExperiences'])) {
             $this->updatePrevWorks($request['workExperiences'], $cv_id);
@@ -132,32 +161,36 @@ class CvService
         }
     }
 
-    /** remove current cv
+    /**
      * 
+     * remove current cv
      */
     public function remove($cv_id) : void
     {
         $this->cvQueries->remove($cv_id);
     }
 
-    /** get one user cv
+    /**
      * 
+     * get one user cv
      */
     public function getUserCv($cv_id) : object
     {
         return $this->cvQueries->getUserCv($cv_id);
     }
 
-    /** get cv collection for log in user
+    /**
      * 
+     * get cv collection for log in user
      */
     public function getUserCvs($user_id) : object
     {
         return $this->cvQueries->getUserCvs($user_id);
     }
 
-    /** get all cv
+    /**
      * 
+     * get all cv
      */
     public function getAllCv() : object
     {
@@ -172,36 +205,40 @@ class CvService
         return $this->cvQueries->getAllCvWithPaginate($request);
     }
 
-    /** save busyness relation from current cv
+    /**
      * 
+     * save busyness relation from current cv
      */
     private function saveBusyness(array $array,int $cv_id) : void
     {
-        $this->busynessQueries->save($array,$cv_id);
+        $this->busynessQueries->save($array, $cv_id);
     }
 
-    /** save sheduleType relation from current cv
+    /**
      * 
+     * save sheduleType relation from current cv
      */
     private function saveSheduleType(array $array,int $cv_id) : void
     {
-        $this->sheduleTypeQueries->save($array,$cv_id);
+        $this->sheduleTypeQueries->save($array, $cv_id);
     }
 
-    /** update busyness relation from current cv
+    /**
      * 
+     * update busyness relation from current cv
      */
     private function updateBusyness(array $array,int $cv_id) : void
     {
-        $this->busynessQueries->update($array,$cv_id);
+        $this->busynessQueries->update($array, $cv_id);
     }
 
-    /** update sheduleType relation from current cv
+    /**
      * 
+     * update sheduleType relation from current cv
      */
     private function updateSheduleType(array $array,int $cv_id) : void
     {
-        $this->sheduleTypeQueries->update($array,$cv_id);
+        $this->sheduleTypeQueries->update($array, $cv_id);
     }
 
     /**
@@ -217,7 +254,7 @@ class CvService
      */
     private function savePrevWorks(array $array, int $cv_id) : void
     {
-        $this->prevWorks->save($array,$cv_id);
+        $this->prevWorks->save($array, $cv_id);
     }
 
     /**
@@ -225,7 +262,7 @@ class CvService
      */
     private function updatePrevWorks(array $array, int $cv_id) : void
     {
-        $this->prevWorks->update($array,$cv_id);
+        $this->prevWorks->update($array, $cv_id);
     }
 
     /**
