@@ -150,7 +150,11 @@
         <div class="vakancy-page-filter-block__row mb24">
           <div class="paragraph cadet-blue">Специализация</div>
           <div class="citizenship-select">
-            <select class="nselect-1" data-title="Любая">
+            <select
+              class="nselect-1"
+              data-title="Любая"
+              v-model="request.specialization"
+            >
               <option value=""></option>
               <option value="Фронтенд">Фронтенд</option>
               <option value="Бекенд">Бекенд</option>
@@ -361,7 +365,7 @@ export default {
   data() {
     return {
       request: {
-        sex: "male",
+        sex: "",
         min_age: "",
         max_age: "",
         salary: "",
@@ -372,7 +376,7 @@ export default {
         sheduleType: [],
         newst: true,
         salary_desq: false,
-        salary_asc: false
+        salary_asc: false,
       },
       cvs: [],
       months: [
@@ -402,16 +406,16 @@ export default {
     },
   },
   methods: {
-    loadCvs() {
-      fetch(
+    async loadCvs() {
+      await fetch(
         `http://frontend.test/api/search?request=${JSON.stringify(
           this.request
         )}`
       )
         .then((response) => {
-          response.json().then((data) => {
+          await response.json().then((data) => {
             this.cvs = data.data;
-            console.log(this.cvs)
+            console.log(this.cvs);
           });
         })
         .catch(function (error) {
@@ -419,7 +423,8 @@ export default {
         });
     },
     getAge(birth_date) {
-      let age = parseInt(new Date().getFullYear()) - parseInt(birth_date.slice(0, 4));
+      let age =
+        parseInt(new Date().getFullYear()) - parseInt(birth_date.slice(0, 4));
       if (age < 21) {
         return age + " лет";
       } else {
