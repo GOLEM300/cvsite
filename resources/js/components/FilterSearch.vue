@@ -5,7 +5,7 @@
     <div class="row">
       <div class="col-lg-9 desctop-992-pr-16">
         <div class="d-flex align-items-center flex-wrap mb8">
-          <span class="paragraph mr16">Найдено 3 резюме</span>
+          <span class="paragraph mr16">Найдено {{ cvs.length }} резюме</span>
           <div class="vakancy-page-header-dropdowns">
             <div class="vakancy-page-wrap show mr16">
               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -24,13 +24,13 @@
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                По новизне
+                {{sort_title}}
                 <i class="fas fa-angle-down arrowDown"></i>
               </a>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="#">По новизне</a>
-                <a class="dropdown-item" href="#">По возрастанию зарплаты</a>
-                <a class="dropdown-item" href="#">По убыванию зарплаты</a>
+                <a class="dropdown-item" role="button" href="#" @click="sort_by('newest','По новизне')">По новизне</a>
+                <a class="dropdown-item" role="button" href="#" @click="sort_by('desc','По возрастанию зарплаты')">По возрастанию зарплаты</a>
+                <a class="dropdown-item" role="button" href="#" @click="sort_by('asc','По убыванию зарплаты')">По убыванию зарплаты</a>
               </div>
             </div>
           </div>
@@ -47,19 +47,21 @@
         >
           <div class="company-list-search__block-left">
             <div class="resume-list__block-img mb8">
-              <img :src="'/storage/uploads/{{ cv.photo }}'" alt="profile" />
+              <img :src="`/site/show/${cv.photo}`" alt="profile" />
             </div>
           </div>
           <div class="company-list-search__block-right">
             <div class="mini-paragraph cadet-blue mobile-mb12">
               {{ updated_at(cv.updated_at) }}
             </div>
-            <h3 class="mini-title mobile-off"><a href="/site/show/1">{{ cv.specialization }}</a></h3>
+            <h3 class="mini-title mobile-off">
+              <a :href="`/site/show/${cv.id}`">{{ cv.specialization }}</a>
+            </h3>
             <div class="d-flex align-items-center flex-wrap mb8">
               <span class="mr16 paragraph">{{ cv.salary }} ₽</span>
-              <span class="mr16 paragraph" v-if="cv.expirience == 'yes'">{{
-                cv.prevYearsExpirience
-              }} лет опыта</span>
+              <span class="mr16 paragraph" v-if="cv.expirience == 'yes'"
+                >{{ cv.prevYearsExpirience }} лет опыта</span
+              >
               <span class="mr16 paragraph" v-else>Нет опыта работы</span>
               <span class="mr16 paragraph">{{ cv.age }} лет</span>
               <span class="mr16 paragraph">{{ cv.locate_city }}</span>
@@ -123,51 +125,57 @@
             mb16
           "
         >
-          <a href="#" class="signin-modal__switch-btn active">Все</a>
-          <a href="#" class="signin-modal__switch-btn">Мужчины</a>
-          <a href="#" class="signin-modal__switch-btn">Женщины</a>
+          <a href="#" class="signin-modal__switch-btn active" @click="sex('all')">Все</a>
+          <a href="#" class="signin-modal__switch-btn" @click="sex('male')">Мужчины</a>
+          <a href="#" class="signin-modal__switch-btn" @click="sex('female')">Женщины</a>
         </div>
         <div class="vakancy-page-filter-block__row mb24">
           <div class="paragraph cadet-blue">Город</div>
           <div class="citizenship-select">
-            <select class="nselect-1">
-              <option value=""></option>
-              <option value="Кемерово">Кемерово</option>
-              <option value="Новосибирск">Новосибирск</option>
-              <option value="Иркутск">Иркутск</option>
-              <option value="Красноярск">Красноярск</option>
-              <option value="Барнаул">Барнаул</option>
+            <select v-model="request.locate_city">
+              <option v-for="item in city_list" v-bind:value="item">
+                {{ item }}
+              </option>
             </select>
           </div>
         </div>
         <div class="vakancy-page-filter-block__row mb24">
           <div class="paragraph cadet-blue">Зарплата</div>
           <div class="p-rel">
-            <input placeholder="Любая" type="text" class="dor-input w100" />
+            <input
+              placeholder="Любая"
+              type="text"
+              class="dor-input w100"
+              v-model="request.salary"
+            />
             <img class="rub-icon" src="images/rub-icon.svg" alt="rub-icon" />
           </div>
         </div>
         <div class="vakancy-page-filter-block__row mb24">
           <div class="paragraph cadet-blue">Специализация</div>
           <div class="citizenship-select">
-            <select
-              class="nselect-1"
-              data-title="Любая"
-              v-model="request.specialization"
-            >
-              <option value=""></option>
-              <option value="Фронтенд">Фронтенд</option>
-              <option value="Бекенд">Бекенд</option>
-              <option value="Дизайн">Дизайн</option>
-              <option value="Тестировщик">Тестировщик</option>
+            <select data-title="Любая" v-model="request.specialization">
+              <option v-for="item in specialization_list" v-bind:value="item">
+                {{ item }}
+              </option>
             </select>
           </div>
         </div>
         <div class="vakancy-page-filter-block__row mb24">
           <div class="paragraph cadet-blue">Возраст</div>
           <div class="d-flex">
-            <input placeholder="От" type="text" class="dor-input w100" />
-            <input placeholder="До" type="text" class="dor-input w100" />
+            <input
+              placeholder="От"
+              type="text"
+              class="dor-input w100"
+              v-model="request.min_age"
+            />
+            <input
+              placeholder="До"
+              type="text"
+              class="dor-input w100"
+              v-model="request.max_age"
+            />
           </div>
         </div>
         <div class="vakancy-page-filter-block__row mb24">
@@ -178,6 +186,8 @@
                 type="checkbox"
                 class="form-check-input"
                 id="exampleCheck1"
+                value="0"
+                v-model="request.selected.prevExpirience"
               />
               <label class="form-check-label" for="exampleCheck1"></label>
               <label for="exampleCheck1" class="profile-info__check-text"
@@ -189,6 +199,8 @@
                 type="checkbox"
                 class="form-check-input"
                 id="exampleCheck2"
+                value="1"
+                v-model="request.selected.prevExpirience"
               />
               <label class="form-check-label" for="exampleCheck2"></label>
               <label for="exampleCheck2" class="profile-info__check-text"
@@ -200,6 +212,8 @@
                 type="checkbox"
                 class="form-check-input"
                 id="exampleCheck3"
+                value="2"
+                v-model="request.selected.prevExpirience"
               />
               <label class="form-check-label" for="exampleCheck3"></label>
               <label for="exampleCheck3" class="profile-info__check-text"
@@ -211,6 +225,8 @@
                 type="checkbox"
                 class="form-check-input"
                 id="exampleCheck4"
+                value="3"
+                v-model="request.selected.prevExpirience"
               />
               <label class="form-check-label" for="exampleCheck4"></label>
               <label for="exampleCheck4" class="profile-info__check-text"
@@ -227,6 +243,8 @@
                 type="checkbox"
                 class="form-check-input"
                 id="exampleCheck5"
+                value="3"
+                v-model="request.selected.busyness"
               />
               <label class="form-check-label" for="exampleCheck5"></label>
               <label for="exampleCheck5" class="profile-info__check-text"
@@ -238,6 +256,8 @@
                 type="checkbox"
                 class="form-check-input"
                 id="exampleCheck6"
+                value="3"
+                v-model="request.selected.busyness"
               />
               <label class="form-check-label" for="exampleCheck6"></label>
               <label for="exampleCheck6" class="profile-info__check-text"
@@ -249,6 +269,8 @@
                 type="checkbox"
                 class="form-check-input"
                 id="exampleCheck7"
+                value="3"
+                v-model="request.selected.busyness"
               />
               <label class="form-check-label" for="exampleCheck7"></label>
               <label for="exampleCheck7" class="profile-info__check-text"
@@ -260,6 +282,8 @@
                 type="checkbox"
                 class="form-check-input"
                 id="exampleCheck8"
+                value="3"
+                v-model="request.selected.busyness"
               />
               <label class="form-check-label" for="exampleCheck8"></label>
               <label for="exampleCheck8" class="profile-info__check-text"
@@ -271,6 +295,8 @@
                 type="checkbox"
                 class="form-check-input"
                 id="exampleCheck9"
+                value="3"
+                v-model="request.selected.busyness"
               />
               <label class="form-check-label" for="exampleCheck9"></label>
               <label for="exampleCheck9" class="profile-info__check-text"
@@ -287,6 +313,8 @@
                 type="checkbox"
                 class="form-check-input"
                 id="exampleCheck10"
+                value="3"
+                v-model="request.selected.sheduleType"
               />
               <label class="form-check-label" for="exampleCheck10"></label>
               <label for="exampleCheck10" class="profile-info__check-text"
@@ -298,6 +326,8 @@
                 type="checkbox"
                 class="form-check-input"
                 id="exampleCheck11"
+                value="3"
+                v-model="request.selected.sheduleType"
               />
               <label class="form-check-label" for="exampleCheck11"></label>
               <label for="exampleCheck11" class="profile-info__check-text"
@@ -309,6 +339,8 @@
                 type="checkbox"
                 class="form-check-input"
                 id="exampleCheck12"
+                value="3"
+                v-model="request.selected.sheduleType"
               />
               <label class="form-check-label" for="exampleCheck12"></label>
               <label for="exampleCheck12" class="profile-info__check-text"
@@ -320,6 +352,8 @@
                 type="checkbox"
                 class="form-check-input"
                 id="exampleCheck13"
+                value="3"
+                v-model="request.selected.sheduleType"
               />
               <label class="form-check-label" for="exampleCheck13"></label>
               <label for="exampleCheck13" class="profile-info__check-text"
@@ -331,6 +365,8 @@
                 type="checkbox"
                 class="form-check-input"
                 id="exampleCheck14"
+                value="3"
+                v-model="request.selected.sheduleType"
               />
               <label class="form-check-label" for="exampleCheck14"></label>
               <label for="exampleCheck14" class="profile-info__check-text"
@@ -364,19 +400,22 @@
 export default {
   data() {
     return {
+      sort_title: "По новизне",
+      specialization_list: ["Фронтенд", "Бекенд", "Дизайн", "Тестировщик"],
+      city_list: ["Москва", "Новосибирск", "Якутск", "Волгоград"],
       request: {
         sex: "",
-        min_age: 0,
-        max_age: 0,
-        salary: 0,
+        min_age: "",
+        max_age: "",
+        salary: "",
         locate_city: "",
         specialization: "",
-        prevExpirience: [],
-        busyness: [],
-        sheduleType: [],
-        newst: true,
-        salary_desq: false,
-        salary_asc: false,
+        sorted_by: "",
+        selected: {
+          prevExpirience: [],
+          busyness: [],
+          sheduleType: [],
+        },
       },
       cvs: [],
       months: [
@@ -400,9 +439,10 @@ export default {
   },
   watch: {
     request: {
-      handler: function () {
+      handler() {
         this.loadCvs();
       },
+      deep: true,
     },
   },
   methods: {
@@ -453,6 +493,13 @@ export default {
       } else {
         return startMonth + " " + startYear + " - " + "По настоящее время";
       }
+    },
+    sort_by(arg, title) {
+      this.request.sorted_by = arg; 
+      this.sort_title = title;
+    },
+    sex(arg) {
+      this.request.sex = arg;
     },
     updated_at(updated_at) {
       let dataArray = updated_at.split("-", 3);

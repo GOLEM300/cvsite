@@ -53,10 +53,26 @@ class CvRepository implements CvQueriesInterface
     public function getAllCvWithPaginate(object $request)
     {
 
-        $query = Cv::orderByDesc('id');
+        if (!empty($value = $request->sorted_by)) {
+            switch ($value) {
+            case "newest":
+                $query = Cv::orderBy('id', 'desc');
+                break;
+            case "desc":
+                $query = Cv::orderBy('salary', 'desc');
+                break;
+            case 'asc':
+                $query = Cv::orderBy('salary', 'asc');
+                break;
+            }
+        } else {
+            $query = Cv::orderBy('id', 'desc');
+        }
 
         if (!empty($value = $request->sex)) {
-            $query->where('sex', $value);
+            if ($value != 'all') {
+                $query->where('sex', $value);
+            }
         }
 
         if (!empty($value = $request->locate_city)) {

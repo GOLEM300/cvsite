@@ -2226,22 +2226,61 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
+      sort_title: "По новизне",
+      specialization_list: ["Фронтенд", "Бекенд", "Дизайн", "Тестировщик"],
+      city_list: ["Москва", "Новосибирск", "Якутск", "Волгоград"],
       request: {
         sex: "",
-        min_age: 0,
-        max_age: 0,
-        salary: 0,
+        min_age: "",
+        max_age: "",
+        salary: "",
         locate_city: "",
         specialization: "",
-        prevExpirience: [],
-        busyness: [],
-        sheduleType: [],
-        newst: true,
-        salary_desq: false,
-        salary_asc: false
+        sorted_by: "",
+        selected: {
+          prevExpirience: [],
+          busyness: [],
+          sheduleType: []
+        }
       },
       cvs: [],
       months: ["Декабрь", "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь"]
@@ -2254,7 +2293,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     request: {
       handler: function handler() {
         this.loadCvs();
-      }
+      },
+      deep: true
     }
   },
   methods: {
@@ -2303,6 +2343,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       } else {
         return startMonth + " " + startYear + " - " + "По настоящее время";
       }
+    },
+    sort_by: function sort_by(arg, title) {
+      this.request.sorted_by = arg;
+      this.sort_title = title;
+    },
+    sex: function sex(arg) {
+      this.request.sex = arg;
     },
     updated_at: function updated_at(_updated_at) {
       var dataArray = _updated_at.split("-", 3);
@@ -39088,7 +39135,99 @@ var render = function() {
         "div",
         { staticClass: "col-lg-9 desctop-992-pr-16" },
         [
-          _vm._m(0),
+          _c(
+            "div",
+            { staticClass: "d-flex align-items-center flex-wrap mb8" },
+            [
+              _c("span", { staticClass: "paragraph mr16" }, [
+                _vm._v("Найдено " + _vm._s(_vm.cvs.length) + " резюме")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "vakancy-page-header-dropdowns" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("div", { staticClass: "vakancy-page-wrap show" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass:
+                        "vakancy-page-btn vakancy-btn dropdown-toggle",
+                      attrs: {
+                        href: "#",
+                        role: "button",
+                        id: "dropdownMenuLink",
+                        "data-toggle": "dropdown",
+                        "aria-haspopup": "true",
+                        "aria-expanded": "false"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n              " +
+                          _vm._s(_vm.sort_title) +
+                          "\n              "
+                      ),
+                      _c("i", { staticClass: "fas fa-angle-down arrowDown" })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "dropdown-menu",
+                      attrs: { "aria-labelledby": "dropdownMenuLink" }
+                    },
+                    [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "dropdown-item",
+                          attrs: { role: "button", href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.sort_by("newest", "По новизне")
+                            }
+                          }
+                        },
+                        [_vm._v("По новизне")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          staticClass: "dropdown-item",
+                          attrs: { role: "button", href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.sort_by(
+                                "desc",
+                                "По возрастанию зарплаты"
+                              )
+                            }
+                          }
+                        },
+                        [_vm._v("По возрастанию зарплаты")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          staticClass: "dropdown-item",
+                          attrs: { role: "button", href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.sort_by("asc", "По убыванию зарплаты")
+                            }
+                          }
+                        },
+                        [_vm._v("По убыванию зарплаты")]
+                      )
+                    ]
+                  )
+                ])
+              ])
+            ]
+          ),
           _vm._v(" "),
           _vm._l(_vm.cvs, function(cv) {
             return _c(
@@ -39101,10 +39240,7 @@ var render = function() {
                 _c("div", { staticClass: "company-list-search__block-left" }, [
                   _c("div", { staticClass: "resume-list__block-img mb8" }, [
                     _c("img", {
-                      attrs: {
-                        src: "/storage/uploads/{{ cv.photo }}",
-                        alt: "profile"
-                      }
+                      attrs: { src: "/site/show/" + cv.photo, alt: "profile" }
                     })
                   ])
                 ]),
@@ -39123,7 +39259,7 @@ var render = function() {
                   ),
                   _vm._v(" "),
                   _c("h3", { staticClass: "mini-title mobile-off" }, [
-                    _c("a", { attrs: { href: "/site/show/1" } }, [
+                    _c("a", { attrs: { href: "/site/show/" + cv.id } }, [
                       _vm._v(_vm._s(cv.specialization))
                     ])
                   ]),
@@ -39194,11 +39330,138 @@ var render = function() {
         [
           _vm._m(2),
           _vm._v(" "),
-          _vm._m(3),
+          _c(
+            "div",
+            {
+              staticClass:
+                "\n          signin-modal__switch-btns-wrap\n          resume-list__switch-btns-wrap\n          mb16\n        "
+            },
+            [
+              _c(
+                "a",
+                {
+                  staticClass: "signin-modal__switch-btn active",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      return _vm.sex("all")
+                    }
+                  }
+                },
+                [_vm._v("Все")]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "signin-modal__switch-btn",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      return _vm.sex("male")
+                    }
+                  }
+                },
+                [_vm._v("Мужчины")]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "signin-modal__switch-btn",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      return _vm.sex("female")
+                    }
+                  }
+                },
+                [_vm._v("Женщины")]
+              )
+            ]
+          ),
           _vm._v(" "),
-          _vm._m(4),
+          _c("div", { staticClass: "vakancy-page-filter-block__row mb24" }, [
+            _c("div", { staticClass: "paragraph cadet-blue" }, [
+              _vm._v("Город")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "citizenship-select" }, [
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.request.locate_city,
+                      expression: "request.locate_city"
+                    }
+                  ],
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.request,
+                        "locate_city",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                _vm._l(_vm.city_list, function(item) {
+                  return _c("option", { domProps: { value: item } }, [
+                    _vm._v("\n              " + _vm._s(item) + "\n            ")
+                  ])
+                }),
+                0
+              )
+            ])
+          ]),
           _vm._v(" "),
-          _vm._m(5),
+          _c("div", { staticClass: "vakancy-page-filter-block__row mb24" }, [
+            _c("div", { staticClass: "paragraph cadet-blue" }, [
+              _vm._v("Зарплата")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "p-rel" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.request.salary,
+                    expression: "request.salary"
+                  }
+                ],
+                staticClass: "dor-input w100",
+                attrs: { placeholder: "Любая", type: "text" },
+                domProps: { value: _vm.request.salary },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.request, "salary", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("img", {
+                staticClass: "rub-icon",
+                attrs: { src: "images/rub-icon.svg", alt: "rub-icon" }
+              })
+            ])
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "vakancy-page-filter-block__row mb24" }, [
             _c("div", { staticClass: "paragraph cadet-blue" }, [
@@ -39217,7 +39480,6 @@ var render = function() {
                       expression: "request.specialization"
                     }
                   ],
-                  staticClass: "nselect-1",
                   attrs: { "data-title": "Любая" },
                   on: {
                     change: function($event) {
@@ -39239,38 +39501,961 @@ var render = function() {
                     }
                   }
                 },
-                [
-                  _c("option", { attrs: { value: "" } }),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "Фронтенд" } }, [
-                    _vm._v("Фронтенд")
-                  ]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "Бекенд" } }, [
-                    _vm._v("Бекенд")
-                  ]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "Дизайн" } }, [
-                    _vm._v("Дизайн")
-                  ]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "Тестировщик" } }, [
-                    _vm._v("Тестировщик")
+                _vm._l(_vm.specialization_list, function(item) {
+                  return _c("option", { domProps: { value: item } }, [
+                    _vm._v("\n              " + _vm._s(item) + "\n            ")
                   ])
-                ]
+                }),
+                0
               )
             ])
           ]),
           _vm._v(" "),
-          _vm._m(6),
+          _c("div", { staticClass: "vakancy-page-filter-block__row mb24" }, [
+            _c("div", { staticClass: "paragraph cadet-blue" }, [
+              _vm._v("Возраст")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "d-flex" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.request.min_age,
+                    expression: "request.min_age"
+                  }
+                ],
+                staticClass: "dor-input w100",
+                attrs: { placeholder: "От", type: "text" },
+                domProps: { value: _vm.request.min_age },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.request, "min_age", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.request.max_age,
+                    expression: "request.max_age"
+                  }
+                ],
+                staticClass: "dor-input w100",
+                attrs: { placeholder: "До", type: "text" },
+                domProps: { value: _vm.request.max_age },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.request, "max_age", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ]),
           _vm._v(" "),
-          _vm._m(7),
+          _c("div", { staticClass: "vakancy-page-filter-block__row mb24" }, [
+            _c("div", { staticClass: "paragraph cadet-blue" }, [
+              _vm._v("Опыт работы")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "profile-info" }, [
+              _c("div", { staticClass: "form-check d-flex" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.request.selected.prevExpirience,
+                      expression: "request.selected.prevExpirience"
+                    }
+                  ],
+                  staticClass: "form-check-input",
+                  attrs: { type: "checkbox", id: "exampleCheck1", value: "0" },
+                  domProps: {
+                    checked: Array.isArray(_vm.request.selected.prevExpirience)
+                      ? _vm._i(_vm.request.selected.prevExpirience, "0") > -1
+                      : _vm.request.selected.prevExpirience
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.request.selected.prevExpirience,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "0",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(
+                              _vm.request.selected,
+                              "prevExpirience",
+                              $$a.concat([$$v])
+                            )
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.request.selected,
+                              "prevExpirience",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
+                      } else {
+                        _vm.$set(_vm.request.selected, "prevExpirience", $$c)
+                      }
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("label", {
+                  staticClass: "form-check-label",
+                  attrs: { for: "exampleCheck1" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "profile-info__check-text",
+                    attrs: { for: "exampleCheck1" }
+                  },
+                  [_vm._v("Без опыта")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-check d-flex" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.request.selected.prevExpirience,
+                      expression: "request.selected.prevExpirience"
+                    }
+                  ],
+                  staticClass: "form-check-input",
+                  attrs: { type: "checkbox", id: "exampleCheck2", value: "1" },
+                  domProps: {
+                    checked: Array.isArray(_vm.request.selected.prevExpirience)
+                      ? _vm._i(_vm.request.selected.prevExpirience, "1") > -1
+                      : _vm.request.selected.prevExpirience
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.request.selected.prevExpirience,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "1",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(
+                              _vm.request.selected,
+                              "prevExpirience",
+                              $$a.concat([$$v])
+                            )
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.request.selected,
+                              "prevExpirience",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
+                      } else {
+                        _vm.$set(_vm.request.selected, "prevExpirience", $$c)
+                      }
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("label", {
+                  staticClass: "form-check-label",
+                  attrs: { for: "exampleCheck2" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "profile-info__check-text",
+                    attrs: { for: "exampleCheck2" }
+                  },
+                  [_vm._v("От 1 года до 3 лет")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-check d-flex" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.request.selected.prevExpirience,
+                      expression: "request.selected.prevExpirience"
+                    }
+                  ],
+                  staticClass: "form-check-input",
+                  attrs: { type: "checkbox", id: "exampleCheck3", value: "2" },
+                  domProps: {
+                    checked: Array.isArray(_vm.request.selected.prevExpirience)
+                      ? _vm._i(_vm.request.selected.prevExpirience, "2") > -1
+                      : _vm.request.selected.prevExpirience
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.request.selected.prevExpirience,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "2",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(
+                              _vm.request.selected,
+                              "prevExpirience",
+                              $$a.concat([$$v])
+                            )
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.request.selected,
+                              "prevExpirience",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
+                      } else {
+                        _vm.$set(_vm.request.selected, "prevExpirience", $$c)
+                      }
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("label", {
+                  staticClass: "form-check-label",
+                  attrs: { for: "exampleCheck3" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "profile-info__check-text",
+                    attrs: { for: "exampleCheck3" }
+                  },
+                  [_vm._v("От 3 лет до 6 лет")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-check d-flex" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.request.selected.prevExpirience,
+                      expression: "request.selected.prevExpirience"
+                    }
+                  ],
+                  staticClass: "form-check-input",
+                  attrs: { type: "checkbox", id: "exampleCheck4", value: "3" },
+                  domProps: {
+                    checked: Array.isArray(_vm.request.selected.prevExpirience)
+                      ? _vm._i(_vm.request.selected.prevExpirience, "3") > -1
+                      : _vm.request.selected.prevExpirience
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.request.selected.prevExpirience,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "3",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(
+                              _vm.request.selected,
+                              "prevExpirience",
+                              $$a.concat([$$v])
+                            )
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.request.selected,
+                              "prevExpirience",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
+                      } else {
+                        _vm.$set(_vm.request.selected, "prevExpirience", $$c)
+                      }
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("label", {
+                  staticClass: "form-check-label",
+                  attrs: { for: "exampleCheck4" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "profile-info__check-text",
+                    attrs: { for: "exampleCheck4" }
+                  },
+                  [_vm._v("Более 6 лет")]
+                )
+              ])
+            ])
+          ]),
           _vm._v(" "),
-          _vm._m(8),
+          _c("div", { staticClass: "vakancy-page-filter-block__row mb24" }, [
+            _c("div", { staticClass: "paragraph cadet-blue" }, [
+              _vm._v("Тип занятости")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "profile-info" }, [
+              _c("div", { staticClass: "form-check d-flex" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.request.selected.busyness,
+                      expression: "request.selected.busyness"
+                    }
+                  ],
+                  staticClass: "form-check-input",
+                  attrs: { type: "checkbox", id: "exampleCheck5", value: "3" },
+                  domProps: {
+                    checked: Array.isArray(_vm.request.selected.busyness)
+                      ? _vm._i(_vm.request.selected.busyness, "3") > -1
+                      : _vm.request.selected.busyness
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.request.selected.busyness,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "3",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(
+                              _vm.request.selected,
+                              "busyness",
+                              $$a.concat([$$v])
+                            )
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.request.selected,
+                              "busyness",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
+                      } else {
+                        _vm.$set(_vm.request.selected, "busyness", $$c)
+                      }
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("label", {
+                  staticClass: "form-check-label",
+                  attrs: { for: "exampleCheck5" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "profile-info__check-text",
+                    attrs: { for: "exampleCheck5" }
+                  },
+                  [_vm._v("Полная занятость")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-check d-flex" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.request.selected.busyness,
+                      expression: "request.selected.busyness"
+                    }
+                  ],
+                  staticClass: "form-check-input",
+                  attrs: { type: "checkbox", id: "exampleCheck6", value: "3" },
+                  domProps: {
+                    checked: Array.isArray(_vm.request.selected.busyness)
+                      ? _vm._i(_vm.request.selected.busyness, "3") > -1
+                      : _vm.request.selected.busyness
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.request.selected.busyness,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "3",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(
+                              _vm.request.selected,
+                              "busyness",
+                              $$a.concat([$$v])
+                            )
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.request.selected,
+                              "busyness",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
+                      } else {
+                        _vm.$set(_vm.request.selected, "busyness", $$c)
+                      }
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("label", {
+                  staticClass: "form-check-label",
+                  attrs: { for: "exampleCheck6" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "profile-info__check-text",
+                    attrs: { for: "exampleCheck6" }
+                  },
+                  [_vm._v("Частичная занятость")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-check d-flex" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.request.selected.busyness,
+                      expression: "request.selected.busyness"
+                    }
+                  ],
+                  staticClass: "form-check-input",
+                  attrs: { type: "checkbox", id: "exampleCheck7", value: "3" },
+                  domProps: {
+                    checked: Array.isArray(_vm.request.selected.busyness)
+                      ? _vm._i(_vm.request.selected.busyness, "3") > -1
+                      : _vm.request.selected.busyness
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.request.selected.busyness,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "3",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(
+                              _vm.request.selected,
+                              "busyness",
+                              $$a.concat([$$v])
+                            )
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.request.selected,
+                              "busyness",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
+                      } else {
+                        _vm.$set(_vm.request.selected, "busyness", $$c)
+                      }
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("label", {
+                  staticClass: "form-check-label",
+                  attrs: { for: "exampleCheck7" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "profile-info__check-text",
+                    attrs: { for: "exampleCheck7" }
+                  },
+                  [_vm._v("Проектная работа")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-check d-flex" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.request.selected.busyness,
+                      expression: "request.selected.busyness"
+                    }
+                  ],
+                  staticClass: "form-check-input",
+                  attrs: { type: "checkbox", id: "exampleCheck8", value: "3" },
+                  domProps: {
+                    checked: Array.isArray(_vm.request.selected.busyness)
+                      ? _vm._i(_vm.request.selected.busyness, "3") > -1
+                      : _vm.request.selected.busyness
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.request.selected.busyness,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "3",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(
+                              _vm.request.selected,
+                              "busyness",
+                              $$a.concat([$$v])
+                            )
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.request.selected,
+                              "busyness",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
+                      } else {
+                        _vm.$set(_vm.request.selected, "busyness", $$c)
+                      }
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("label", {
+                  staticClass: "form-check-label",
+                  attrs: { for: "exampleCheck8" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "profile-info__check-text",
+                    attrs: { for: "exampleCheck8" }
+                  },
+                  [_vm._v("Стажировка")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-check d-flex" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.request.selected.busyness,
+                      expression: "request.selected.busyness"
+                    }
+                  ],
+                  staticClass: "form-check-input",
+                  attrs: { type: "checkbox", id: "exampleCheck9", value: "3" },
+                  domProps: {
+                    checked: Array.isArray(_vm.request.selected.busyness)
+                      ? _vm._i(_vm.request.selected.busyness, "3") > -1
+                      : _vm.request.selected.busyness
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.request.selected.busyness,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "3",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(
+                              _vm.request.selected,
+                              "busyness",
+                              $$a.concat([$$v])
+                            )
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.request.selected,
+                              "busyness",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
+                      } else {
+                        _vm.$set(_vm.request.selected, "busyness", $$c)
+                      }
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("label", {
+                  staticClass: "form-check-label",
+                  attrs: { for: "exampleCheck9" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "profile-info__check-text",
+                    attrs: { for: "exampleCheck9" }
+                  },
+                  [_vm._v("Волонтёрство")]
+                )
+              ])
+            ])
+          ]),
           _vm._v(" "),
-          _vm._m(9),
+          _c("div", { staticClass: "vakancy-page-filter-block__row mb24" }, [
+            _c("div", { staticClass: "paragraph cadet-blue" }, [
+              _vm._v("График работы")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "profile-info" }, [
+              _c("div", { staticClass: "form-check d-flex" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.request.selected.sheduleType,
+                      expression: "request.selected.sheduleType"
+                    }
+                  ],
+                  staticClass: "form-check-input",
+                  attrs: { type: "checkbox", id: "exampleCheck10", value: "3" },
+                  domProps: {
+                    checked: Array.isArray(_vm.request.selected.sheduleType)
+                      ? _vm._i(_vm.request.selected.sheduleType, "3") > -1
+                      : _vm.request.selected.sheduleType
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.request.selected.sheduleType,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "3",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(
+                              _vm.request.selected,
+                              "sheduleType",
+                              $$a.concat([$$v])
+                            )
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.request.selected,
+                              "sheduleType",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
+                      } else {
+                        _vm.$set(_vm.request.selected, "sheduleType", $$c)
+                      }
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("label", {
+                  staticClass: "form-check-label",
+                  attrs: { for: "exampleCheck10" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "profile-info__check-text",
+                    attrs: { for: "exampleCheck10" }
+                  },
+                  [_vm._v("Полный день")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-check d-flex" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.request.selected.sheduleType,
+                      expression: "request.selected.sheduleType"
+                    }
+                  ],
+                  staticClass: "form-check-input",
+                  attrs: { type: "checkbox", id: "exampleCheck11", value: "3" },
+                  domProps: {
+                    checked: Array.isArray(_vm.request.selected.sheduleType)
+                      ? _vm._i(_vm.request.selected.sheduleType, "3") > -1
+                      : _vm.request.selected.sheduleType
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.request.selected.sheduleType,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "3",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(
+                              _vm.request.selected,
+                              "sheduleType",
+                              $$a.concat([$$v])
+                            )
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.request.selected,
+                              "sheduleType",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
+                      } else {
+                        _vm.$set(_vm.request.selected, "sheduleType", $$c)
+                      }
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("label", {
+                  staticClass: "form-check-label",
+                  attrs: { for: "exampleCheck11" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "profile-info__check-text",
+                    attrs: { for: "exampleCheck11" }
+                  },
+                  [_vm._v("Сменный график")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-check d-flex" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.request.selected.sheduleType,
+                      expression: "request.selected.sheduleType"
+                    }
+                  ],
+                  staticClass: "form-check-input",
+                  attrs: { type: "checkbox", id: "exampleCheck12", value: "3" },
+                  domProps: {
+                    checked: Array.isArray(_vm.request.selected.sheduleType)
+                      ? _vm._i(_vm.request.selected.sheduleType, "3") > -1
+                      : _vm.request.selected.sheduleType
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.request.selected.sheduleType,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "3",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(
+                              _vm.request.selected,
+                              "sheduleType",
+                              $$a.concat([$$v])
+                            )
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.request.selected,
+                              "sheduleType",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
+                      } else {
+                        _vm.$set(_vm.request.selected, "sheduleType", $$c)
+                      }
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("label", {
+                  staticClass: "form-check-label",
+                  attrs: { for: "exampleCheck12" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "profile-info__check-text",
+                    attrs: { for: "exampleCheck12" }
+                  },
+                  [_vm._v("Вахтовый метод")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-check d-flex" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.request.selected.sheduleType,
+                      expression: "request.selected.sheduleType"
+                    }
+                  ],
+                  staticClass: "form-check-input",
+                  attrs: { type: "checkbox", id: "exampleCheck13", value: "3" },
+                  domProps: {
+                    checked: Array.isArray(_vm.request.selected.sheduleType)
+                      ? _vm._i(_vm.request.selected.sheduleType, "3") > -1
+                      : _vm.request.selected.sheduleType
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.request.selected.sheduleType,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "3",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(
+                              _vm.request.selected,
+                              "sheduleType",
+                              $$a.concat([$$v])
+                            )
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.request.selected,
+                              "sheduleType",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
+                      } else {
+                        _vm.$set(_vm.request.selected, "sheduleType", $$c)
+                      }
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("label", {
+                  staticClass: "form-check-label",
+                  attrs: { for: "exampleCheck13" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "profile-info__check-text",
+                    attrs: { for: "exampleCheck13" }
+                  },
+                  [_vm._v("Гибкий график")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-check d-flex" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.request.selected.sheduleType,
+                      expression: "request.selected.sheduleType"
+                    }
+                  ],
+                  staticClass: "form-check-input",
+                  attrs: { type: "checkbox", id: "exampleCheck14", value: "3" },
+                  domProps: {
+                    checked: Array.isArray(_vm.request.selected.sheduleType)
+                      ? _vm._i(_vm.request.selected.sheduleType, "3") > -1
+                      : _vm.request.selected.sheduleType
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.request.selected.sheduleType,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "3",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(
+                              _vm.request.selected,
+                              "sheduleType",
+                              $$a.concat([$$v])
+                            )
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.request.selected,
+                              "sheduleType",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
+                      } else {
+                        _vm.$set(_vm.request.selected, "sheduleType", $$c)
+                      }
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("label", {
+                  staticClass: "form-check-label",
+                  attrs: { for: "exampleCheck14" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "profile-info__check-text",
+                    attrs: { for: "exampleCheck14" }
+                  },
+                  [_vm._v("Удалённая работа")]
+                )
+              ])
+            ])
+          ]),
           _vm._v(" "),
-          _vm._m(10)
+          _vm._m(3)
         ]
       )
     ])
@@ -39281,94 +40466,28 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "d-flex align-items-center flex-wrap mb8" },
-      [
-        _c("span", { staticClass: "paragraph mr16" }, [
-          _vm._v("Найдено 3 резюме")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "vakancy-page-header-dropdowns" }, [
-          _c("div", { staticClass: "vakancy-page-wrap show mr16" }, [
-            _c(
-              "div",
-              {
-                staticClass: "dropdown-menu",
-                attrs: { "aria-labelledby": "dropdownMenuLink" }
-              },
-              [
-                _c(
-                  "a",
-                  { staticClass: "dropdown-item", attrs: { href: "#" } },
-                  [_vm._v("За день")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  { staticClass: "dropdown-item", attrs: { href: "#" } },
-                  [_vm._v("За год")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  { staticClass: "dropdown-item", attrs: { href: "#" } },
-                  [_vm._v("За все время")]
-                )
-              ]
-            )
+    return _c("div", { staticClass: "vakancy-page-wrap show mr16" }, [
+      _c(
+        "div",
+        {
+          staticClass: "dropdown-menu",
+          attrs: { "aria-labelledby": "dropdownMenuLink" }
+        },
+        [
+          _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
+            _vm._v("За день")
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "vakancy-page-wrap show" }, [
-            _c(
-              "a",
-              {
-                staticClass: "vakancy-page-btn vakancy-btn dropdown-toggle",
-                attrs: {
-                  href: "#",
-                  role: "button",
-                  id: "dropdownMenuLink",
-                  "data-toggle": "dropdown",
-                  "aria-haspopup": "true",
-                  "aria-expanded": "false"
-                }
-              },
-              [
-                _vm._v("\n              По новизне\n              "),
-                _c("i", { staticClass: "fas fa-angle-down arrowDown" })
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "dropdown-menu",
-                attrs: { "aria-labelledby": "dropdownMenuLink" }
-              },
-              [
-                _c(
-                  "a",
-                  { staticClass: "dropdown-item", attrs: { href: "#" } },
-                  [_vm._v("По новизне")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  { staticClass: "dropdown-item", attrs: { href: "#" } },
-                  [_vm._v("По возрастанию зарплаты")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  { staticClass: "dropdown-item", attrs: { href: "#" } },
-                  [_vm._v("По убыванию зарплаты")]
-                )
-              ]
-            )
+          _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
+            _vm._v("За год")
+          ]),
+          _vm._v(" "),
+          _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
+            _vm._v("За все время")
           ])
-        ])
-      ]
-    )
+        ]
+      )
+    ])
   },
   function() {
     var _vm = this
@@ -39433,438 +40552,6 @@ var staticRenderFns = [
         })
       ]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "\n          signin-modal__switch-btns-wrap\n          resume-list__switch-btns-wrap\n          mb16\n        "
-      },
-      [
-        _c(
-          "a",
-          {
-            staticClass: "signin-modal__switch-btn active",
-            attrs: { href: "#" }
-          },
-          [_vm._v("Все")]
-        ),
-        _vm._v(" "),
-        _c(
-          "a",
-          { staticClass: "signin-modal__switch-btn", attrs: { href: "#" } },
-          [_vm._v("Мужчины")]
-        ),
-        _vm._v(" "),
-        _c(
-          "a",
-          { staticClass: "signin-modal__switch-btn", attrs: { href: "#" } },
-          [_vm._v("Женщины")]
-        )
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "vakancy-page-filter-block__row mb24" }, [
-      _c("div", { staticClass: "paragraph cadet-blue" }, [_vm._v("Город")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "citizenship-select" }, [
-        _c("select", { staticClass: "nselect-1" }, [
-          _c("option", { attrs: { value: "" } }),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "Кемерово" } }, [_vm._v("Кемерово")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "Новосибирск" } }, [
-            _vm._v("Новосибирск")
-          ]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "Иркутск" } }, [_vm._v("Иркутск")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "Красноярск" } }, [
-            _vm._v("Красноярск")
-          ]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "Барнаул" } }, [_vm._v("Барнаул")])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "vakancy-page-filter-block__row mb24" }, [
-      _c("div", { staticClass: "paragraph cadet-blue" }, [_vm._v("Зарплата")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "p-rel" }, [
-        _c("input", {
-          staticClass: "dor-input w100",
-          attrs: { placeholder: "Любая", type: "text" }
-        }),
-        _vm._v(" "),
-        _c("img", {
-          staticClass: "rub-icon",
-          attrs: { src: "images/rub-icon.svg", alt: "rub-icon" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "vakancy-page-filter-block__row mb24" }, [
-      _c("div", { staticClass: "paragraph cadet-blue" }, [_vm._v("Возраст")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "d-flex" }, [
-        _c("input", {
-          staticClass: "dor-input w100",
-          attrs: { placeholder: "От", type: "text" }
-        }),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "dor-input w100",
-          attrs: { placeholder: "До", type: "text" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "vakancy-page-filter-block__row mb24" }, [
-      _c("div", { staticClass: "paragraph cadet-blue" }, [
-        _vm._v("Опыт работы")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "profile-info" }, [
-        _c("div", { staticClass: "form-check d-flex" }, [
-          _c("input", {
-            staticClass: "form-check-input",
-            attrs: { type: "checkbox", id: "exampleCheck1" }
-          }),
-          _vm._v(" "),
-          _c("label", {
-            staticClass: "form-check-label",
-            attrs: { for: "exampleCheck1" }
-          }),
-          _vm._v(" "),
-          _c(
-            "label",
-            {
-              staticClass: "profile-info__check-text",
-              attrs: { for: "exampleCheck1" }
-            },
-            [_vm._v("Без опыта")]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-check d-flex" }, [
-          _c("input", {
-            staticClass: "form-check-input",
-            attrs: { type: "checkbox", id: "exampleCheck2" }
-          }),
-          _vm._v(" "),
-          _c("label", {
-            staticClass: "form-check-label",
-            attrs: { for: "exampleCheck2" }
-          }),
-          _vm._v(" "),
-          _c(
-            "label",
-            {
-              staticClass: "profile-info__check-text",
-              attrs: { for: "exampleCheck2" }
-            },
-            [_vm._v("От 1 года до 3 лет")]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-check d-flex" }, [
-          _c("input", {
-            staticClass: "form-check-input",
-            attrs: { type: "checkbox", id: "exampleCheck3" }
-          }),
-          _vm._v(" "),
-          _c("label", {
-            staticClass: "form-check-label",
-            attrs: { for: "exampleCheck3" }
-          }),
-          _vm._v(" "),
-          _c(
-            "label",
-            {
-              staticClass: "profile-info__check-text",
-              attrs: { for: "exampleCheck3" }
-            },
-            [_vm._v("От 3 лет до 6 лет")]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-check d-flex" }, [
-          _c("input", {
-            staticClass: "form-check-input",
-            attrs: { type: "checkbox", id: "exampleCheck4" }
-          }),
-          _vm._v(" "),
-          _c("label", {
-            staticClass: "form-check-label",
-            attrs: { for: "exampleCheck4" }
-          }),
-          _vm._v(" "),
-          _c(
-            "label",
-            {
-              staticClass: "profile-info__check-text",
-              attrs: { for: "exampleCheck4" }
-            },
-            [_vm._v("Более 6 лет")]
-          )
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "vakancy-page-filter-block__row mb24" }, [
-      _c("div", { staticClass: "paragraph cadet-blue" }, [
-        _vm._v("Тип занятости")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "profile-info" }, [
-        _c("div", { staticClass: "form-check d-flex" }, [
-          _c("input", {
-            staticClass: "form-check-input",
-            attrs: { type: "checkbox", id: "exampleCheck5" }
-          }),
-          _vm._v(" "),
-          _c("label", {
-            staticClass: "form-check-label",
-            attrs: { for: "exampleCheck5" }
-          }),
-          _vm._v(" "),
-          _c(
-            "label",
-            {
-              staticClass: "profile-info__check-text",
-              attrs: { for: "exampleCheck5" }
-            },
-            [_vm._v("Полная занятость")]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-check d-flex" }, [
-          _c("input", {
-            staticClass: "form-check-input",
-            attrs: { type: "checkbox", id: "exampleCheck6" }
-          }),
-          _vm._v(" "),
-          _c("label", {
-            staticClass: "form-check-label",
-            attrs: { for: "exampleCheck6" }
-          }),
-          _vm._v(" "),
-          _c(
-            "label",
-            {
-              staticClass: "profile-info__check-text",
-              attrs: { for: "exampleCheck6" }
-            },
-            [_vm._v("Частичная занятость")]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-check d-flex" }, [
-          _c("input", {
-            staticClass: "form-check-input",
-            attrs: { type: "checkbox", id: "exampleCheck7" }
-          }),
-          _vm._v(" "),
-          _c("label", {
-            staticClass: "form-check-label",
-            attrs: { for: "exampleCheck7" }
-          }),
-          _vm._v(" "),
-          _c(
-            "label",
-            {
-              staticClass: "profile-info__check-text",
-              attrs: { for: "exampleCheck7" }
-            },
-            [_vm._v("Проектная работа")]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-check d-flex" }, [
-          _c("input", {
-            staticClass: "form-check-input",
-            attrs: { type: "checkbox", id: "exampleCheck8" }
-          }),
-          _vm._v(" "),
-          _c("label", {
-            staticClass: "form-check-label",
-            attrs: { for: "exampleCheck8" }
-          }),
-          _vm._v(" "),
-          _c(
-            "label",
-            {
-              staticClass: "profile-info__check-text",
-              attrs: { for: "exampleCheck8" }
-            },
-            [_vm._v("Стажировка")]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-check d-flex" }, [
-          _c("input", {
-            staticClass: "form-check-input",
-            attrs: { type: "checkbox", id: "exampleCheck9" }
-          }),
-          _vm._v(" "),
-          _c("label", {
-            staticClass: "form-check-label",
-            attrs: { for: "exampleCheck9" }
-          }),
-          _vm._v(" "),
-          _c(
-            "label",
-            {
-              staticClass: "profile-info__check-text",
-              attrs: { for: "exampleCheck9" }
-            },
-            [_vm._v("Волонтёрство")]
-          )
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "vakancy-page-filter-block__row mb24" }, [
-      _c("div", { staticClass: "paragraph cadet-blue" }, [
-        _vm._v("График работы")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "profile-info" }, [
-        _c("div", { staticClass: "form-check d-flex" }, [
-          _c("input", {
-            staticClass: "form-check-input",
-            attrs: { type: "checkbox", id: "exampleCheck10" }
-          }),
-          _vm._v(" "),
-          _c("label", {
-            staticClass: "form-check-label",
-            attrs: { for: "exampleCheck10" }
-          }),
-          _vm._v(" "),
-          _c(
-            "label",
-            {
-              staticClass: "profile-info__check-text",
-              attrs: { for: "exampleCheck10" }
-            },
-            [_vm._v("Полный день")]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-check d-flex" }, [
-          _c("input", {
-            staticClass: "form-check-input",
-            attrs: { type: "checkbox", id: "exampleCheck11" }
-          }),
-          _vm._v(" "),
-          _c("label", {
-            staticClass: "form-check-label",
-            attrs: { for: "exampleCheck11" }
-          }),
-          _vm._v(" "),
-          _c(
-            "label",
-            {
-              staticClass: "profile-info__check-text",
-              attrs: { for: "exampleCheck11" }
-            },
-            [_vm._v("Сменный график")]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-check d-flex" }, [
-          _c("input", {
-            staticClass: "form-check-input",
-            attrs: { type: "checkbox", id: "exampleCheck12" }
-          }),
-          _vm._v(" "),
-          _c("label", {
-            staticClass: "form-check-label",
-            attrs: { for: "exampleCheck12" }
-          }),
-          _vm._v(" "),
-          _c(
-            "label",
-            {
-              staticClass: "profile-info__check-text",
-              attrs: { for: "exampleCheck12" }
-            },
-            [_vm._v("Вахтовый метод")]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-check d-flex" }, [
-          _c("input", {
-            staticClass: "form-check-input",
-            attrs: { type: "checkbox", id: "exampleCheck13" }
-          }),
-          _vm._v(" "),
-          _c("label", {
-            staticClass: "form-check-label",
-            attrs: { for: "exampleCheck13" }
-          }),
-          _vm._v(" "),
-          _c(
-            "label",
-            {
-              staticClass: "profile-info__check-text",
-              attrs: { for: "exampleCheck13" }
-            },
-            [_vm._v("Гибкий график")]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-check d-flex" }, [
-          _c("input", {
-            staticClass: "form-check-input",
-            attrs: { type: "checkbox", id: "exampleCheck14" }
-          }),
-          _vm._v(" "),
-          _c("label", {
-            staticClass: "form-check-label",
-            attrs: { for: "exampleCheck14" }
-          }),
-          _vm._v(" "),
-          _c(
-            "label",
-            {
-              staticClass: "profile-info__check-text",
-              attrs: { for: "exampleCheck14" }
-            },
-            [_vm._v("Удалённая работа")]
-          )
-        ])
-      ])
-    ])
   },
   function() {
     var _vm = this
