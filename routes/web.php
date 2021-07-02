@@ -70,6 +70,7 @@ Route::group(
         'middleware' => ['auth'],
     ],
     function() {
+        Route::get('/show/{cv}', 'ProfileController@show')->name('profile.show');
         Route::get('/list/{user_id}', 'ProfileController@list')->name('profile.list');
     }
 );

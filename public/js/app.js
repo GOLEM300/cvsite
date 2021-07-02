@@ -39123,7 +39123,9 @@ var render = function() {
                   ),
                   _vm._v(" "),
                   _c("h3", { staticClass: "mini-title mobile-off" }, [
-                    _vm._v(_vm._s(cv.specialization))
+                    _c("a", { attrs: { href: "/site/show/1" } }, [
+                      _vm._v(_vm._s(cv.specialization))
+                    ])
                   ]),
                   _vm._v(" "),
                   _c(
@@ -39145,7 +39147,7 @@ var render = function() {
                           ]),
                       _vm._v(" "),
                       _c("span", { staticClass: "mr16 paragraph" }, [
-                        _vm._v(_vm._s(cv.age))
+                        _vm._v(_vm._s(cv.age) + " лет")
                       ]),
                       _vm._v(" "),
                       _c("span", { staticClass: "mr16 paragraph" }, [

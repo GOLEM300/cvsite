@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <div class="mt8 mb32"><a href="{{ route('site.site.search') }}"><img src="images/blue-left-arrow.svg" alt="arrow"> Резюме в
+                <div class="mt8 mb32"><a href="{{ route('profile.profile.list', $user_cv->user_id) }}"><img src="images/blue-left-arrow.svg" alt="arrow"> Резюме в
                         Кемерово</a>
                 </div>
             </div>

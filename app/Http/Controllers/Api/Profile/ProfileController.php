@@ -15,6 +15,12 @@ class ProfileController extends Controller
         $this->service = $service;
     }
 
+    public function show($cv_id)
+    {
+        $user_cv = $this->service->getUserCv($cv_id);
+        return new CvResource($user_cv);
+    }
+
     public function list(int $user_id)
     {
         $cvs = $this->service->getUserCvs($user_id);

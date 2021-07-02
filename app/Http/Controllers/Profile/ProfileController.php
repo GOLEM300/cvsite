@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cv;
 use App\UseCases\Cvs\CvService;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,6 +14,15 @@ class ProfileController extends Controller
     public function __construct(CvService $service)
     {
         $this->service = $service;
+    }
+
+    /**
+     * 
+     */
+    public function show(Cv $cv)
+    {
+        $user_cv = $this->service->getUserCv($cv->id);
+        return view('profile.show', compact('user_cv'));
     }
 
     public function list()

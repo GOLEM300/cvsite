@@ -54,14 +54,14 @@
             <div class="mini-paragraph cadet-blue mobile-mb12">
               {{ updated_at(cv.updated_at) }}
             </div>
-            <h3 class="mini-title mobile-off">{{ cv.specialization }}</h3>
+            <h3 class="mini-title mobile-off"><a href="/site/show/1">{{ cv.specialization }}</a></h3>
             <div class="d-flex align-items-center flex-wrap mb8">
               <span class="mr16 paragraph">{{ cv.salary }} ₽</span>
               <span class="mr16 paragraph" v-if="cv.expirience == 'yes'">{{
                 cv.prevYearsExpirience
               }} лет опыта</span>
               <span class="mr16 paragraph" v-else>Нет опыта работы</span>
-              <span class="mr16 paragraph">{{ cv.age }}</span>
+              <span class="mr16 paragraph">{{ cv.age }} лет</span>
               <span class="mr16 paragraph">{{ cv.locate_city }}</span>
             </div>
             <p class="paragraph tbold mobile-off">Последнее место работы</p>

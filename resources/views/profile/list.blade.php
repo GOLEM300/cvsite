@@ -59,7 +59,7 @@
                                     </div>
                                     <div class="col-xl-12 d-flex justify-content-between align-items-center flex-wrap">
                                         <div class="d-flex flex-wrap mobile-mb12">
-                                            <a class="mr16" href="{{ route('site.site.show', $cv->id)}}">Открыть</a>
+                                            <a class="mr16" href="{{ route('profile.profile.show', $cv->id)}}">Открыть</a>
                                         </div>
                                         <span class="mini-paragraph cadet-blue">{{$cv->published_at()}}</span>
                                     </div>
